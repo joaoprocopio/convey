@@ -1,7 +1,8 @@
 import {
   type AsyncComponentOptions,
-  computed,
   defineAsyncComponent,
+  shallowRef,
+  watch,
 } from "vue";
 import { type RawRouteComponent, useRoute } from "vue-router";
 
@@ -10,11 +11,17 @@ import { isComp, isFn, isNil } from "~/utils/is";
 export function useRouterLayout() {
   const route = useRoute();
 
-  const RouterLayout = computed(() =>
-    safeGetComp(route.meta.layout, {
-      loadingComponent: safeGetComp(route.meta.layoutLoading),
-      errorComponent: safeGetComp(route.meta.layoutError),
-    }),
+  const RouterLayout = shallowRef<RawRouteComponent>();
+
+  watch(
+    route,
+    () => {
+      RouterLayout.value = safeGetComp(route.meta.layout, {
+        loadingComponent: safeGetComp(route.meta.layoutLoading),
+        errorComponent: safeGetComp(route.meta.layoutError),
+      });
+    },
+    { immediate: true },
   );
 
   return RouterLayout;
