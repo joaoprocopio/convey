@@ -4,13 +4,11 @@ import {
   ChevronRight,
   Computer,
   GalleryVerticalEnd,
-  HardDriveDownload,
   LogOut,
   type LucideIcon,
   Moon,
   PackageSearch,
   Palette,
-  Satellite,
   Sun,
 } from "lucide-vue-next";
 import { RouterLink } from "vue-router";
