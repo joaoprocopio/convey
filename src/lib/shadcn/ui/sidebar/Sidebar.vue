@@ -1,11 +1,8 @@
 <script setup lang="ts">
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-} from "~/lib/shadcn/ui/sheet";
+import { Sheet, SheetContent } from "~/lib/shadcn/ui/sheet";
+import SheetDescription from "~/lib/shadcn/ui/sheet/SheetDescription.vue";
+import SheetHeader from "~/lib/shadcn/ui/sheet/SheetHeader.vue";
+import SheetTitle from "~/lib/shadcn/ui/sheet/SheetTitle.vue";
 import { cn } from "~/lib/shadcn/utils";
 
 import type { SidebarProps } from ".";
