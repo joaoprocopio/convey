@@ -87,9 +87,8 @@ type Nav = {
   icon: LucideIcon;
   title: string;
   tooltip: string;
-  route?: string;
+  route: string;
   links?: {
-    icon?: LucideIcon;
     title: string;
     tooltip: string;
     route: string;
@@ -103,16 +102,7 @@ const links: Nav[] = [
     tooltip: "Detecções",
     route: DeteccoesPageName,
   },
-  {
-    icon: Satellite,
-    title: "Sensores",
-    tooltip: "Sensores",
-  },
-  {
-    icon: HardDriveDownload,
-    title: "Exportar",
-    tooltip: "Exportar",
-  },
+
   {
     icon: PackageSearch,
     title: "Produtos",
@@ -231,7 +221,7 @@ function hasLinks(link?: Nav): boolean {
           <SidebarGroupContent>
             <SidebarMenu>
               <template v-for="(link, linkIndex) in links" :key="linkIndex">
-                <Collapsible as-child>
+                <Collapsible as-child :default-open="true">
                   <SidebarMenuItem>
                     <RouterLink
                       v-slot="{ isActive }"
