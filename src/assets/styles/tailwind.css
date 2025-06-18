@@ -245,3 +245,14 @@
     scrollbar-color: var(--color-border) transparent;
   }
 }
+
+/* If you want to debug the hitbox and the element size, apply those classes: bg-blue-500/40 after:bg-red-500/60 */
+@utility hitbox-* {
+  position: relative;
+
+  &::after {
+    position: absolute;
+    content: var(--tw-content);
+    inset: calc(var(--spacing) * --value(number) * -1);
+  }
+}

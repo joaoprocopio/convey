@@ -253,7 +253,9 @@ function hasLinks(link?: Nav): boolean {
 
                     <CollapsibleTrigger v-if="hasLinks(link)" as-child>
                       <SidebarMenuAction class="data-[state=open]:rotate-90">
-                        <ChevronRight />
+                        <div class="hitbox-3.5">
+                          <ChevronRight class="size-4" />
+                        </div>
                       </SidebarMenuAction>
                     </CollapsibleTrigger>
 
