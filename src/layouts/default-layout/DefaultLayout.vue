@@ -7,6 +7,7 @@ import {
   LogOut,
   type LucideIcon,
   Moon,
+  PackageSearch,
   Palette,
   Satellite,
   Sun,
@@ -46,9 +47,9 @@ import {
 import { useTheme } from "~/lib/theme/composables";
 import { Theme } from "~/lib/theme/constants";
 
-const theme = useTheme();
+const selectedTheme = useTheme();
 
-const themes = [
+const availableThemes = [
   {
     icon: Computer,
     title: "Sistema",
@@ -71,9 +72,13 @@ type Nav = {
   title: string;
   tooltip: string;
   route?: string;
+  items?: {
+    title: string;
+    // route: string;
+  }[];
 };
 
-const navlinks: Nav[] = [
+const links: Nav[] = [
   {
     icon: GalleryVerticalEnd,
     title: "Detecções",
@@ -85,11 +90,17 @@ const navlinks: Nav[] = [
     title: "Sensores",
     tooltip: "Sensores",
   },
-
   {
     icon: HardDriveDownload,
     title: "Exportar",
     tooltip: "Exportar",
+  },
+  {
+    icon: PackageSearch,
+    title: "Produtos",
+    tooltip: "Produtos",
+    // route: "produtos",
+    items: [{ title: "Full-text search" }],
   },
 ] as const;
 </script>
@@ -148,9 +159,9 @@ const navlinks: Nav[] = [
               </DropdownMenuSubTrigger>
               <DropdownMenuPortal>
                 <DropdownMenuSubContent>
-                  <DropdownMenuRadioGroup v-model="theme">
+                  <DropdownMenuRadioGroup v-model="selectedTheme">
                     <DropdownMenuRadioItem
-                      v-for="theme in themes"
+                      v-for="theme in availableThemes"
                       :key="theme.value"
                       :value="theme.value"
                     >
@@ -181,28 +192,28 @@ const navlinks: Nav[] = [
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem
-                v-for="(navlink, navlinkindex) in navlinks"
-                :key="navlinkindex"
-              >
-                <RouterLink
-                  v-slot="{ isActive }"
-                  :to="{ name: navlink.route }"
-                  custom
-                >
-                  <SidebarMenuButton
-                    as-child
-                    :is-active="isActive && 'route' in navlink"
-                    :tooltip="navlink.tooltip"
-                    :aria-disabled="!navlink.route"
+              <template v-for="(link, linkIndex) in links" :key="linkIndex">
+                <SidebarMenuItem>
+                  <RouterLink
+                    v-slot="{ isActive }"
+                    :to="{ name: link.route }"
+                    custom
                   >
-                    <RouterLink :to="{ name: navlink.route }">
-                      <component :is="navlink.icon" />
-                      {{ navlink.title }}
-                    </RouterLink>
-                  </SidebarMenuButton>
-                </RouterLink>
-              </SidebarMenuItem>
+                    <SidebarMenuButton
+                      as-child
+                      :is-active="isActive && 'route' in link"
+                      :tooltip="link.tooltip"
+                      :aria-disabled="!link.route"
+                    >
+                      <RouterLink :to="{ name: link.route }">
+                        <component :is="link.icon" v-if="link.icon" />
+                        {{ link.title }}
+                      </RouterLink>
+                    </SidebarMenuButton>
+                  </RouterLink>
+                </SidebarMenuItem>
+                <!-- TODO: fazer o collapsible -->
+              </template>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
