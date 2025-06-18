@@ -28,11 +28,7 @@ export const routes: RouteRecordRaw[] = [
   {
     path: "/produtos",
     name: ProdutosPageName,
-    component: {
-      setup() {
-        return () => h("div", null, [h("h1", null, "produtos")]);
-      },
-    },
+    component: () => import("~/pages/produtos-page"),
     meta: { layout: DefaultLayout },
   },
   {
