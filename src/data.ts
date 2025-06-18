@@ -1,5 +1,7 @@
 import { type TDeteccao, type TDeteccaoStatus } from "~/constants/deteccao";
 
+export const marcas = [];
+
 export const deteccoesGroupedByStatus = {
   concluido: [
     {

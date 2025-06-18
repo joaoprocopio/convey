@@ -16,6 +16,7 @@ import {
   ComboboxTrigger,
   ComboboxViewport,
 } from "~/lib/shadcn/ui/combobox";
+import { Command } from "~/lib/shadcn/ui/command";
 import { SidebarTrigger } from "~/lib/shadcn/ui/sidebar";
 
 const timezones = [
@@ -74,63 +75,61 @@ const selectedGroup = computed(() =>
       <h1 class="ml-2 text-sm">Produtos</h1>
     </header>
 
-    <header class="flex h-header border-b px-6"></header>
-  </Teleport>
+    <header class="flex h-header items-center border-b px-6">
+      <Combobox v-model="selectedTimezone" by="label">
+        <ComboboxAnchor as-child>
+          <ComboboxTrigger as-child>
+            <Button variant="outline" class="w-fit justify-between" size="sm">
+              <template v-if="selectedTimezone">
+                <div class="flex flex-col items-start gap-0.5">
+                  <span
+                    >{{ selectedGroup?.label }} -
+                    {{ selectedTimezone.label }}</span
+                  >
+                </div>
+              </template>
+              <template v-else> Select timezone </template>
 
-  <div class="m-4">
-    <Combobox v-model="selectedTimezone" by="label">
-      <ComboboxAnchor as-child>
-        <ComboboxTrigger as-child>
-          <Button variant="outline" class="h-16 justify-between px-2.5">
-            <template v-if="selectedTimezone">
-              <div class="flex flex-col items-start gap-0.5">
-                <span class="text-xs font-normal text-muted-foreground">
-                  {{ selectedGroup?.label }}
-                </span>
-                <span>{{ selectedTimezone.label }}</span>
-              </div>
-            </template>
-            <template v-else> Select timezone </template>
+              <ChevronDownIcon class="ml-2 size-4 shrink-0 opacity-50" />
+            </Button>
+          </ComboboxTrigger>
+        </ComboboxAnchor>
 
-            <ChevronDownIcon class="ml-2 size-4 shrink-0 opacity-50" />
-          </Button>
-        </ComboboxTrigger>
-      </ComboboxAnchor>
+        <ComboboxList class="w-72" align="start">
+          <ComboboxInput placeholder="Select timezone..." />
 
-      <ComboboxList class="w-72" :align="'start'">
-        <ComboboxInput placeholder="Select timezone..." />
+          <ComboboxViewport>
+            <ComboboxEmpty> No timezone found. </ComboboxEmpty>
 
-        <ComboboxViewport>
-          <ComboboxEmpty> No timezone found. </ComboboxEmpty>
-
-          <ComboboxGroup
-            v-for="region in timezones"
-            :key="region.label"
-            :heading="region.label"
-          >
-            <ComboboxItem
-              v-for="timezone in region.timezones"
-              :key="timezone.value"
-              :value="timezone"
+            <ComboboxGroup
+              v-for="region in timezones"
+              :key="region.label"
+              :heading="region.label"
             >
-              {{ timezone.label }}
+              <ComboboxItem
+                v-for="timezone in region.timezones"
+                :key="timezone.value"
+                :value="timezone"
+              >
+                {{ timezone.label }}
 
-              <ComboboxItemIndicator>
-                <Check />
-              </ComboboxItemIndicator>
+                <ComboboxItemIndicator>
+                  <Check />
+                </ComboboxItemIndicator>
+              </ComboboxItem>
+            </ComboboxGroup>
+          </ComboboxViewport>
+
+          <ComboboxSeparator />
+
+          <ComboboxGroup class="bg-popover">
+            <ComboboxItem :value="null">
+              <PlusCircleIcon />
+              Create timezone
             </ComboboxItem>
           </ComboboxGroup>
-        </ComboboxViewport>
-
-        <ComboboxSeparator />
-
-        <ComboboxGroup class="bg-popover">
-          <ComboboxItem :value="null">
-            <PlusCircleIcon />
-            Create timezone
-          </ComboboxItem>
-        </ComboboxGroup>
-      </ComboboxList>
-    </Combobox>
-  </div>
+        </ComboboxList>
+      </Combobox>
+    </header>
+  </Teleport>
 </template>
