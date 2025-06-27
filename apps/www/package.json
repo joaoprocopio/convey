@@ -1,5 +1,5 @@
 {
-  "name": "@eutevue/www",
+  "name": "eutevue",
   "private": true,
   "type": "module",
   "scripts": {
