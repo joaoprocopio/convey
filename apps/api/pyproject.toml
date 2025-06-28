@@ -8,19 +8,19 @@ version = "0.1.0"
 description = "."
 requires-python = ">=3.13"
 dependencies = [
-    "django>=5.2.3",
+    "fastapi>=0.115.14",
+    "httptools>=0.6.4",
+    "orjson>=3.10.18",
+    "pydantic>=2.11.7",
+    "starlette>=0.46.2",
+    "uvicorn[standard]>=0.35.0",
 ]
 
 [dependency-groups]
 dev = [
-    "django-stubs[compatible-mypy]>=5.2.1",
     "mypy>=1.16.1",
     "ruff>=0.12.1",
 ]
 
 [tool.mypy]
 strict = true
-plugins = ["mypy_django_plugin.main"]
-
-[tool.django-stubs]
-django_settings_module = "convey.settings"
