@@ -1,10 +1,30 @@
 from fastapi import FastAPI
+from fastapi.responses import ORJSONResponse
+from starlette.middleware.cors import CORSMiddleware
+from starlette.middleware.gzip import GZipMiddleware
 
-api = FastAPI()
+from convey.api import api_v1
+
+# async def lifespan(_: FastAPI):
+#     # TODO: FIXME: isso aqui é uma gambiarra, as migrações deveriam ser controladas pelo alembic
+#     async with async_engine.begin() as conn:
+#         try:
+#             await conn.run_sync(Model.metadata.create_all)
+#             yield
+#         except Exception:
+#             await conn.rollback()
+
+# lifespan=lifespan,
+
+app = FastAPI(default_response_class=ORJSONResponse)
 
 
-@api.get("/")
-async def root():
-    return {
-        "hello": "world",
-    }
+app.add_middleware(GZipMiddleware, minimum_size=512)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(api_v1, prefix="/api/v1")
