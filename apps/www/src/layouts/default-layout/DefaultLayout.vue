@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import {
   ChevronDown,
-  ChevronRight,
   Computer,
   GalleryVerticalEnd,
   LogOut,
@@ -13,19 +12,9 @@ import {
 } from "lucide-vue-next";
 import { RouterLink } from "vue-router";
 
-import {
-  DeteccoesPageName,
-  ProdutosExemplo1PageName,
-  ProdutosExemplo2PageName,
-  ProdutosExemplo3PageName,
-  ProdutosPageName,
-} from "~/lib/router/constants";
+import { DeteccoesPageName, ProdutosPageName } from "~/lib/router/constants";
 import { Avatar, AvatarFallback } from "~/lib/shadcn/ui/avatar";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "~/lib/shadcn/ui/collapsible";
+import { Collapsible } from "~/lib/shadcn/ui/collapsible";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -49,12 +38,8 @@ import {
   SidebarHeader,
   SidebarInset,
   SidebarMenu,
-  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
   SidebarProvider,
   SidebarRail,
 } from "~/lib/shadcn/ui/sidebar";
@@ -86,11 +71,6 @@ type Nav = {
   title: string;
   tooltip: string;
   route: string;
-  links?: {
-    title: string;
-    tooltip: string;
-    route: string;
-  }[];
 };
 
 const links: Nav[] = [
@@ -106,29 +86,8 @@ const links: Nav[] = [
     title: "Produtos",
     tooltip: "Produtos",
     route: ProdutosPageName,
-    links: [
-      {
-        route: ProdutosExemplo1PageName,
-        title: "Exemplo 1",
-        tooltip: "Exemplo 1",
-      },
-      {
-        route: ProdutosExemplo2PageName,
-        title: "Exemplo 2",
-        tooltip: "Exemplo 2",
-      },
-      {
-        route: ProdutosExemplo3PageName,
-        title: "Exemplo 3",
-        tooltip: "Exemplo 3",
-      },
-    ],
   },
 ] as const;
-
-function hasLinks(link?: Nav): boolean {
-  return Array.isArray(link?.links);
-}
 </script>
 
 <template>
@@ -238,37 +197,6 @@ function hasLinks(link?: Nav): boolean {
                         </RouterLink>
                       </SidebarMenuButton>
                     </RouterLink>
-
-                    <CollapsibleTrigger v-if="hasLinks(link)" as-child>
-                      <SidebarMenuAction class="data-[state=open]:rotate-90">
-                        <div class="hitbox-3.5">
-                          <ChevronRight class="size-4" />
-                        </div>
-                      </SidebarMenuAction>
-                    </CollapsibleTrigger>
-
-                    <CollapsibleContent v-if="hasLinks(link)">
-                      <SidebarMenuSub>
-                        <RouterLink
-                          v-for="innerLink in link.links"
-                          :key="innerLink.title"
-                          v-slot="{ isActive }"
-                          :to="{ name: innerLink.route }"
-                          custom
-                        >
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton
-                              as-child
-                              :is-active="isActive"
-                            >
-                              <RouterLink :to="{ name: innerLink.route }">
-                                <span>{{ innerLink.title }}</span>
-                              </RouterLink>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                        </RouterLink>
-                      </SidebarMenuSub>
-                    </CollapsibleContent>
                   </SidebarMenuItem>
                 </Collapsible>
               </template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { GalleryVerticalEnd, ListCheck } from "lucide-vue-next";
+import { GalleryVerticalEnd, ListCheck, Plus } from "lucide-vue-next";
 
 import DeteccaoDetails from "~/components/deteccao-details";
 import DeteccaoStatusIndicator from "~/components/deteccao-status-indicator";
@@ -29,6 +29,10 @@ const DeteccaoStatusFilters = {
       >
         {{ deteccoesCount }}
       </span>
+      <Button class="ml-auto" variant="outline" size="sm">
+        <Plus />
+        <span>Criar detecção</span>
+      </Button>
     </header>
 
     <header class="flex h-header border-b px-6">
