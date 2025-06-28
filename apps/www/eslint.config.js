@@ -10,7 +10,8 @@ import url from "url";
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const __gitignore = path.resolve(__dirname, ".gitignore");
+const __rootdir = path.resolve(__dirname, "..", "..");
+const __gitignore = path.resolve(__rootdir, ".gitignore");
 
 export default tseslint.config(
   includeIgnoreFile(__gitignore),
