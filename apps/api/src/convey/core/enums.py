@@ -1,9 +1,9 @@
-from enum import StrEnum, auto
+from enum import StrEnum
 
 
 class FestivalStatus(StrEnum):
-    DRAFT = auto()
-    PAST = auto()
-    UPCOMING = auto()
-    ONGOING = auto()
-    FINISHED = auto()
+    DRAFT = "draft"
+    PAST = "past"
+    UPCOMING = "upcoming"
+    ONGOING = "ongoing"
+    FINISHED = "finished"

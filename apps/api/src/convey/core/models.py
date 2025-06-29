@@ -1,9 +1,3 @@
-# from datetime import datetime, timezone
-
-# from convey.config import SRID
-# from convey.core.enums import CicatrizQueimadasStatus
-
-
 from convey.config import SRID
 from convey.core.enums import FestivalStatus
 from convey.database.models import Model, TimestampMixin
