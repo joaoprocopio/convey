@@ -8,28 +8,28 @@ from sqlalchemy import DateTime, Enum, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 
-class Attraction(Model, TimestampMixin):
+class Atracao(Model, TimestampMixin):
     slug: Mapped[str] = mapped_column(String(255), unique=True, index=True)
-    name: Mapped[str] = mapped_column(String(255))
+    nome: Mapped[str] = mapped_column(String(255))
 
 
-class FestivalPeriodDate(Model):
+class ShowPeriodoData(Model):
     at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
     thumbnail_url: Mapped[str] = mapped_column(String(500))
 
 
-class FestivalPeriod(Model):
-    start_id: Mapped[int] = mapped_column(ForeignKey(FestivalPeriodDate.id))
-    start: Mapped[FestivalPeriodDate] = relationship(foreign_keys=[start_id])
-    end_id: Mapped[int] = mapped_column(ForeignKey(FestivalPeriodDate.id))
-    end: Mapped[FestivalPeriodDate] = relationship(foreign_keys=[end_id])
+class ShowPeriodo(Model):
+    inicio_id: Mapped[int] = mapped_column(ForeignKey(ShowPeriodoData.id))
+    inicio: Mapped[ShowPeriodoData] = relationship(foreign_keys=[inicio_id])
+    fim_id: Mapped[int] = mapped_column(ForeignKey(ShowPeriodoData.id))
+    fim: Mapped[ShowPeriodoData] = relationship(foreign_keys=[fim_id])
 
 
-class Festival(Model, TimestampMixin):
+class Show(Model, TimestampMixin):
     slug: Mapped[str] = mapped_column(String(255), unique=True, index=True)
-    name: Mapped[str] = mapped_column(String(255))
+    nome: Mapped[str] = mapped_column(String(255))
     thumbnail_url: Mapped[str] = mapped_column(String(500))
-    location: Mapped[WKBElement] = mapped_column(
+    local: Mapped[WKBElement] = mapped_column(
         Geometry(geometry_type="POINT", srid=SRID)
     )
     bbox: Mapped[WKBElement] = mapped_column(
@@ -38,7 +38,7 @@ class Festival(Model, TimestampMixin):
     status: Mapped[FestivalStatus] = mapped_column(
         Enum(FestivalStatus), default=lambda: FestivalStatus.DRAFT
     )
-    period_id: Mapped[int] = mapped_column(ForeignKey(FestivalPeriod.id))
-    period: Mapped[FestivalPeriod] = relationship()
-    attraction_id: Mapped[int] = mapped_column(ForeignKey(Attraction.id))
-    attraction: Mapped["Attraction"] = relationship()
+    periodo_id: Mapped[int] = mapped_column(ForeignKey(ShowPeriodo.id))
+    periodo: Mapped[ShowPeriodo] = relationship()
+    atracao_id: Mapped[int] = mapped_column(ForeignKey(Atracao.id))
+    atracao: Mapped["Atracao"] = relationship()

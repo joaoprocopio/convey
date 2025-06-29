@@ -2,17 +2,18 @@
 import {
   ChevronDown,
   Computer,
-  GalleryVerticalEnd,
+  Drum,
   LogOut,
   type LucideIcon,
   Moon,
-  PackageSearch,
   Palette,
+  PartyPopper,
   Sun,
+  Tickets,
 } from "lucide-vue-next";
 import { RouterLink } from "vue-router";
 
-import { DeteccoesPageName, ProdutosPageName } from "~/lib/router/constants";
+import { DeteccoesPageName } from "~/lib/router/constants";
 import { Avatar, AvatarFallback } from "~/lib/shadcn/ui/avatar";
 import { Collapsible } from "~/lib/shadcn/ui/collapsible";
 import {
@@ -70,22 +71,25 @@ type Nav = {
   icon: LucideIcon;
   title: string;
   tooltip: string;
-  route: string;
+  route?: string;
 };
 
 const links: Nav[] = [
   {
-    icon: GalleryVerticalEnd,
-    title: "Detecções",
-    tooltip: "Detecções",
+    icon: PartyPopper,
+    title: "Shows",
+    tooltip: "Shows",
     route: DeteccoesPageName,
   },
-
   {
-    icon: PackageSearch,
-    title: "Produtos",
-    tooltip: "Produtos",
-    route: ProdutosPageName,
+    icon: Drum,
+    title: "Atrações",
+    tooltip: "Atrações",
+  },
+  {
+    icon: Tickets,
+    title: "Ingressos",
+    tooltip: "Ingressos",
   },
 ] as const;
 </script>

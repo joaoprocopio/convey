@@ -2,11 +2,7 @@ import type { RouteRecordRaw } from "vue-router";
 
 import DefaultLayout from "~/layouts/default-layout";
 
-import {
-  DeteccaoPageName,
-  DeteccoesPageName,
-  ProdutosPageName,
-} from "./constants";
+import { DeteccaoPageName, DeteccoesPageName } from "./constants";
 
 export const routes: RouteRecordRaw[] = [
   {
@@ -19,12 +15,6 @@ export const routes: RouteRecordRaw[] = [
     path: "/:id",
     name: DeteccaoPageName,
     component: () => import("~/pages/deteccao-page"),
-    meta: { layout: DefaultLayout },
-  },
-  {
-    path: "/produtos",
-    name: ProdutosPageName,
-    component: () => import("~/pages/produtos-page"),
     meta: { layout: DefaultLayout },
   },
 ];

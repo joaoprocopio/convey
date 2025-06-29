@@ -6,26 +6,13 @@ export const deteccoesGroupedByStatus = {
   concluido: [
     {
       id: 1,
-      periodo: {
-        id: 4,
-        start: {
-          at: "2023-03-03T00:00:00Z",
-          thumbnail_url: "https://picsum.photos/600/400",
-        },
-        end: {
-          at: "2023-04-16T00:00:00Z",
-          thumbnail_url: "https://picsum.photos/600/400",
-        },
-      },
-      location: [-43.172, -22.906],
+      periodo_start_thumbnail_url: "https://picsum.photos/600/400",
+      periodo_end_thumbnail_url: "https://picsum.photos/600/400",
+      periodo_start_at: "3 de mar",
+      periodo_end_at: "16 de abr",
       created_at: "18 de mai",
       updated_at: "23 de mai",
       thumbnail_url: "https://picsum.photos/600/400",
-      attraction: {
-        id: 1,
-        slug: "red-hot-chili-peppers",
-        name: "Red Hot Chili Peppers",
-      },
       status: "concluido",
     },
     {
