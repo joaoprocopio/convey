@@ -12,7 +12,7 @@ import {
   type TDeteccao,
   type TDeteccaoStatus,
 } from "~/constants/deteccao";
-import { DeteccaoPageName } from "~/lib/router/constants";
+import { ShowPageName } from "~/lib/router/constants";
 import { AspectRatio } from "~/lib/shadcn/ui/aspect-ratio";
 
 defineProps<{
@@ -24,7 +24,7 @@ defineProps<{
 <template>
   <RouterLink
     :key="deteccao.id"
-    :to="{ name: DeteccaoPageName, params: { id: deteccao.id } }"
+    :to="{ name: ShowPageName, params: { id: deteccao.id } }"
     class="grid-template grid w-full gap-x-8 gap-y-4 px-6 py-4 hover:bg-secondary/50 hover:text-secondary-foreground"
   >
     <div class="area-thumbnail w-56">

@@ -3,39 +3,56 @@ import type { RouteRecordRaw } from "vue-router";
 
 import DefaultLayout from "~/layouts/default-layout";
 
-import { DeteccaoPageName, DeteccoesPageName } from "./constants";
+import {
+  AtracoesPageName,
+  IngressoPageName,
+  ShowPageName,
+  ShowsPageName,
+} from "./constants";
 
 export const routes: RouteRecordRaw[] = [
   {
     path: "/",
     redirect: {
-      name: DeteccoesPageName,
+      name: ShowsPageName,
     },
   },
   {
     path: "/:pathMatch(.*)*",
     redirect: {
-      name: DeteccoesPageName,
+      name: ShowsPageName,
     },
   },
   {
     path: "/shows",
-    name: DeteccoesPageName,
+    name: ShowsPageName,
     component: () => import("~/pages/deteccoes-page"),
     meta: { layout: DefaultLayout },
   },
   {
     path: "/shows/:id",
-    name: DeteccaoPageName,
+    name: ShowPageName,
     component: () => import("~/pages/deteccao-page"),
     meta: { layout: DefaultLayout },
   },
   {
     path: "/atracoes",
+    name: AtracoesPageName,
     component: {
       setup() {
-        return () => h("div", null, [h("h1", null, "exemplo 1")]);
+        return () => h("div", null, [h("h1", null, "atracoes")]);
       },
     },
+    meta: { layout: DefaultLayout },
+  },
+  {
+    path: "/ingressos",
+    name: IngressoPageName,
+    component: {
+      setup() {
+        return () => h("div", null, [h("h1", null, "ingressos")]);
+      },
+    },
+    meta: { layout: DefaultLayout },
   },
 ];

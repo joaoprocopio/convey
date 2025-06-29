@@ -14,7 +14,7 @@ import { RouterLink, useRoute } from "vue-router";
 import { Leafmap } from "~/components/leafmap";
 import { DeteccaoStatus, type TDeteccao } from "~/constants/deteccao";
 import { flattenedDeteccoes } from "~/data";
-import { DeteccoesPageName } from "~/lib/router/constants";
+import { ShowsPageName } from "~/lib/router/constants";
 import { AspectRatio } from "~/lib/shadcn/ui/aspect-ratio";
 import { Badge } from "~/lib/shadcn/ui/badge";
 import {
@@ -80,7 +80,7 @@ const dates = computed(
       <Breadcrumb class="ml-2">
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink :as="RouterLink" :to="{ name: DeteccoesPageName }">
+            <BreadcrumbLink :as="RouterLink" :to="{ name: ShowsPageName }">
               Detecções
             </BreadcrumbLink>
           </BreadcrumbItem>

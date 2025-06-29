@@ -13,7 +13,11 @@ import {
 } from "lucide-vue-next";
 import { RouterLink } from "vue-router";
 
-import { DeteccoesPageName } from "~/lib/router/constants";
+import {
+  AtracoesPageName,
+  IngressoPageName,
+  ShowsPageName,
+} from "~/lib/router/constants";
 import { Avatar, AvatarFallback } from "~/lib/shadcn/ui/avatar";
 import { Collapsible } from "~/lib/shadcn/ui/collapsible";
 import {
@@ -79,17 +83,19 @@ const links: Nav[] = [
     icon: PartyPopper,
     title: "Shows",
     tooltip: "Shows",
-    route: DeteccoesPageName,
+    route: ShowsPageName,
   },
   {
     icon: Drum,
     title: "Atrações",
     tooltip: "Atrações",
+    route: AtracoesPageName,
   },
   {
     icon: Tickets,
     title: "Ingressos",
     tooltip: "Ingressos",
+    route: IngressoPageName,
   },
 ] as const;
 </script>
