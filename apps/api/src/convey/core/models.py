@@ -13,9 +13,16 @@ class Attraction(Model, TimestampMixin):
     name: Mapped[str] = mapped_column(String(255))
 
 
-class FestivalPeriod(Model):
+class FestivalPeriodDate(Model):
     at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
     thumbnail_url: Mapped[str] = mapped_column(String(500))
+
+
+class FestivalPeriod(Model):
+    start_id: Mapped[int] = mapped_column(ForeignKey(FestivalPeriodDate.id))
+    start: Mapped[FestivalPeriodDate] = relationship(foreign_keys=[start_id])
+    end_id: Mapped[int] = mapped_column(ForeignKey(FestivalPeriodDate.id))
+    end: Mapped[FestivalPeriodDate] = relationship(foreign_keys=[end_id])
 
 
 class Festival(Model, TimestampMixin):
@@ -31,9 +38,7 @@ class Festival(Model, TimestampMixin):
     status: Mapped[FestivalStatus] = mapped_column(
         Enum(FestivalStatus), default=lambda: FestivalStatus.DRAFT
     )
-    period_start_id: Mapped[int] = mapped_column(ForeignKey(FestivalPeriod.id))
-    period_start: Mapped[FestivalPeriod] = relationship(foreign_keys=[period_start_id])
-    period_end_id: Mapped[int] = mapped_column(ForeignKey(FestivalPeriod.id))
-    period_end: Mapped[FestivalPeriod] = relationship(foreign_keys=[period_end_id])
+    period_id: Mapped[int] = mapped_column(ForeignKey(FestivalPeriod.id))
+    period: Mapped[FestivalPeriod] = relationship()
     attraction_id: Mapped[int] = mapped_column(ForeignKey(Attraction.id))
     attraction: Mapped["Attraction"] = relationship()
