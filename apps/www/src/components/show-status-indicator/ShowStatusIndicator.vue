@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import {
-  type DeteccaoStatus,
-  type TDeteccaoStatus,
-} from "~/constants/deteccao";
+import type { ShowStatus, TShowStatus } from "~/models/show";
 
 defineProps<{
-  statusQuantity: number;
-  status: (typeof DeteccaoStatus)[TDeteccaoStatus];
+  quantity: number;
+  status: (typeof ShowStatus)[TShowStatus];
 }>();
 </script>
 
@@ -17,7 +14,7 @@ defineProps<{
     <component :is="status.icon" class="size-5" />
     <p class="text-sm text-foreground">{{ status.title }}</p>
     <p class="text-sm">
-      {{ statusQuantity }}
+      {{ quantity }}
     </p>
   </div>
 </template>

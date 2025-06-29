@@ -1,44 +1,47 @@
 <script setup lang="ts">
-import { GalleryVerticalEnd, ListCheck, Plus } from "lucide-vue-next";
+import {
+  GalleryVerticalEnd,
+  ListCheck,
+  type LucideIcon,
+} from "lucide-vue-next";
 
-import DeteccaoDetails from "~/components/deteccao-details";
-import DeteccaoStatusIndicator from "~/components/deteccao-status-indicator";
-import { DeteccaoStatus, type TDeteccaoStatus } from "~/constants/deteccao";
-import { deteccoesCount, deteccoesGroupedByStatus } from "~/data";
-import type { UIEnum } from "~/lib/enums/types";
+import ShowDetails from "~/components/show-details";
+import ShowStatusIndicator from "~/components/show-status-indicator";
+import { showsCount, showsGroupedByStatus } from "~/data";
+import type { TEnum } from "~/lib/enums/types";
 import { Button } from "~/lib/shadcn/ui/button";
 import { SidebarTrigger } from "~/lib/shadcn/ui/sidebar";
+import { ShowStatus, type TShowStatus } from "~/models/show";
 
-const DeteccaoStatusFilters = {
+const filters = {
   tudo: {
     icon: GalleryVerticalEnd,
     title: "Tudo",
     value: "tudo",
   },
-  ...DeteccaoStatus,
-} as const satisfies UIEnum<TDeteccaoStatus | "tudo">;
+  ...ShowStatus,
+} as const satisfies TEnum<
+  TShowStatus | "tudo",
+  { icon: LucideIcon; title: string }
+>;
 </script>
 
 <template>
   <Teleport to="#sidebar-header-container" defer>
     <header class="flex h-header items-center border-b px-6">
       <SidebarTrigger />
-      <h1 class="ml-2 text-sm">Detecções</h1>
+      <h1 class="ml-2 text-sm">Shows</h1>
       <span
         class="ml-2 inline-flex aspect-[3.33/4] items-center justify-center rounded-sm bg-muted px-1 text-2xs font-medium"
       >
-        {{ deteccoesCount }}
+        {{ showsCount }}
       </span>
-      <Button class="ml-auto" variant="outline" size="sm">
-        <Plus />
-        <span>Criar detecção</span>
-      </Button>
     </header>
 
     <header class="flex h-header border-b px-6">
       <div class="flex items-center gap-3">
         <Button
-          v-for="filter in DeteccaoStatusFilters"
+          v-for="filter in filters"
           :key="filter.value"
           size="sm"
           class="border"
@@ -58,16 +61,16 @@ const DeteccaoStatusFilters = {
     </header>
   </Teleport>
 
-  <div v-for="status in DeteccaoStatus" :key="status.value">
-    <DeteccaoStatusIndicator
+  <div v-for="status in ShowStatus" :key="status.value">
+    <ShowStatusIndicator
       :status="status"
-      :status-quantity="deteccoesGroupedByStatus[status.value].length"
+      :quantity="showsGroupedByStatus[status.value].length"
     />
 
-    <DeteccaoDetails
-      v-for="deteccao in deteccoesGroupedByStatus[status.value]"
-      :key="deteccao.id"
-      :deteccao="deteccao"
+    <ShowDetails
+      v-for="show in showsGroupedByStatus[status.value]"
+      :key="show.id"
+      :show="show"
       :status="status"
     />
   </div>

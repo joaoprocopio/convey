@@ -1,8 +1,6 @@
-import { type TDeteccao, type TDeteccaoStatus } from "~/constants/deteccao";
+import type { TShow, TShowStatus } from "~/models/show";
 
-export const marcas = [];
-
-export const deteccoesGroupedByStatus = {
+export const showsGroupedByStatus = {
   concluido: [
     {
       id: 1,
@@ -196,10 +194,8 @@ export const deteccoesGroupedByStatus = {
       status: "pendente",
     },
   ],
-} as const satisfies Record<TDeteccaoStatus, TDeteccao[]>;
+} as const satisfies Record<TShowStatus, TShow[]>;
 
-export const flattenedDeteccoes = Object.values(
-  deteccoesGroupedByStatus,
-).flat();
+export const flattenedShows = Object.values(showsGroupedByStatus).flat();
 
-export const deteccoesCount = Object.values(flattenedDeteccoes).length;
+export const showsCount = Object.values(flattenedShows).length;

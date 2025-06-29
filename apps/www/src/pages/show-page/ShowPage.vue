@@ -12,8 +12,7 @@ import { computed } from "vue";
 import { RouterLink, useRoute } from "vue-router";
 
 import { Leafmap } from "~/components/leafmap";
-import { DeteccaoStatus, type TDeteccao } from "~/constants/deteccao";
-import { flattenedDeteccoes } from "~/data";
+import { flattenedShows } from "~/data";
 import { ShowsPageName } from "~/lib/router/constants";
 import { AspectRatio } from "~/lib/shadcn/ui/aspect-ratio";
 import { Badge } from "~/lib/shadcn/ui/badge";
@@ -35,18 +34,17 @@ import {
   StepperSeparator,
   StepperTitle,
 } from "~/lib/shadcn/ui/stepper";
+import { ShowStatus, type TShow } from "~/models/show";
 
 const route = useRoute();
 
-const deteccao = computed<TDeteccao | undefined>(() =>
-  flattenedDeteccoes.find(
-    (deteccao) => deteccao.id === parseInt(route.params.id as string),
+const show = computed<TShow | undefined>(() =>
+  flattenedShows.find(
+    (show) => show.id === parseInt(route.params.id as string),
   ),
 );
 
-const status = computed(
-  () => deteccao.value && DeteccaoStatus[deteccao.value?.status],
-);
+const status = computed(() => show.value && ShowStatus[show.value?.status]);
 
 const dates = computed(
   () =>
@@ -54,14 +52,14 @@ const dates = computed(
       {
         icon: MapPinHouse,
         label: "Data inicial",
-        url: deteccao.value?.periodo_start_thumbnail_url,
-        timestamp: deteccao.value?.periodo_start_at,
+        url: show.value?.periodo_start_thumbnail_url,
+        timestamp: show.value?.periodo_start_at,
       },
       {
         icon: MapPinCheck,
         label: "Data final",
-        url: deteccao.value?.periodo_end_thumbnail_url,
-        timestamp: deteccao.value?.periodo_end_at,
+        url: show.value?.periodo_end_thumbnail_url,
+        timestamp: show.value?.periodo_end_at,
       },
     ] as const satisfies {
       label: string;
@@ -81,14 +79,14 @@ const dates = computed(
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink :as="RouterLink" :to="{ name: ShowsPageName }">
-              Detecções
+              Shows
             </BreadcrumbLink>
           </BreadcrumbItem>
 
           <BreadcrumbSeparator />
 
           <BreadcrumbItem>
-            <BreadcrumbPage> # {{ deteccao?.id }} </BreadcrumbPage>
+            <BreadcrumbPage> # {{ show?.id }} </BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
@@ -98,7 +96,7 @@ const dates = computed(
   <div class="grid h-full max-h-full grid-cols-[auto_1fr]">
     <div class="pr-24 pl-6">
       <div class="bg-background/60 py-8">
-        <h1 class="text-3xl font-semibold"># {{ deteccao?.id }}</h1>
+        <h1 class="text-3xl font-semibold"># {{ show?.id }}</h1>
 
         <div class="mt-6 flex max-w-lg flex-wrap items-center gap-x-4 gap-y-4">
           <Badge variant="secondary" size="lg">
@@ -108,19 +106,19 @@ const dates = computed(
 
           <Badge variant="secondary" size="lg">
             <CalendarFold class="text-muted-foreground" />
-            <span>{{ deteccao?.periodo_start_at }}</span>
+            <span>{{ show?.periodo_start_at }}</span>
             <MoveRight class="h-4" />
-            <span>{{ deteccao?.periodo_end_at }}</span>
+            <span>{{ show?.periodo_end_at }}</span>
           </Badge>
 
           <Badge variant="secondary" size="lg">
             <CalendarPlus class="text-muted-foreground" />
-            {{ deteccao?.created_at }}
+            {{ show?.created_at }}
           </Badge>
 
           <Badge variant="secondary" size="lg">
             <CalendarSync class="text-muted-foreground" />
-            {{ deteccao?.updated_at }}
+            {{ show?.updated_at }}
           </Badge>
         </div>
       </div>
@@ -148,7 +146,7 @@ const dates = computed(
                 {{ date.timestamp }}
               </StepperTitle>
 
-              <div class="deteccao-card-field-thumbnail mt-6 w-md">
+              <div class="mt-6 w-md">
                 <AspectRatio :ratio="8 / 5" class="overflow-hidden rounded-lg">
                   <img
                     :src="date.url"

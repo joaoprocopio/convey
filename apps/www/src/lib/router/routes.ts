@@ -26,13 +26,13 @@ export const routes: RouteRecordRaw[] = [
   {
     path: "/shows",
     name: ShowsPageName,
-    component: () => import("~/pages/deteccoes-page"),
+    component: () => import("~/pages/shows-page"),
     meta: { layout: DefaultLayout },
   },
   {
     path: "/shows/:id",
     name: ShowPageName,
-    component: () => import("~/pages/deteccao-page"),
+    component: () => import("~/pages/show-page"),
     meta: { layout: DefaultLayout },
   },
   {

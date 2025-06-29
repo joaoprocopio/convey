@@ -7,30 +7,26 @@ import {
   MoveRight,
 } from "lucide-vue-next";
 
-import {
-  type DeteccaoStatus,
-  type TDeteccao,
-  type TDeteccaoStatus,
-} from "~/constants/deteccao";
 import { ShowPageName } from "~/lib/router/constants";
 import { AspectRatio } from "~/lib/shadcn/ui/aspect-ratio";
+import { type ShowStatus, type TShow, type TShowStatus } from "~/models/show";
 
 defineProps<{
-  deteccao: TDeteccao;
-  status: (typeof DeteccaoStatus)[TDeteccaoStatus];
+  show: TShow;
+  status: (typeof ShowStatus)[TShowStatus];
 }>();
 </script>
 
 <template>
   <RouterLink
-    :key="deteccao.id"
-    :to="{ name: ShowPageName, params: { id: deteccao.id } }"
+    :key="show.id"
+    :to="{ name: ShowPageName, params: { id: show.id } }"
     class="grid-template grid w-full gap-x-8 gap-y-4 px-6 py-4 hover:bg-secondary/50 hover:text-secondary-foreground"
   >
     <div class="area-thumbnail w-56">
       <AspectRatio :ratio="8 / 5" class="overflow-hidden rounded-lg">
         <img
-          :src="deteccao.thumbnail_url"
+          :src="show.thumbnail_url"
           class="h-full w-full bg-muted object-cover"
         />
       </AspectRatio>
@@ -38,16 +34,16 @@ defineProps<{
 
     <div class="grid-field area-id">
       <Hash class="grid-field-icon" />
-      <span>{{ deteccao.id }}</span>
+      <span>{{ show.id }}</span>
     </div>
 
     <div class="grid-field area-periodo">
       <CalendarFold class="grid-field-icon" />
 
       <div class="flex items-center gap-x-2">
-        <span>{{ deteccao.periodo_start_at }}</span>
+        <span>{{ show.periodo_start_at }}</span>
         <MoveRight class="h-5" />
-        <span>{{ deteccao.periodo_end_at }}</span>
+        <span>{{ show.periodo_end_at }}</span>
       </div>
     </div>
 
@@ -58,12 +54,12 @@ defineProps<{
 
     <div class="grid-field area-created-at">
       <CalendarPlus class="grid-field-icon" />
-      <span>{{ deteccao.created_at }}</span>
+      <span>{{ show.created_at }}</span>
     </div>
 
     <div class="grid-field area-updated-at">
       <CalendarSync class="grid-field-icon" />
-      <span>{{ deteccao.updated_at }}</span>
+      <span>{{ show.updated_at }}</span>
     </div>
   </RouterLink>
 </template>
