@@ -3,12 +3,14 @@
     <RouterView />
   </component>
   <RouterView v-else />
+  <VueQueryDevtools />
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
 import { useRoute } from "vue-router";
 
+import { VueQueryDevtools } from "~/lib/query/devtools";
 import { useRouterLayout } from "~/lib/router/composables";
 
 const route = useRoute();

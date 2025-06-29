@@ -4,7 +4,8 @@
     "types": ["vite/client"],
     "paths": {
       "~/*": ["./src/*"]
-    }
+    },
+    "noErrorTruncation": true
   },
   "exclude": ["node_modules", "dist"]
 }
