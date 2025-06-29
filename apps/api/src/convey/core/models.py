@@ -36,7 +36,7 @@ class Show(Model, TimestampMixin):
         Geometry(geometry_type="POLYGON", srid=SRID),
     )
     status: Mapped[FestivalStatus] = mapped_column(
-        Enum(FestivalStatus), default=lambda: FestivalStatus.DRAFT
+        Enum(FestivalStatus), default=lambda: FestivalStatus.RASCUNHO
     )
     periodo_id: Mapped[int] = mapped_column(ForeignKey(ShowPeriodo.id))
     periodo: Mapped[ShowPeriodo] = relationship()

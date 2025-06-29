@@ -2,8 +2,8 @@ from enum import StrEnum
 
 
 class FestivalStatus(StrEnum):
-    DRAFT = "draft"
-    PAST = "past"
-    UPCOMING = "upcoming"
-    ONGOING = "ongoing"
-    FINISHED = "finished"
+    RASCUNHO = "rascunho"
+    PASSADO = "passado"
+    PROVIR = "porvir"
+    ACONTECENDO = "acontecendo"
+    CONCLUÍDO = "concluído"

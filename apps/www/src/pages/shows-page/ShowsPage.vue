@@ -8,10 +8,10 @@ import {
 import ShowDetails from "~/components/show-details";
 import ShowStatusIndicator from "~/components/show-status-indicator";
 import { showsCount, showsGroupedByStatus } from "~/data";
+import { ShowStatus, type TShowStatus } from "~/data/show/models";
 import type { TEnum } from "~/lib/enums/types";
 import { Button } from "~/lib/shadcn/ui/button";
 import { SidebarTrigger } from "~/lib/shadcn/ui/sidebar";
-import { ShowStatus, type TShowStatus } from "~/data/show/models";
 
 const filters = {
   tudo: {
