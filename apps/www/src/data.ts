@@ -16,8 +16,6 @@ export const deteccoesGroupedByStatus = {
           at: "2023-04-16T00:00:00Z",
           thumbnail_url: "https://picsum.photos/600/400",
         },
-        created_at: "2023-05-18T00:00:00Z",
-        updated_at: "2023-05-23T00:00:00Z",
       },
       location: [-43.172, -22.906],
       created_at: "18 de mai",

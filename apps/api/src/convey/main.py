@@ -9,10 +9,9 @@ from convey.database.models import Model
 
 
 async def lifespan(_: FastAPI):
-    # TODO: FIXME: isso aqui é uma gambiarra, as migrações deveriam ser controladas pelo alembic
     async with async_engine.begin() as conn:
         try:
-            await conn.run_sync(Model.metadata.create_all)
+            await conn.run_sync(Model.metadata.create_all)  # gambiarrinha d levs
             yield
         except Exception:
             await conn.rollback()
@@ -24,7 +23,7 @@ app = FastAPI(
 )
 
 
-app.add_middleware(GZipMiddleware, minimum_size=512)
+app.add_middleware(GZipMiddleware)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
