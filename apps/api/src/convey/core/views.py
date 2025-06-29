@@ -8,7 +8,11 @@ from fastapi import APIRouter, Response, status
 router_v1 = APIRouter()
 
 
-@router_v1.get("/attractions", response_model=List[AttractionSchema])
+@router_v1.get(
+    "/attractions",
+    response_model=List[AttractionSchema],
+    status_code=status.HTTP_200_OK,
+)
 async def attractions_list(session: AsyncSessionDep):
     attractions = await list_attractions(session)
 
