@@ -34,7 +34,7 @@ import {
   StepperSeparator,
   StepperTitle,
 } from "~/lib/shadcn/ui/stepper";
-import { ShowStatus, type TShow } from "~/models/show";
+import { ShowStatus, type TShow } from "~/data/show/models";
 
 const route = useRoute();
 

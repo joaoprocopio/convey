@@ -1,4 +1,4 @@
-import type { TShow, TShowStatus } from "~/models/show";
+import type { TShow, TShowStatus } from "~/data/show/models";
 
 export const showsGroupedByStatus = {
   concluido: [

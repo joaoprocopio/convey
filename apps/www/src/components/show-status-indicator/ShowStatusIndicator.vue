@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ShowStatus, TShowStatus } from "~/models/show";
+import type { ShowStatus, TShowStatus } from "~/data/show/models";
 
 defineProps<{
   quantity: number;

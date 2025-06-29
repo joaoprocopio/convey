@@ -9,7 +9,7 @@ import {
 
 import { ShowPageName } from "~/lib/router/constants";
 import { AspectRatio } from "~/lib/shadcn/ui/aspect-ratio";
-import { type ShowStatus, type TShow, type TShowStatus } from "~/models/show";
+import { type ShowStatus, type TShow, type TShowStatus } from "~/data/show/models";
 
 defineProps<{
   show: TShow;

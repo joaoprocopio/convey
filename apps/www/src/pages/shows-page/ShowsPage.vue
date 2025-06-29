@@ -11,7 +11,7 @@ import { showsCount, showsGroupedByStatus } from "~/data";
 import type { TEnum } from "~/lib/enums/types";
 import { Button } from "~/lib/shadcn/ui/button";
 import { SidebarTrigger } from "~/lib/shadcn/ui/sidebar";
-import { ShowStatus, type TShowStatus } from "~/models/show";
+import { ShowStatus, type TShowStatus } from "~/data/show/models";
 
 const filters = {
   tudo: {
