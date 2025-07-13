@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { useMediaQuery, useVModel } from "@vueuse/core";
+import { useMediaQuery, useStorage } from "@vueuse/core";
 import { TooltipProvider } from "reka-ui";
-import { computed, type HTMLAttributes, type Ref, ref } from "vue";
+import { computed, type HTMLAttributes, type ModelRef } from "vue";
 
 import { cn } from "~/lib/shadcn/utils";
+import { cookieStorage } from "~/lib/vueuse/cookie-storage";
 
 import {
   provideSidebarContext,
-  SIDEBAR_COOKIE_MAX_AGE,
   SIDEBAR_COOKIE_NAME,
   SIDEBAR_WIDTH,
   SIDEBAR_WIDTH_ICON,
@@ -16,7 +16,6 @@ import {
 const props = withDefaults(
   defineProps<{
     defaultOpen?: boolean;
-    open?: boolean;
     class?: HTMLAttributes["class"];
   }>(),
   {
@@ -25,34 +24,26 @@ const props = withDefaults(
   },
 );
 
-const emits = defineEmits<{
-  "update:open": [open: boolean];
-}>();
-
 const isMobile = useMediaQuery("(max-width: 768px)");
-const openMobile = ref(false);
 
-const open = useVModel(props, "open", emits, {
-  defaultValue: props.defaultOpen ?? false,
-  passive: (props.open === undefined) as false,
-}) as Ref<boolean>;
+const __INTERNAL_COOKIE_OPEN__ = useStorage(
+  SIDEBAR_COOKIE_NAME,
+  props.defaultOpen,
+  cookieStorage,
+);
 
-function setOpen(value: boolean) {
-  open.value = value; // emits('update:open', value)
-
-  // This sets the cookie to keep the sidebar state.
-  document.cookie = `${SIDEBAR_COOKIE_NAME}=${open.value}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
-}
-
-function setOpenMobile(value: boolean) {
-  openMobile.value = value;
-}
+const open = defineModel<boolean>("open", {
+  get() {
+    return __INTERNAL_COOKIE_OPEN__.value;
+  },
+  set(value) {
+    __INTERNAL_COOKIE_OPEN__.value = value;
+  },
+}) as ModelRef<boolean, string, boolean, boolean>;
 
 // Helper to toggle the sidebar.
 function toggleSidebar() {
-  return isMobile.value
-    ? setOpenMobile(!openMobile.value)
-    : setOpen(!open.value);
+  open.value = !open.value;
 }
 
 // We add a state so that we can do data-state="expanded" or "collapsed".
@@ -62,10 +53,7 @@ const state = computed(() => (open.value ? "expanded" : "collapsed"));
 provideSidebarContext({
   state,
   open,
-  setOpen,
   isMobile,
-  openMobile,
-  setOpenMobile,
   toggleSidebar,
 });
 </script>

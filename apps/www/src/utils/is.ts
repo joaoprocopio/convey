@@ -20,3 +20,7 @@ export function isFn(value: unknown): value is (...args: any[]) => any {
 export function isNumber(value: unknown): value is number {
   return Number.isFinite(parseInt(value as string));
 }
+
+export function isStr(value: unknown): value is string {
+  return typeof value === "string";
+}
