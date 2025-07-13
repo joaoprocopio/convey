@@ -1,9 +1,7 @@
 from datetime import datetime
 
-from convey.config import SRID
 from convey.core.enums import FestivalStatus
 from convey.database.models import Model, TimestampMixin
-from geoalchemy2 import Geometry, WKBElement
 from sqlalchemy import DateTime, Enum, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -29,12 +27,6 @@ class Show(Model, TimestampMixin):
     slug: Mapped[str] = mapped_column(String(255), unique=True, index=True)
     nome: Mapped[str] = mapped_column(String(255))
     thumbnail_url: Mapped[str] = mapped_column(String(500))
-    local: Mapped[WKBElement] = mapped_column(
-        Geometry(geometry_type="POINT", srid=SRID)
-    )
-    bbox: Mapped[WKBElement] = mapped_column(
-        Geometry(geometry_type="POLYGON", srid=SRID),
-    )
     status: Mapped[FestivalStatus] = mapped_column(
         Enum(FestivalStatus), default=lambda: FestivalStatus.RASCUNHO
     )

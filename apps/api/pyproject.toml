@@ -9,7 +9,6 @@ description = "."
 requires-python = ">=3.13"
 dependencies = [
     "fastapi>=0.115.14",
-    "geoalchemy2[shapely]>=0.17.1",
     "httptools>=0.6.4",
     "orjson>=3.10.18",
     "pydantic>=2.11.7",
@@ -22,7 +21,6 @@ dependencies = [
 dev = [
     "mypy>=1.16.1",
     "ruff>=0.12.1",
-    "types-shapely>=2.1.0.20250512",
 ]
 
 [tool.mypy]
