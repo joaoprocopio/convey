@@ -6,7 +6,7 @@ import { defineConfig } from "vite";
 import vueDevTools from "vite-plugin-vue-devtools";
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(() => ({
   plugins: [tailwindcss(), vue(), vueDevTools()],
   publicDir: "./src/public",
   resolve: {
@@ -14,4 +14,4 @@ export default defineConfig({
       "~": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
-});
+}));
