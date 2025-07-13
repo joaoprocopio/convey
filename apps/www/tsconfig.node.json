@@ -1,6 +1,6 @@
 {
   "extends": "@tsconfig/node22/tsconfig.json",
-  "include": ["*.conf.*", "*.config.*"],
+  "include": ["*.conf*"],
   "compilerOptions": {
     "noEmit": true,
     "allowJs": true,
