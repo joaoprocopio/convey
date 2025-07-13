@@ -1,22 +1,28 @@
 <script setup lang="ts">
 import {
+  ChartNoAxesCombined,
   ChevronDown,
   Computer,
-  Drum,
+  FileText,
+  Home,
   LogOut,
   type LucideIcon,
   Moon,
+  PackageOpen,
   Palette,
-  PartyPopper,
+  Store,
   Sun,
-  Tickets,
+  Truck,
 } from "lucide-vue-next";
 import { RouterLink } from "vue-router";
 
 import {
-  AtracoesPageName,
-  IngressoPageName,
-  ShowsPageName,
+  FinanceiroPageName,
+  InicioPageName,
+  PedidosPageName,
+  ProdutosPageName,
+  PropostasPageName,
+  UnidadesPageName,
 } from "~/lib/router/constants";
 import { Avatar, AvatarFallback } from "~/lib/shadcn/ui/avatar";
 import { Collapsible } from "~/lib/shadcn/ui/collapsible";
@@ -80,22 +86,40 @@ type Nav = {
 
 const links: Nav[] = [
   {
-    icon: PartyPopper,
-    title: "Shows",
-    tooltip: "Shows",
-    route: ShowsPageName,
+    icon: Home,
+    title: "Início",
+    tooltip: "Início",
+    route: InicioPageName,
   },
   {
-    icon: Drum,
-    title: "Atrações",
-    tooltip: "Atrações",
-    route: AtracoesPageName,
+    icon: Store,
+    title: "Unidades",
+    tooltip: "Unidades",
+    route: UnidadesPageName,
   },
   {
-    icon: Tickets,
-    title: "Ingressos",
-    tooltip: "Ingressos",
-    route: IngressoPageName,
+    icon: Truck,
+    title: "Pedidos",
+    tooltip: "Pedidos",
+    route: PedidosPageName,
+  },
+  {
+    icon: PackageOpen,
+    title: "Produtos",
+    tooltip: "Produtos",
+    route: ProdutosPageName,
+  },
+  {
+    icon: FileText,
+    title: "Propopstas",
+    tooltip: "Propopstas",
+    route: PropostasPageName,
+  },
+  {
+    icon: ChartNoAxesCombined,
+    title: "Financeiro",
+    tooltip: "Financeiro",
+    route: FinanceiroPageName,
   },
 ] as const;
 </script>

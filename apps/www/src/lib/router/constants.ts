@@ -1,7 +1,6 @@
-export const ShowsPageName = "shows" as const;
-
-export const ShowPageName = "show" as const;
-
-export const AtracoesPageName = "atracoes" as const;
-
-export const IngressoPageName = "ingresso" as const;
+export const InicioPageName = "inicio" as const;
+export const UnidadesPageName = "unidades" as const;
+export const PedidosPageName = "pedidos" as const;
+export const ProdutosPageName = "produtos" as const;
+export const PropostasPageName = "propostas" as const;
+export const FinanceiroPageName = "financeiro" as const;

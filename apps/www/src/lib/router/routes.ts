@@ -2,57 +2,80 @@ import { h } from "vue";
 import type { RouteRecordRaw } from "vue-router";
 
 import DefaultLayout from "~/layouts/default-layout";
-
 import {
-  AtracoesPageName,
-  IngressoPageName,
-  ShowPageName,
-  ShowsPageName,
-} from "./constants";
+  FinanceiroPageName,
+  InicioPageName,
+  PedidosPageName,
+  ProdutosPageName,
+  PropostasPageName,
+  UnidadesPageName,
+} from "~/lib/router/constants";
 
 export const routes: RouteRecordRaw[] = [
   {
     path: "/",
-    redirect: {
-      name: ShowsPageName,
+    name: InicioPageName,
+    component: {
+      setup() {
+        return () => h("div", null, [h("h1", null, InicioPageName)]);
+      },
     },
+    meta: { layout: DefaultLayout },
+  },
+  {
+    path: "/financeiro",
+    name: FinanceiroPageName,
+    component: {
+      setup() {
+        return () => h("div", null, [h("h1", null, FinanceiroPageName)]);
+      },
+    },
+    meta: { layout: DefaultLayout },
+  },
+  {
+    path: "/pedidos",
+    name: PedidosPageName,
+    component: {
+      setup() {
+        return () => h("div", null, [h("h1", null, PedidosPageName)]);
+      },
+    },
+    meta: { layout: DefaultLayout },
+  },
+  {
+    path: "/produtos",
+    name: ProdutosPageName,
+    component: {
+      setup() {
+        return () => h("div", null, [h("h1", null, ProdutosPageName)]);
+      },
+    },
+    meta: { layout: DefaultLayout },
+  },
+  {
+    path: "/propostas",
+    name: PropostasPageName,
+    component: {
+      setup() {
+        return () => h("div", null, [h("h1", null, PropostasPageName)]);
+      },
+    },
+    meta: { layout: DefaultLayout },
+  },
+  {
+    path: "/unidades",
+    name: UnidadesPageName,
+    component: {
+      setup() {
+        return () => h("div", null, [h("h1", null, UnidadesPageName)]);
+      },
+    },
+    meta: { layout: DefaultLayout },
   },
   {
     path: "/:pathMatch(.*)*",
     redirect: {
-      name: ShowsPageName,
+      name: InicioPageName,
     },
-  },
-  {
-    path: "/shows",
-    name: ShowsPageName,
-    component: () => import("~/pages/shows-page"),
-    meta: { layout: DefaultLayout },
-  },
-  {
-    path: "/shows/:id",
-    name: ShowPageName,
-    component: () => import("~/pages/show-page"),
-    meta: { layout: DefaultLayout },
-  },
-  {
-    path: "/atracoes",
-    name: AtracoesPageName,
-    component: {
-      setup() {
-        return () => h("div", null, [h("h1", null, "atracoes")]);
-      },
-    },
-    meta: { layout: DefaultLayout },
-  },
-  {
-    path: "/ingressos",
-    name: IngressoPageName,
-    component: {
-      setup() {
-        return () => h("div", null, [h("h1", null, "ingressos")]);
-      },
-    },
-    meta: { layout: DefaultLayout },
   },
 ];
