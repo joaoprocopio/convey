@@ -6,17 +6,17 @@ import {
   defineConfigWithVueTs,
   vueTsConfigs,
 } from "@vue/eslint-config-typescript";
-import importsort from "eslint-plugin-simple-import-sort";
+import pluginImportSort from "eslint-plugin-simple-import-sort";
 import pluginVue from "eslint-plugin-vue";
-import path from "path";
-import url from "url";
+import { dirname, resolve } from "path";
+import { fileURLToPath } from "url";
 
-const __filename = url.fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const __gitignore = path.resolve(__dirname, ".gitignore");
+const exec = fileURLToPath(import.meta.url);
+const root = dirname(exec);
+const gitignore = resolve(root, ".gitignore");
 
 export default defineConfigWithVueTs(
-  includeIgnoreFile(__gitignore),
+  includeIgnoreFile(gitignore),
 
   {
     name: "app/files-to-lint",
@@ -40,7 +40,7 @@ export default defineConfigWithVueTs(
 
   {
     plugins: {
-      "simple-import-sort": importsort,
+      "simple-import-sort": pluginImportSort,
     },
     rules: {
       "simple-import-sort/imports": "error",
