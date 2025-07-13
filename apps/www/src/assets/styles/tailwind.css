@@ -3,6 +3,22 @@
 
 @custom-variant dark (&:is(.dark *));
 
+.mac-light {
+  --text-primary: rgba(0, 0, 0, 0.85);
+  --text-secondary: rgba(0, 0, 0, 0.5);
+  --text-tertiary: rgba(0, 0, 0, 0.25);
+  --text-quaternary: rgba(0, 0, 0, 0.1);
+  --text-quinary: rgba(0, 0, 0, 0.5);
+}
+
+.mac-dark {
+  --text-primary: rgba(255, 255, 255, 0.85);
+  --text-secondary: rgba(255, 255, 255, 0.55);
+  --text-tertiary: rgba(255, 255, 255, 0.25);
+  --text-quaternary: rgba(255, 255, 255, 0.1);
+  --text-quinary: rgba(255, 255, 255, 0.5);
+}
+
 :root {
   --radius: 0.825rem;
   --background: oklch(1 0 0);
