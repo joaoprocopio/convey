@@ -13,8 +13,8 @@ import {
   Store,
   Sun,
   Truck,
-} from "lucide-vue-next";
-import { RouterLink } from "vue-router";
+} from 'lucide-vue-next';
+import { RouterLink } from 'vue-router';
 
 import {
   FinanceiroPageName,
@@ -23,9 +23,10 @@ import {
   ProdutosPageName,
   PropostasPageName,
   UnidadesPageName,
-} from "~/lib/router/constants";
-import { Avatar, AvatarFallback } from "~/lib/shadcn/ui/avatar";
-import { Collapsible } from "~/lib/shadcn/ui/collapsible";
+} from '~/lib/router/constants';
+import { Avatar, AvatarFallback } from '~/lib/shadcn/ui/avatar';
+import { Collapsible } from '~/lib/shadcn/ui/collapsible';
+import { Drawer } from '~/lib/shadcn/ui/drawer';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -40,7 +41,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "~/lib/shadcn/ui/dropdown-menu";
+} from '~/lib/shadcn/ui/dropdown-menu';
 import {
   Sidebar,
   SidebarContent,
@@ -53,26 +54,26 @@ import {
   SidebarMenuItem,
   SidebarProvider,
   SidebarRail,
-} from "~/lib/shadcn/ui/sidebar";
-import { useTheme } from "~/lib/theme/composables";
-import { Theme } from "~/lib/theme/constants";
+} from '~/lib/shadcn/ui/sidebar';
+import { useTheme } from '~/lib/theme/composables';
+import { Theme } from '~/lib/theme/constants';
 
 const selectedTheme = useTheme();
 
 const availableThemes = [
   {
     icon: Computer,
-    title: "Sistema",
+    title: 'Sistema',
     value: Theme.System,
   },
   {
     icon: Sun,
-    title: "Claro",
+    title: 'Claro',
     value: Theme.Light,
   },
   {
     icon: Moon,
-    title: "Escuro",
+    title: 'Escuro',
     value: Theme.Dark,
   },
 ] as const satisfies { icon: LucideIcon; value: string; title: string }[];
@@ -87,38 +88,38 @@ type Nav = {
 const links: Nav[] = [
   {
     icon: Home,
-    title: "Início",
-    tooltip: "Início",
+    title: 'Início',
+    tooltip: 'Início',
     route: InicioPageName,
   },
   {
     icon: Store,
-    title: "Unidades",
-    tooltip: "Unidades",
+    title: 'Unidades',
+    tooltip: 'Unidades',
     route: UnidadesPageName,
   },
   {
     icon: Truck,
-    title: "Pedidos",
-    tooltip: "Pedidos",
+    title: 'Pedidos',
+    tooltip: 'Pedidos',
     route: PedidosPageName,
   },
   {
     icon: PackageOpen,
-    title: "Produtos",
-    tooltip: "Produtos",
+    title: 'Produtos',
+    tooltip: 'Produtos',
     route: ProdutosPageName,
   },
   {
     icon: FileText,
-    title: "Propostas",
-    tooltip: "Propostas",
+    title: 'Propostas',
+    tooltip: 'Propostas',
     route: PropostasPageName,
   },
   {
     icon: ChartNoAxesCombined,
-    title: "Financeiro",
-    tooltip: "Financeiro",
+    title: 'Financeiro',
+    tooltip: 'Financeiro',
     route: FinanceiroPageName,
   },
 ] as const;
@@ -147,6 +148,7 @@ const links: Nav[] = [
             </SidebarMenuButton>
           </DropdownMenuTrigger>
 
+          <Drawer>asdf</Drawer>
           <DropdownMenuContent class="min-w-56" align="start" side="bottom">
             <DropdownMenuLabel
               class="flex items-center gap-2 px-1 py-1.5 text-left text-sm"
