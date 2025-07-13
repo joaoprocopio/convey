@@ -111,8 +111,8 @@ const links: Nav[] = [
   },
   {
     icon: FileText,
-    title: "Propopstas",
-    tooltip: "Propopstas",
+    title: "Propostas",
+    tooltip: "Propostas",
     route: PropostasPageName,
   },
   {
