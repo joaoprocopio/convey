@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "reinstall": "git clean -xdf node_modules dist && npm cache clean --force && npm cache verify && npm install",
+    "clean": "git clean -xdf node_modules dist",
+    "cleaninstall": "pnpm clean && pnpm store prune --force && pnpm install",
     "dev": "vite",
     "type-check": "vue-tsc --build",
     "build": "run-p type-check \"build-only {@}\" --",
