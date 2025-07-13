@@ -1,4 +1,5 @@
-import { Theme, type TTHeme } from './constants'
+import type { TTHeme } from '~/lib/theme/constants'
+import { Theme } from '~/lib/theme/constants'
 
 export function applyTheme(theme: TTHeme, media: MediaQueryList) {
   const rootEl = document.documentElement

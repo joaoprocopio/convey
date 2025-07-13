@@ -1,9 +1,11 @@
-import { inject } from 'vue'
+import { useStorage } from '@vueuse/core'
 
-import { themeKey } from '~/lib/theme/plugin'
+import type { TTHeme } from '~/lib/theme/constants'
+import { Theme } from '~/lib/theme/constants'
+import { cookieStorage } from '~/lib/vueuse/cookie-storage'
 
 export function useTheme() {
-  const theme = inject(themeKey)
+  const theme = useStorage<TTHeme>('theme', Theme.System, cookieStorage)
 
   return theme
 }

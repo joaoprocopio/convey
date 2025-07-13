@@ -8,7 +8,6 @@ import { cookieStorage } from '~/lib/vueuse/cookie-storage'
 
 import {
   provideSidebarContext,
-  SIDEBAR_COOKIE_NAME,
   SIDEBAR_WIDTH,
   SIDEBAR_WIDTH_ICON,
 } from './utils'
@@ -27,7 +26,7 @@ const props = withDefaults(
 const isMobile = useMediaQuery('(max-width: 768px)')
 
 const __INTERNAL_COOKIE_OPEN__ = useStorage(
-  SIDEBAR_COOKIE_NAME,
+  'sidebar',
   props.defaultOpen,
   cookieStorage,
 )

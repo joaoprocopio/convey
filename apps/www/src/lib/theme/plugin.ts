@@ -1,18 +1,11 @@
-import {
-  type FunctionPlugin,
-  type InjectionKey,
-  type Ref,
-  ref,
-  watch,
-} from 'vue'
+import { type FunctionPlugin, watch } from 'vue'
 
-import { PrefersDarkColorScheme, Theme, type TTHeme } from './constants'
-import { applyTheme } from './dom'
+import { useTheme } from '~/lib/theme/composables'
+import { PrefersDarkColorScheme } from '~/lib/theme/constants'
+import { applyTheme } from '~/lib/theme/dom'
 
-export const themeKey = Symbol() as InjectionKey<Ref<TTHeme>>
-
-export const theme: FunctionPlugin = async (app) => {
-  const theme = ref<TTHeme>(Theme.System)
+export const theme: FunctionPlugin = async () => {
+  const theme = useTheme()
   const media = window.matchMedia(PrefersDarkColorScheme)
 
   watch(theme, (nextTheme) => applyTheme(nextTheme, media), {
@@ -20,6 +13,4 @@ export const theme: FunctionPlugin = async (app) => {
   })
 
   media.addEventListener('change', () => applyTheme(theme.value, media))
-
-  app.provide(themeKey, theme)
 }
