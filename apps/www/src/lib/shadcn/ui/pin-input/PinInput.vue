@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import { reactiveOmit } from "@vueuse/core";
+import { reactiveOmit } from '@vueuse/core'
 import {
   PinInputRoot,
   type PinInputRootEmits,
   type PinInputRootProps,
   useForwardPropsEmits,
-} from "reka-ui";
-import type { HTMLAttributes } from "vue";
+} from 'reka-ui'
+import type { HTMLAttributes } from 'vue'
 
-import { cn } from "~/lib/shadcn/utils";
+import { cn } from '~/lib/shadcn/utils'
 
 const props = withDefaults(
-  defineProps<PinInputRootProps & { class?: HTMLAttributes["class"] }>(),
+  defineProps<PinInputRootProps & { class?: HTMLAttributes['class'] }>(),
   {
     modelValue: () => [],
   },
-);
-const emits = defineEmits<PinInputRootEmits>();
+)
+const emits = defineEmits<PinInputRootEmits>()
 
-const delegatedProps = reactiveOmit(props, "class");
+const delegatedProps = reactiveOmit(props, 'class')
 
-const forwarded = useForwardPropsEmits(delegatedProps, emits);
+const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>

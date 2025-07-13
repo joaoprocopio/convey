@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from "vue";
+import type { HTMLAttributes } from 'vue'
 
-import { cn } from "~/lib/shadcn/utils";
+import { cn } from '~/lib/shadcn/utils'
 
-import { type AlertVariants, alertVariants } from ".";
+import { type AlertVariants, alertVariants } from '.'
 
 const props = defineProps<{
-  class?: HTMLAttributes["class"];
-  variant?: AlertVariants["variant"];
-}>();
+  class?: HTMLAttributes['class']
+  variant?: AlertVariants['variant']
+}>()
 </script>
 
 <template>

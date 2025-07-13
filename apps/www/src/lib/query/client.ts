@@ -1,4 +1,4 @@
-import { QueryClient } from "@tanstack/vue-query";
+import { QueryClient } from '@tanstack/vue-query'
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -6,4 +6,4 @@ export const queryClient = new QueryClient({
       staleTime: 5_000, // 5s
     },
   },
-});
+})

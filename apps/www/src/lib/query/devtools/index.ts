@@ -1,7 +1,7 @@
-import { defineAsyncComponent } from "vue";
+import { defineAsyncComponent } from 'vue'
 
-import { env } from "~/env";
+import { env } from '~/env'
 
 export const VueQueryDevtools = env.DEV
-  ? defineAsyncComponent(async () => await import("./devtools.vue"))
-  : undefined;
+  ? defineAsyncComponent(async () => await import('./devtools.vue'))
+  : undefined

@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { reactiveOmit } from "@vueuse/core";
-import type { SeparatorProps } from "reka-ui";
-import { Separator } from "reka-ui";
-import type { HTMLAttributes } from "vue";
+import { reactiveOmit } from '@vueuse/core'
+import type { SeparatorProps } from 'reka-ui'
+import { Separator } from 'reka-ui'
+import type { HTMLAttributes } from 'vue'
 
-import { cn } from "~/lib/shadcn/utils";
+import { cn } from '~/lib/shadcn/utils'
 
 const props = defineProps<
-  SeparatorProps & { class?: HTMLAttributes["class"] }
->();
+  SeparatorProps & { class?: HTMLAttributes['class'] }
+>()
 
-const delegatedProps = reactiveOmit(props, "class");
+const delegatedProps = reactiveOmit(props, 'class')
 </script>
 
 <template>

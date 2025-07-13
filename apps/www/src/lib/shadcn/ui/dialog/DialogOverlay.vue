@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { reactiveOmit } from "@vueuse/core";
-import { DialogOverlay, type DialogOverlayProps } from "reka-ui";
-import type { HTMLAttributes } from "vue";
+import { reactiveOmit } from '@vueuse/core'
+import { DialogOverlay, type DialogOverlayProps } from 'reka-ui'
+import type { HTMLAttributes } from 'vue'
 
-import { cn } from "~/lib/shadcn/utils";
+import { cn } from '~/lib/shadcn/utils'
 
 const props = defineProps<
-  DialogOverlayProps & { class?: HTMLAttributes["class"] }
->();
+  DialogOverlayProps & { class?: HTMLAttributes['class'] }
+>()
 
-const delegatedProps = reactiveOmit(props, "class");
+const delegatedProps = reactiveOmit(props, 'class')
 </script>
 
 <template>

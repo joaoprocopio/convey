@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { computed, type HTMLAttributes } from "vue";
+import { computed, type HTMLAttributes } from 'vue'
 
-import { Skeleton } from "~/lib/shadcn/ui/skeleton";
-import { cn } from "~/lib/shadcn/utils";
+import { Skeleton } from '~/lib/shadcn/ui/skeleton'
+import { cn } from '~/lib/shadcn/utils'
 
 const props = defineProps<{
-  showIcon?: boolean;
-  class?: HTMLAttributes["class"];
-}>();
+  showIcon?: boolean
+  class?: HTMLAttributes['class']
+}>()
 
 const width = computed(() => {
-  return `${Math.floor(Math.random() * 40) + 50}%`;
-});
+  return `${Math.floor(Math.random() * 40) + 50}%`
+})
 </script>
 
 <template>

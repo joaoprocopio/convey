@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { cn } from "~/lib/shadcn/utils";
+import { cn } from '~/lib/shadcn/utils'
 
-import type { WithClassAsProps } from "./interface";
-import { useCarousel } from "./useCarousel";
+import type { WithClassAsProps } from './interface'
+import { useCarousel } from './useCarousel'
 
-const props = defineProps<WithClassAsProps>();
+const props = defineProps<WithClassAsProps>()
 
-const { orientation } = useCarousel();
+const { orientation } = useCarousel()
 </script>
 
 <template>

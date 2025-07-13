@@ -1,14 +1,14 @@
 <script lang="ts" setup>
-import { reactiveOmit } from "@vueuse/core";
+import { reactiveOmit } from '@vueuse/core'
 import {
   CalendarRoot,
   type CalendarRootEmits,
   type CalendarRootProps,
   useForwardPropsEmits,
-} from "reka-ui";
-import type { HTMLAttributes } from "vue";
+} from 'reka-ui'
+import type { HTMLAttributes } from 'vue'
 
-import { cn } from "~/lib/shadcn/utils";
+import { cn } from '~/lib/shadcn/utils'
 
 import {
   CalendarCell,
@@ -22,16 +22,16 @@ import {
   CalendarHeading,
   CalendarNextButton,
   CalendarPrevButton,
-} from ".";
+} from '.'
 
 const props = defineProps<
-  CalendarRootProps & { class?: HTMLAttributes["class"] }
->();
-const emits = defineEmits<CalendarRootEmits>();
+  CalendarRootProps & { class?: HTMLAttributes['class'] }
+>()
+const emits = defineEmits<CalendarRootEmits>()
 
-const delegatedProps = reactiveOmit(props, "class");
+const delegatedProps = reactiveOmit(props, 'class')
 
-const forwarded = useForwardPropsEmits(delegatedProps, emits);
+const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>

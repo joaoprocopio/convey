@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { reactiveOmit } from "@vueuse/core";
-import type { ComboboxViewportProps } from "reka-ui";
-import { ComboboxViewport, useForwardProps } from "reka-ui";
-import type { HTMLAttributes } from "vue";
+import { reactiveOmit } from '@vueuse/core'
+import type { ComboboxViewportProps } from 'reka-ui'
+import { ComboboxViewport, useForwardProps } from 'reka-ui'
+import type { HTMLAttributes } from 'vue'
 
-import { cn } from "~/lib/shadcn/utils";
+import { cn } from '~/lib/shadcn/utils'
 
 const props = defineProps<
-  ComboboxViewportProps & { class?: HTMLAttributes["class"] }
->();
+  ComboboxViewportProps & { class?: HTMLAttributes['class'] }
+>()
 
-const delegatedProps = reactiveOmit(props, "class");
+const delegatedProps = reactiveOmit(props, 'class')
 
-const forwarded = useForwardProps(delegatedProps);
+const forwarded = useForwardProps(delegatedProps)
 </script>
 
 <template>

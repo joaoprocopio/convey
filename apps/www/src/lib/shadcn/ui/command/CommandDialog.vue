@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { DialogRootEmits, DialogRootProps } from "reka-ui";
-import { useForwardPropsEmits } from "reka-ui";
+import type { DialogRootEmits, DialogRootProps } from 'reka-ui'
+import { useForwardPropsEmits } from 'reka-ui'
 
 import {
   Dialog,
@@ -8,25 +8,25 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "~/lib/shadcn/ui/dialog";
+} from '~/lib/shadcn/ui/dialog'
 
-import Command from "./Command.vue";
+import Command from './Command.vue'
 
 const props = withDefaults(
   defineProps<
     DialogRootProps & {
-      title?: string;
-      description?: string;
+      title?: string
+      description?: string
     }
   >(),
   {
-    title: "Command Palette",
-    description: "Search for a command to run...",
+    title: 'Command Palette',
+    description: 'Search for a command to run...',
   },
-);
-const emits = defineEmits<DialogRootEmits>();
+)
+const emits = defineEmits<DialogRootEmits>()
 
-const forwarded = useForwardPropsEmits(props, emits);
+const forwarded = useForwardPropsEmits(props, emits)
 </script>
 
 <template>

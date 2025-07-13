@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import { reactiveOmit } from "@vueuse/core";
+import { reactiveOmit } from '@vueuse/core'
 import {
   PaginationRoot,
   type PaginationRootEmits,
   type PaginationRootProps,
   useForwardPropsEmits,
-} from "reka-ui";
-import type { HTMLAttributes } from "vue";
+} from 'reka-ui'
+import type { HTMLAttributes } from 'vue'
 
-import { cn } from "~/lib/shadcn/utils";
+import { cn } from '~/lib/shadcn/utils'
 
 const props = defineProps<
   PaginationRootProps & {
-    class?: HTMLAttributes["class"];
+    class?: HTMLAttributes['class']
   }
->();
-const emits = defineEmits<PaginationRootEmits>();
+>()
+const emits = defineEmits<PaginationRootEmits>()
 
-const delegatedProps = reactiveOmit(props, "class");
-const forwarded = useForwardPropsEmits(delegatedProps, emits);
+const delegatedProps = reactiveOmit(props, 'class')
+const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>

@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { reactiveOmit } from "@vueuse/core";
-import type { PrimitiveProps } from "reka-ui";
-import { Primitive } from "reka-ui";
-import type { HTMLAttributes } from "vue";
+import { reactiveOmit } from '@vueuse/core'
+import type { PrimitiveProps } from 'reka-ui'
+import { Primitive } from 'reka-ui'
+import type { HTMLAttributes } from 'vue'
 
-import { cn } from "~/lib/shadcn/utils";
+import { cn } from '~/lib/shadcn/utils'
 
-import { type BadgeVariants, badgeVariants } from ".";
+import { type BadgeVariants, badgeVariants } from '.'
 
 const props = defineProps<
   PrimitiveProps & {
-    variant?: BadgeVariants["variant"];
-    size?: BadgeVariants["size"];
-    class?: HTMLAttributes["class"];
+    variant?: BadgeVariants['variant']
+    size?: BadgeVariants['size']
+    class?: HTMLAttributes['class']
   }
->();
+>()
 
-const delegatedProps = reactiveOmit(props, "class");
+const delegatedProps = reactiveOmit(props, 'class')
 </script>
 
 <template>

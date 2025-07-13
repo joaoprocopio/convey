@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { reactiveOmit } from "@vueuse/core";
-import { DialogTitle, type DialogTitleProps } from "reka-ui";
-import type { HTMLAttributes } from "vue";
+import { reactiveOmit } from '@vueuse/core'
+import { DialogTitle, type DialogTitleProps } from 'reka-ui'
+import type { HTMLAttributes } from 'vue'
 
-import { cn } from "~/lib/shadcn/utils";
+import { cn } from '~/lib/shadcn/utils'
 
 const props = defineProps<
-  DialogTitleProps & { class?: HTMLAttributes["class"] }
->();
+  DialogTitleProps & { class?: HTMLAttributes['class'] }
+>()
 
-const delegatedProps = reactiveOmit(props, "class");
+const delegatedProps = reactiveOmit(props, 'class')
 </script>
 
 <template>

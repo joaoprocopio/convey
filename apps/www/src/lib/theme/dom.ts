@@ -1,15 +1,15 @@
-import { Theme, type TTHeme } from "./constants";
+import { Theme, type TTHeme } from './constants'
 
 export function applyTheme(theme: TTHeme, media: MediaQueryList) {
-  const rootEl = document.documentElement;
+  const rootEl = document.documentElement
 
-  rootEl.classList.remove(Theme.Light, Theme.Dark);
+  rootEl.classList.remove(Theme.Light, Theme.Dark)
 
   if (theme === Theme.System) {
-    const resolvedTheme = media.matches ? Theme.Dark : Theme.Light;
+    const resolvedTheme = media.matches ? Theme.Dark : Theme.Light
 
-    rootEl.classList.add(resolvedTheme);
+    rootEl.classList.add(resolvedTheme)
   } else {
-    rootEl.classList.add(theme);
+    rootEl.classList.add(theme)
   }
 }

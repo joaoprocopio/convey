@@ -13,8 +13,8 @@ import {
   Store,
   Sun,
   Truck,
-} from 'lucide-vue-next';
-import { RouterLink } from 'vue-router';
+} from 'lucide-vue-next'
+import { RouterLink } from 'vue-router'
 
 import {
   FinanceiroPageName,
@@ -23,10 +23,9 @@ import {
   ProdutosPageName,
   PropostasPageName,
   UnidadesPageName,
-} from '~/lib/router/constants';
-import { Avatar, AvatarFallback } from '~/lib/shadcn/ui/avatar';
-import { Collapsible } from '~/lib/shadcn/ui/collapsible';
-import { Drawer } from '~/lib/shadcn/ui/drawer';
+} from '~/lib/router/constants'
+import { Avatar, AvatarFallback } from '~/lib/shadcn/ui/avatar'
+import { Collapsible } from '~/lib/shadcn/ui/collapsible'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -41,7 +40,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from '~/lib/shadcn/ui/dropdown-menu';
+} from '~/lib/shadcn/ui/dropdown-menu'
 import {
   Sidebar,
   SidebarContent,
@@ -54,11 +53,11 @@ import {
   SidebarMenuItem,
   SidebarProvider,
   SidebarRail,
-} from '~/lib/shadcn/ui/sidebar';
-import { useTheme } from '~/lib/theme/composables';
-import { Theme } from '~/lib/theme/constants';
+} from '~/lib/shadcn/ui/sidebar'
+import { useTheme } from '~/lib/theme/composables'
+import { Theme } from '~/lib/theme/constants'
 
-const selectedTheme = useTheme();
+const selectedTheme = useTheme()
 
 const availableThemes = [
   {
@@ -76,14 +75,14 @@ const availableThemes = [
     title: 'Escuro',
     value: Theme.Dark,
   },
-] as const satisfies { icon: LucideIcon; value: string; title: string }[];
+] as const satisfies { icon: LucideIcon; value: string; title: string }[]
 
 type Nav = {
-  icon: LucideIcon;
-  title: string;
-  tooltip: string;
-  route?: string;
-};
+  icon: LucideIcon
+  title: string
+  tooltip: string
+  route?: string
+}
 
 const links: Nav[] = [
   {
@@ -122,7 +121,7 @@ const links: Nav[] = [
     tooltip: 'Financeiro',
     route: FinanceiroPageName,
   },
-] as const;
+] as const
 </script>
 
 <template>
@@ -148,7 +147,6 @@ const links: Nav[] = [
             </SidebarMenuButton>
           </DropdownMenuTrigger>
 
-          <Drawer>asdf</Drawer>
           <DropdownMenuContent class="min-w-56" align="start" side="bottom">
             <DropdownMenuLabel
               class="flex items-center gap-2 px-1 py-1.5 text-left text-sm"

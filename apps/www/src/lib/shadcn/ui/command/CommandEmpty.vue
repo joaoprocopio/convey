@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import { reactiveOmit } from "@vueuse/core";
-import type { PrimitiveProps } from "reka-ui";
-import { Primitive } from "reka-ui";
-import { computed, type HTMLAttributes } from "vue";
+import { reactiveOmit } from '@vueuse/core'
+import type { PrimitiveProps } from 'reka-ui'
+import { Primitive } from 'reka-ui'
+import { computed, type HTMLAttributes } from 'vue'
 
-import { cn } from "~/lib/shadcn/utils";
+import { cn } from '~/lib/shadcn/utils'
 
-import { useCommand } from ".";
+import { useCommand } from '.'
 
 const props = defineProps<
-  PrimitiveProps & { class?: HTMLAttributes["class"] }
->();
+  PrimitiveProps & { class?: HTMLAttributes['class'] }
+>()
 
-const delegatedProps = reactiveOmit(props, "class");
+const delegatedProps = reactiveOmit(props, 'class')
 
-const { filterState } = useCommand();
+const { filterState } = useCommand()
 const isRender = computed(
   () => !!filterState.search && filterState.filtered.count === 0,
-);
+)
 </script>
 
 <template>

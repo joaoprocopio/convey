@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import { reactiveOmit } from "@vueuse/core";
-import { Circle } from "lucide-vue-next";
+import { reactiveOmit } from '@vueuse/core'
+import { Circle } from 'lucide-vue-next'
 import {
   MenubarItemIndicator,
   MenubarRadioItem,
   type MenubarRadioItemEmits,
   type MenubarRadioItemProps,
   useForwardPropsEmits,
-} from "reka-ui";
-import type { HTMLAttributes } from "vue";
+} from 'reka-ui'
+import type { HTMLAttributes } from 'vue'
 
-import { cn } from "~/lib/shadcn/utils";
+import { cn } from '~/lib/shadcn/utils'
 
 const props = defineProps<
-  MenubarRadioItemProps & { class?: HTMLAttributes["class"] }
->();
-const emits = defineEmits<MenubarRadioItemEmits>();
+  MenubarRadioItemProps & { class?: HTMLAttributes['class'] }
+>()
+const emits = defineEmits<MenubarRadioItemEmits>()
 
-const delegatedProps = reactiveOmit(props, "class");
+const delegatedProps = reactiveOmit(props, 'class')
 
-const forwarded = useForwardPropsEmits(delegatedProps, emits);
+const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>

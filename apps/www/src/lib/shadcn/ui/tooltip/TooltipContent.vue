@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactiveOmit } from "@vueuse/core";
+import { reactiveOmit } from '@vueuse/core'
 import {
   TooltipArrow,
   TooltipContent,
@@ -7,26 +7,26 @@ import {
   type TooltipContentProps,
   TooltipPortal,
   useForwardPropsEmits,
-} from "reka-ui";
-import type { HTMLAttributes } from "vue";
+} from 'reka-ui'
+import type { HTMLAttributes } from 'vue'
 
-import { cn } from "~/lib/shadcn/utils";
+import { cn } from '~/lib/shadcn/utils'
 
 defineOptions({
   inheritAttrs: false,
-});
+})
 
 const props = withDefaults(
-  defineProps<TooltipContentProps & { class?: HTMLAttributes["class"] }>(),
+  defineProps<TooltipContentProps & { class?: HTMLAttributes['class'] }>(),
   {
     sideOffset: 4,
   },
-);
+)
 
-const emits = defineEmits<TooltipContentEmits>();
+const emits = defineEmits<TooltipContentEmits>()
 
-const delegatedProps = reactiveOmit(props, "class");
-const forwarded = useForwardPropsEmits(delegatedProps, emits);
+const delegatedProps = reactiveOmit(props, 'class')
+const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>

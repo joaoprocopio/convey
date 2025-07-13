@@ -1,32 +1,32 @@
 <script setup lang="ts">
-import { reactiveOmit } from "@vueuse/core";
+import { reactiveOmit } from '@vueuse/core'
 import {
   PopoverContent,
   type PopoverContentEmits,
   type PopoverContentProps,
   PopoverPortal,
   useForwardPropsEmits,
-} from "reka-ui";
-import type { HTMLAttributes } from "vue";
+} from 'reka-ui'
+import type { HTMLAttributes } from 'vue'
 
-import { cn } from "~/lib/shadcn/utils";
+import { cn } from '~/lib/shadcn/utils'
 
 defineOptions({
   inheritAttrs: false,
-});
+})
 
 const props = withDefaults(
-  defineProps<PopoverContentProps & { class?: HTMLAttributes["class"] }>(),
+  defineProps<PopoverContentProps & { class?: HTMLAttributes['class'] }>(),
   {
-    align: "center",
+    align: 'center',
     sideOffset: 4,
   },
-);
-const emits = defineEmits<PopoverContentEmits>();
+)
+const emits = defineEmits<PopoverContentEmits>()
 
-const delegatedProps = reactiveOmit(props, "class");
+const delegatedProps = reactiveOmit(props, 'class')
 
-const forwarded = useForwardPropsEmits(delegatedProps, emits);
+const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>

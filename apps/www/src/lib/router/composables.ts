@@ -3,15 +3,15 @@ import {
   defineAsyncComponent,
   shallowRef,
   watch,
-} from "vue";
-import { type RawRouteComponent, useRoute } from "vue-router";
+} from 'vue'
+import { type RawRouteComponent, useRoute } from 'vue-router'
 
-import { isComp, isFn, isNil } from "~/utils/is";
+import { isComp, isFn, isNil } from '~/utils/is'
 
 export function useRouterLayout() {
-  const route = useRoute();
+  const route = useRoute()
 
-  const RouterLayout = shallowRef<RawRouteComponent>();
+  const RouterLayout = shallowRef<RawRouteComponent>()
 
   watch(
     route,
@@ -19,12 +19,12 @@ export function useRouterLayout() {
       RouterLayout.value = safeGetComp(route.meta.layout, {
         loadingComponent: safeGetComp(route.meta.layoutLoading),
         errorComponent: safeGetComp(route.meta.layoutError),
-      });
+      })
     },
     { immediate: true },
-  );
+  )
 
-  return RouterLayout;
+  return RouterLayout
 }
 
 /**
@@ -37,14 +37,14 @@ export function useRouterLayout() {
  */
 function safeGetComp(
   comp: RawRouteComponent | undefined | null,
-  options: Omit<AsyncComponentOptions, "loader" | "suspensible"> = {},
+  options: Omit<AsyncComponentOptions, 'loader' | 'suspensible'> = {},
 ) {
   if (isNil(comp)) {
-    return undefined;
+    return undefined
   }
 
   if (isComp(comp)) {
-    return comp;
+    return comp
   }
 
   if (isFn(comp)) {
@@ -52,8 +52,8 @@ function safeGetComp(
       ...options,
       suspensible: false,
       loader: comp,
-    });
+    })
   }
 
-  return undefined;
+  return undefined
 }

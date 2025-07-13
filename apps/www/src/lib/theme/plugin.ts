@@ -4,22 +4,22 @@ import {
   type Ref,
   ref,
   watch,
-} from "vue";
+} from 'vue'
 
-import { PrefersDarkColorScheme, Theme, type TTHeme } from "./constants";
-import { applyTheme } from "./dom";
+import { PrefersDarkColorScheme, Theme, type TTHeme } from './constants'
+import { applyTheme } from './dom'
 
-export const themeKey = Symbol() as InjectionKey<Ref<TTHeme>>;
+export const themeKey = Symbol() as InjectionKey<Ref<TTHeme>>
 
 export const theme: FunctionPlugin = async (app) => {
-  const theme = ref<TTHeme>(Theme.System);
-  const media = window.matchMedia(PrefersDarkColorScheme);
+  const theme = ref<TTHeme>(Theme.System)
+  const media = window.matchMedia(PrefersDarkColorScheme)
 
   watch(theme, (nextTheme) => applyTheme(nextTheme, media), {
     immediate: true,
-  });
+  })
 
-  media.addEventListener("change", () => applyTheme(theme.value, media));
+  media.addEventListener('change', () => applyTheme(theme.value, media))
 
-  app.provide(themeKey, theme);
-};
+  app.provide(themeKey, theme)
+}

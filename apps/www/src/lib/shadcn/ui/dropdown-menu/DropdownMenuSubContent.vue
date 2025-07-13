@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import { reactiveOmit } from "@vueuse/core";
+import { reactiveOmit } from '@vueuse/core'
 import {
   DropdownMenuSubContent,
   type DropdownMenuSubContentEmits,
   type DropdownMenuSubContentProps,
   useForwardPropsEmits,
-} from "reka-ui";
-import type { HTMLAttributes } from "vue";
+} from 'reka-ui'
+import type { HTMLAttributes } from 'vue'
 
-import { cn } from "~/lib/shadcn/utils";
+import { cn } from '~/lib/shadcn/utils'
 
 const props = defineProps<
-  DropdownMenuSubContentProps & { class?: HTMLAttributes["class"] }
->();
-const emits = defineEmits<DropdownMenuSubContentEmits>();
+  DropdownMenuSubContentProps & { class?: HTMLAttributes['class'] }
+>()
+const emits = defineEmits<DropdownMenuSubContentEmits>()
 
-const delegatedProps = reactiveOmit(props, "class");
+const delegatedProps = reactiveOmit(props, 'class')
 
-const forwarded = useForwardPropsEmits(delegatedProps, emits);
+const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>

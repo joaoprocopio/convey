@@ -1,15 +1,15 @@
 <script lang="ts" setup>
-import type { HTMLAttributes } from "vue";
+import type { HTMLAttributes } from 'vue'
 
-import { cn } from "~/lib/shadcn/utils";
+import { cn } from '~/lib/shadcn/utils'
 
-import { useFormField } from "./useFormField";
+import { useFormField } from './useFormField'
 
 const props = defineProps<{
-  class?: HTMLAttributes["class"];
-}>();
+  class?: HTMLAttributes['class']
+}>()
 
-const { formDescriptionId } = useFormField();
+const { formDescriptionId } = useFormField()
 </script>
 
 <template>

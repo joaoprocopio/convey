@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { NumberFieldInput } from "reka-ui";
-import type { HTMLAttributes } from "vue";
+import { NumberFieldInput } from 'reka-ui'
+import type { HTMLAttributes } from 'vue'
 
-import { cn } from "~/lib/shadcn/utils";
+import { cn } from '~/lib/shadcn/utils'
 
 const props = defineProps<{
-  class?: HTMLAttributes["class"];
-}>();
+  class?: HTMLAttributes['class']
+}>()
 </script>
 
 <template>

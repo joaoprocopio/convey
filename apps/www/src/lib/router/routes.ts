@@ -1,7 +1,7 @@
-import { h } from "vue";
-import type { RouteRecordRaw } from "vue-router";
+import { h } from 'vue'
+import type { RouteRecordRaw } from 'vue-router'
 
-import DefaultLayout from "~/layouts/default-layout";
+import DefaultLayout from '~/layouts/default-layout'
 import {
   FinanceiroPageName,
   InicioPageName,
@@ -9,73 +9,73 @@ import {
   ProdutosPageName,
   PropostasPageName,
   UnidadesPageName,
-} from "~/lib/router/constants";
+} from '~/lib/router/constants'
 
 export const routes: RouteRecordRaw[] = [
   {
-    path: "/",
+    path: '/',
     name: InicioPageName,
     component: {
       setup() {
-        return () => h("div", null, [h("h1", null, InicioPageName)]);
+        return () => h('div', null, [h('h1', null, InicioPageName)])
       },
     },
     meta: { layout: DefaultLayout },
   },
   {
-    path: "/financeiro",
+    path: '/financeiro',
     name: FinanceiroPageName,
     component: {
       setup() {
-        return () => h("div", null, [h("h1", null, FinanceiroPageName)]);
+        return () => h('div', null, [h('h1', null, FinanceiroPageName)])
       },
     },
     meta: { layout: DefaultLayout },
   },
   {
-    path: "/pedidos",
+    path: '/pedidos',
     name: PedidosPageName,
     component: {
       setup() {
-        return () => h("div", null, [h("h1", null, PedidosPageName)]);
+        return () => h('div', null, [h('h1', null, PedidosPageName)])
       },
     },
     meta: { layout: DefaultLayout },
   },
   {
-    path: "/produtos",
+    path: '/produtos',
     name: ProdutosPageName,
     component: {
       setup() {
-        return () => h("div", null, [h("h1", null, ProdutosPageName)]);
+        return () => h('div', null, [h('h1', null, ProdutosPageName)])
       },
     },
     meta: { layout: DefaultLayout },
   },
   {
-    path: "/propostas",
+    path: '/propostas',
     name: PropostasPageName,
     component: {
       setup() {
-        return () => h("div", null, [h("h1", null, PropostasPageName)]);
+        return () => h('div', null, [h('h1', null, PropostasPageName)])
       },
     },
     meta: { layout: DefaultLayout },
   },
   {
-    path: "/unidades",
+    path: '/unidades',
     name: UnidadesPageName,
     component: {
       setup() {
-        return () => h("div", null, [h("h1", null, UnidadesPageName)]);
+        return () => h('div', null, [h('h1', null, UnidadesPageName)])
       },
     },
     meta: { layout: DefaultLayout },
   },
   {
-    path: "/:pathMatch(.*)*",
+    path: '/:pathMatch(.*)*',
     redirect: {
       name: InicioPageName,
     },
   },
-];
+]

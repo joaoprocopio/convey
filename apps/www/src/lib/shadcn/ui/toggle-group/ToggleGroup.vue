@@ -1,35 +1,35 @@
 <script setup lang="ts">
-import { reactiveOmit } from "@vueuse/core";
-import type { VariantProps } from "class-variance-authority";
+import { reactiveOmit } from '@vueuse/core'
+import type { VariantProps } from 'class-variance-authority'
 import {
   ToggleGroupRoot,
   type ToggleGroupRootEmits,
   type ToggleGroupRootProps,
   useForwardPropsEmits,
-} from "reka-ui";
-import { type HTMLAttributes, provide } from "vue";
+} from 'reka-ui'
+import { type HTMLAttributes, provide } from 'vue'
 
-import type { toggleVariants } from "~/lib/shadcn/ui/toggle";
-import { cn } from "~/lib/shadcn/utils";
+import type { toggleVariants } from '~/lib/shadcn/ui/toggle'
+import { cn } from '~/lib/shadcn/utils'
 
-type ToggleGroupVariants = VariantProps<typeof toggleVariants>;
+type ToggleGroupVariants = VariantProps<typeof toggleVariants>
 
 const props = defineProps<
   ToggleGroupRootProps & {
-    class?: HTMLAttributes["class"];
-    variant?: ToggleGroupVariants["variant"];
-    size?: ToggleGroupVariants["size"];
+    class?: HTMLAttributes['class']
+    variant?: ToggleGroupVariants['variant']
+    size?: ToggleGroupVariants['size']
   }
->();
-const emits = defineEmits<ToggleGroupRootEmits>();
+>()
+const emits = defineEmits<ToggleGroupRootEmits>()
 
-provide("toggleGroup", {
+provide('toggleGroup', {
   variant: props.variant,
   size: props.size,
-});
+})
 
-const delegatedProps = reactiveOmit(props, "class", "size", "variant");
-const forwarded = useForwardPropsEmits(delegatedProps, emits);
+const delegatedProps = reactiveOmit(props, 'class', 'size', 'variant')
+const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>

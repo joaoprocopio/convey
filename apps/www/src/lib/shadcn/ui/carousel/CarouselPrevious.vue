@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import { ArrowLeft } from "lucide-vue-next";
+import { ArrowLeft } from 'lucide-vue-next'
 
-import { Button, type ButtonVariants } from "~/lib/shadcn/ui/button";
-import { cn } from "~/lib/shadcn/utils";
+import { Button, type ButtonVariants } from '~/lib/shadcn/ui/button'
+import { cn } from '~/lib/shadcn/utils'
 
-import type { WithClassAsProps } from "./interface";
-import { useCarousel } from "./useCarousel";
+import type { WithClassAsProps } from './interface'
+import { useCarousel } from './useCarousel'
 
 const props = withDefaults(
   defineProps<
     {
-      variant?: ButtonVariants["variant"];
-      size?: ButtonVariants["size"];
+      variant?: ButtonVariants['variant']
+      size?: ButtonVariants['size']
     } & WithClassAsProps
   >(),
   {
-    variant: "outline",
-    size: "icon",
+    variant: 'outline',
+    size: 'icon',
   },
-);
+)
 
-const { orientation, canScrollPrev, scrollPrev } = useCarousel();
+const { orientation, canScrollPrev, scrollPrev } = useCarousel()
 </script>
 
 <template>

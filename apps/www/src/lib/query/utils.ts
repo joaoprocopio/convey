@@ -5,7 +5,7 @@ import type {
   QueryKey,
   UndefinedInitialQueryOptions,
   UseMutationOptions,
-} from "@tanstack/vue-query";
+} from '@tanstack/vue-query'
 
 export function queryOptions<
   TQueryFnData = unknown,
@@ -15,8 +15,8 @@ export function queryOptions<
 >(
   options: DefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
 ): DefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey> & {
-  queryKey: DataTag<TQueryKey, TQueryFnData, TError>;
-};
+  queryKey: DataTag<TQueryKey, TQueryFnData, TError>
+}
 
 export function queryOptions<
   TQueryFnData = unknown,
@@ -26,11 +26,11 @@ export function queryOptions<
 >(
   options: UndefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
 ): UndefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey> & {
-  queryKey: DataTag<TQueryKey, TQueryFnData, TError>;
-};
+  queryKey: DataTag<TQueryKey, TQueryFnData, TError>
+}
 
 export function queryOptions(options: unknown) {
-  return options;
+  return options
 }
 
 export function mutationOptions<
@@ -39,5 +39,5 @@ export function mutationOptions<
   TVariables = void,
   TContext = unknown,
 >(options: UseMutationOptions<TData, TError, TVariables, TContext>) {
-  return options;
+  return options
 }

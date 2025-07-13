@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import { reactiveOmit } from "@vueuse/core";
-import { ChevronDown } from "lucide-vue-next";
+import { reactiveOmit } from '@vueuse/core'
+import { ChevronDown } from 'lucide-vue-next'
 import {
   AccordionHeader,
   AccordionTrigger,
   type AccordionTriggerProps,
-} from "reka-ui";
-import type { HTMLAttributes } from "vue";
+} from 'reka-ui'
+import type { HTMLAttributes } from 'vue'
 
-import { cn } from "~/lib/shadcn/utils";
+import { cn } from '~/lib/shadcn/utils'
 
 const props = defineProps<
-  AccordionTriggerProps & { class?: HTMLAttributes["class"] }
->();
+  AccordionTriggerProps & { class?: HTMLAttributes['class'] }
+>()
 
-const delegatedProps = reactiveOmit(props, "class");
+const delegatedProps = reactiveOmit(props, 'class')
 </script>
 
 <template>

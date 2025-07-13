@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import { reactiveOmit } from "@vueuse/core";
-import type { SliderRootEmits, SliderRootProps } from "reka-ui";
+import { reactiveOmit } from '@vueuse/core'
+import type { SliderRootEmits, SliderRootProps } from 'reka-ui'
 import {
   SliderRange,
   SliderRoot,
   SliderThumb,
   SliderTrack,
   useForwardPropsEmits,
-} from "reka-ui";
-import type { HTMLAttributes } from "vue";
+} from 'reka-ui'
+import type { HTMLAttributes } from 'vue'
 
-import { cn } from "~/lib/shadcn/utils";
+import { cn } from '~/lib/shadcn/utils'
 
 const props = defineProps<
-  SliderRootProps & { class?: HTMLAttributes["class"] }
->();
-const emits = defineEmits<SliderRootEmits>();
+  SliderRootProps & { class?: HTMLAttributes['class'] }
+>()
+const emits = defineEmits<SliderRootEmits>()
 
-const delegatedProps = reactiveOmit(props, "class");
+const delegatedProps = reactiveOmit(props, 'class')
 
-const forwarded = useForwardPropsEmits(delegatedProps, emits);
+const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>

@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import { reactiveOmit } from "@vueuse/core";
+import { reactiveOmit } from '@vueuse/core'
 import {
   NavigationMenuContent,
   type NavigationMenuContentEmits,
   type NavigationMenuContentProps,
   useForwardPropsEmits,
-} from "reka-ui";
-import type { HTMLAttributes } from "vue";
+} from 'reka-ui'
+import type { HTMLAttributes } from 'vue'
 
-import { cn } from "~/lib/shadcn/utils";
+import { cn } from '~/lib/shadcn/utils'
 
 const props = defineProps<
-  NavigationMenuContentProps & { class?: HTMLAttributes["class"] }
->();
-const emits = defineEmits<NavigationMenuContentEmits>();
+  NavigationMenuContentProps & { class?: HTMLAttributes['class'] }
+>()
+const emits = defineEmits<NavigationMenuContentEmits>()
 
-const delegatedProps = reactiveOmit(props, "class");
+const delegatedProps = reactiveOmit(props, 'class')
 
-const forwarded = useForwardPropsEmits(delegatedProps, emits);
+const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>

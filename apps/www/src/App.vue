@@ -7,14 +7,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import { useRoute } from "vue-router";
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 
-import { VueQueryDevtools } from "~/lib/query/devtools";
-import { useRouterLayout } from "~/lib/router/composables";
+import { VueQueryDevtools } from '~/lib/query/devtools'
+import { useRouterLayout } from '~/lib/router/composables'
 
-const route = useRoute();
-const RouterLayout = useRouterLayout();
+const route = useRoute()
+const RouterLayout = useRouterLayout()
 
-const hasLayout = computed<boolean>(() => Boolean(route.meta.layout));
+const hasLayout = computed<boolean>(() => Boolean(route.meta.layout))
 </script>

@@ -1,16 +1,16 @@
 <script lang="ts" setup>
-import { ErrorMessage } from "vee-validate";
-import { type HTMLAttributes, toValue } from "vue";
+import { ErrorMessage } from 'vee-validate'
+import { type HTMLAttributes, toValue } from 'vue'
 
-import { cn } from "~/lib/shadcn/utils";
+import { cn } from '~/lib/shadcn/utils'
 
-import { useFormField } from "./useFormField";
+import { useFormField } from './useFormField'
 
 const props = defineProps<{
-  class?: HTMLAttributes["class"];
-}>();
+  class?: HTMLAttributes['class']
+}>()
 
-const { name, formMessageId } = useFormField();
+const { name, formMessageId } = useFormField()
 </script>
 
 <template>

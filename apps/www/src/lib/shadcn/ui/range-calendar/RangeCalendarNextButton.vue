@@ -1,23 +1,23 @@
 <script lang="ts" setup>
-import { reactiveOmit } from "@vueuse/core";
-import { ChevronRight } from "lucide-vue-next";
+import { reactiveOmit } from '@vueuse/core'
+import { ChevronRight } from 'lucide-vue-next'
 import {
   RangeCalendarNext,
   type RangeCalendarNextProps,
   useForwardProps,
-} from "reka-ui";
-import type { HTMLAttributes } from "vue";
+} from 'reka-ui'
+import type { HTMLAttributes } from 'vue'
 
-import { buttonVariants } from "~/lib/shadcn/ui/button";
-import { cn } from "~/lib/shadcn/utils";
+import { buttonVariants } from '~/lib/shadcn/ui/button'
+import { cn } from '~/lib/shadcn/utils'
 
 const props = defineProps<
-  RangeCalendarNextProps & { class?: HTMLAttributes["class"] }
->();
+  RangeCalendarNextProps & { class?: HTMLAttributes['class'] }
+>()
 
-const delegatedProps = reactiveOmit(props, "class");
+const delegatedProps = reactiveOmit(props, 'class')
 
-const forwardedProps = useForwardProps(delegatedProps);
+const forwardedProps = useForwardProps(delegatedProps)
 </script>
 
 <template>

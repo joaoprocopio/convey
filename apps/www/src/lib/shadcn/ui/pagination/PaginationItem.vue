@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import { reactiveOmit } from "@vueuse/core";
-import { PaginationListItem, type PaginationListItemProps } from "reka-ui";
-import type { HTMLAttributes } from "vue";
+import { reactiveOmit } from '@vueuse/core'
+import { PaginationListItem, type PaginationListItemProps } from 'reka-ui'
+import type { HTMLAttributes } from 'vue'
 
-import { type ButtonVariants, buttonVariants } from "~/lib/shadcn/ui/button";
-import { cn } from "~/lib/shadcn/utils";
+import { type ButtonVariants, buttonVariants } from '~/lib/shadcn/ui/button'
+import { cn } from '~/lib/shadcn/utils'
 
 const props = withDefaults(
   defineProps<
     PaginationListItemProps & {
-      size?: ButtonVariants["size"];
-      class?: HTMLAttributes["class"];
-      isActive?: boolean;
+      size?: ButtonVariants['size']
+      class?: HTMLAttributes['class']
+      isActive?: boolean
     }
   >(),
   {
-    size: "icon",
+    size: 'icon',
   },
-);
+)
 
-const delegatedProps = reactiveOmit(props, "class", "size", "isActive");
+const delegatedProps = reactiveOmit(props, 'class', 'size', 'isActive')
 </script>
 
 <template>

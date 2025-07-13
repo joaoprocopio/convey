@@ -1,19 +1,19 @@
 <script lang="ts" setup>
-import type { DialogContentEmits, DialogContentProps } from "reka-ui";
-import { useForwardPropsEmits } from "reka-ui";
-import { DrawerContent, DrawerPortal } from "vaul-vue";
-import type { HTMLAttributes } from "vue";
+import type { DialogContentEmits, DialogContentProps } from 'reka-ui'
+import { useForwardPropsEmits } from 'reka-ui'
+import { DrawerContent, DrawerPortal } from 'vaul-vue'
+import type { HTMLAttributes } from 'vue'
 
-import { cn } from "~/lib/shadcn/utils";
+import { cn } from '~/lib/shadcn/utils'
 
-import DrawerOverlay from "./DrawerOverlay.vue";
+import DrawerOverlay from './DrawerOverlay.vue'
 
 const props = defineProps<
-  DialogContentProps & { class?: HTMLAttributes["class"] }
->();
-const emits = defineEmits<DialogContentEmits>();
+  DialogContentProps & { class?: HTMLAttributes['class'] }
+>()
+const emits = defineEmits<DialogContentEmits>()
 
-const forwarded = useForwardPropsEmits(props, emits);
+const forwarded = useForwardPropsEmits(props, emits)
 </script>
 
 <template>

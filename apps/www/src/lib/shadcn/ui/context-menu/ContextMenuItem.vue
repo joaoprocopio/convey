@@ -1,32 +1,32 @@
 <script setup lang="ts">
-import { reactiveOmit } from "@vueuse/core";
+import { reactiveOmit } from '@vueuse/core'
 import {
   ContextMenuItem,
   type ContextMenuItemEmits,
   type ContextMenuItemProps,
   useForwardPropsEmits,
-} from "reka-ui";
-import type { HTMLAttributes } from "vue";
+} from 'reka-ui'
+import type { HTMLAttributes } from 'vue'
 
-import { cn } from "~/lib/shadcn/utils";
+import { cn } from '~/lib/shadcn/utils'
 
 const props = withDefaults(
   defineProps<
     ContextMenuItemProps & {
-      class?: HTMLAttributes["class"];
-      inset?: boolean;
-      variant?: "default" | "destructive";
+      class?: HTMLAttributes['class']
+      inset?: boolean
+      variant?: 'default' | 'destructive'
     }
   >(),
   {
-    variant: "default",
+    variant: 'default',
   },
-);
-const emits = defineEmits<ContextMenuItemEmits>();
+)
+const emits = defineEmits<ContextMenuItemEmits>()
 
-const delegatedProps = reactiveOmit(props, "class");
+const delegatedProps = reactiveOmit(props, 'class')
 
-const forwarded = useForwardPropsEmits(delegatedProps, emits);
+const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>

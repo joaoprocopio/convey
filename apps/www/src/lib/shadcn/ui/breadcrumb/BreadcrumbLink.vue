@@ -1,15 +1,15 @@
 <script lang="ts" setup>
-import { Primitive, type PrimitiveProps } from "reka-ui";
-import type { HTMLAttributes } from "vue";
+import { Primitive, type PrimitiveProps } from 'reka-ui'
+import type { HTMLAttributes } from 'vue'
 
-import { cn } from "~/lib/shadcn/utils";
+import { cn } from '~/lib/shadcn/utils'
 
 const props = withDefaults(
-  defineProps<PrimitiveProps & { class?: HTMLAttributes["class"] }>(),
+  defineProps<PrimitiveProps & { class?: HTMLAttributes['class'] }>(),
   {
-    as: "a",
+    as: 'a',
   },
-);
+)
 </script>
 
 <template>

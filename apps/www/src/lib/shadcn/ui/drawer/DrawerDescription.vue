@@ -1,16 +1,16 @@
 <script lang="ts" setup>
-import { reactiveOmit } from "@vueuse/core";
-import type { DrawerDescriptionProps } from "vaul-vue";
-import { DrawerDescription } from "vaul-vue";
-import type { HTMLAttributes } from "vue";
+import { reactiveOmit } from '@vueuse/core'
+import type { DrawerDescriptionProps } from 'vaul-vue'
+import { DrawerDescription } from 'vaul-vue'
+import type { HTMLAttributes } from 'vue'
 
-import { cn } from "~/lib/shadcn/utils";
+import { cn } from '~/lib/shadcn/utils'
 
 const props = defineProps<
-  DrawerDescriptionProps & { class?: HTMLAttributes["class"] }
->();
+  DrawerDescriptionProps & { class?: HTMLAttributes['class'] }
+>()
 
-const delegatedProps = reactiveOmit(props, "class");
+const delegatedProps = reactiveOmit(props, 'class')
 </script>
 
 <template>
