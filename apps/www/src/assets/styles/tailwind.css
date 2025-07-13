@@ -3,7 +3,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-:root {
+/* :root {
   --text-primary: rgba(0, 0, 0, 0.85);
   --text-secondary: rgba(0, 0, 0, 0.5);
   --text-tertiary: rgba(0, 0, 0, 0.25);
@@ -17,6 +17,9 @@
   --fill-quinary: rgba(0, 0, 0, 0.015);
 
   --sidebar: rgba(234, 234, 234, 0.84);
+  --sidebar-focus:
+    linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+    linear-gradient(rgba(246, 246, 246, 0.84), rgba(246, 246, 246, 0.84));
 }
 
 .dark {
@@ -33,7 +36,10 @@
   --fill-quinary: rgba(255, 255, 255, 0.015);
 
   --sidebar: rgba(0, 0, 0, 0.45);
-}
+  --sidebar-focus:
+    linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
+    linear-gradient(rgba(40, 40, 40, 0.65), rgba(40, 40, 40, 0.65));
+} */
 
 :root {
   --radius: 0.825rem;
