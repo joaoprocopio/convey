@@ -143,7 +143,7 @@ const links: Nav[] = [
 
               <span class="truncate text-sm font-medium"> Roger Camargo </span>
 
-              <ChevronDown class="size-4 text-sidebar-ring" />
+              <ChevronDown class="size-4 text-muted-foreground" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
 
