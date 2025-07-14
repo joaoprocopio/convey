@@ -5,25 +5,19 @@ import {
   Computer,
   FileText,
   Home,
+  Inbox,
   LogOut,
   type LucideIcon,
   Moon,
   PackageOpen,
   Palette,
+  Search,
   Store,
   Sun,
   Truck,
 } from 'lucide-vue-next'
 import { RouterLink } from 'vue-router'
 
-import {
-  FinanceiroPageName,
-  InicioPageName,
-  PedidosPageName,
-  ProdutosPageName,
-  PropostasPageName,
-  UnidadesPageName,
-} from '~/lib/router/constants'
 import { Avatar, AvatarFallback } from '~/lib/shadcn/ui/avatar'
 import { Collapsible } from '~/lib/shadcn/ui/collapsible'
 import {
@@ -77,51 +71,85 @@ const availableThemes = [
   },
 ] as const satisfies { icon: LucideIcon; value: string; title: string }[]
 
-type Nav = {
-  icon: LucideIcon
-  title: string
-  tooltip: string
-  route?: string
+interface Marca {
+  id: number
+  nome: string
 }
 
-const links: Nav[] = [
+const marcas: Marca[] = [
   {
+    id: 14,
+    nome: 'Pizza Prime',
+  },
+  {
+    id: 36,
+    nome: 'Si Señor',
+  },
+  {
+    id: 83,
+    nome: 'Divino Fogão',
+  },
+]
+
+interface Item {
+  title: string
+  icon?: LucideIcon
+  items?: Item[]
+}
+
+const items: Item[] = [
+  {
+    title: 'Buscar',
+    icon: Search,
+  },
+  {
+    title: 'Página inicial',
     icon: Home,
-    title: 'Início',
-    tooltip: 'Início',
-    route: InicioPageName,
   },
   {
-    icon: Store,
-    title: 'Unidades',
-    tooltip: 'Unidades',
-    route: UnidadesPageName,
+    title: 'Caixa de entrada',
+    icon: Inbox,
   },
+
   {
-    icon: Truck,
-    title: 'Pedidos',
-    tooltip: 'Pedidos',
-    route: PedidosPageName,
+    title: 'Logística',
+    items: [
+      {
+        title: 'Produtos',
+        icon: PackageOpen,
+      },
+      {
+        title: 'Propostas',
+        icon: FileText,
+      },
+      {
+        title: 'Pedidos',
+        icon: Truck,
+      },
+    ],
   },
+
   {
-    icon: PackageOpen,
-    title: 'Produtos',
-    tooltip: 'Produtos',
-    route: ProdutosPageName,
+    title: 'Marcas',
+    items: marcas.map((marca) => ({
+      title: marca.nome,
+      items: [
+        {
+          title: 'Unidades',
+          icon: Store,
+        },
+        {
+          title: 'Colaboradores',
+          icon: ChartNoAxesCombined,
+        },
+        {
+          title: 'Financeiro',
+          icon: ChartNoAxesCombined,
+        },
+      ],
+    })),
   },
-  {
-    icon: FileText,
-    title: 'Propostas',
-    tooltip: 'Propostas',
-    route: PropostasPageName,
-  },
-  {
-    icon: ChartNoAxesCombined,
-    title: 'Financeiro',
-    tooltip: 'Financeiro',
-    route: FinanceiroPageName,
-  },
-] as const
+]
 </script>
 
 <template>
@@ -211,7 +239,7 @@ const links: Nav[] = [
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              <template v-for="(link, linkIndex) in links" :key="linkIndex">
+              <template v-for="(link, linkIndex) in items" :key="linkIndex">
                 <Collapsible as-child :default-open="true">
                   <SidebarMenuItem>
                     <RouterLink

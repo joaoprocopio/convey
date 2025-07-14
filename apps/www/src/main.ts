@@ -2,7 +2,7 @@ import '~/assets/styles/tailwind.css'
 
 import { createApp } from 'vue'
 
-import App from '~/App.vue'
+import App from '~/app.vue'
 import { query } from '~/lib/query/plugin'
 import { router } from '~/lib/router/plugin'
 import { theme } from '~/lib/theme/plugin'

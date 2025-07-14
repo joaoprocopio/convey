@@ -35,9 +35,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: dist
-          key: ${{ runner.os }}-build-${{ hashFiles('src/App.vue') }}
+          key: ${{ runner.os }}-build-${{ hashFiles('src/app.vue') }}
           restore-keys: |
-            ${{ runner.os }}-build-${{ hashFiles('src/App.vue') }}
+            ${{ runner.os }}-build-${{ hashFiles('src/app.vue') }}
             ${{ runner.os }}-build-
 
       - name: Install dependencies
