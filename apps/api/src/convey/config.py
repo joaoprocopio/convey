@@ -1,5 +1,3 @@
-from typing import Literal
-
 from pydantic import PostgresDsn
 from starlette.config import Config
 
@@ -22,4 +20,3 @@ POSTGRES_URL: str = str(
         path=POSTGRES_DB,
     )
 )
-SRID: Literal[4326] = 4326
