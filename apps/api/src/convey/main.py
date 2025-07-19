@@ -1,24 +1,29 @@
+# from contextlib import asynccontextmanager
+# from typing import AsyncIterator
+
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
 from starlette.middleware.cors import CORSMiddleware
 from starlette.middleware.gzip import GZipMiddleware
 
 from convey.api import api_v1
-from convey.database.core import async_engine
-from convey.database.models import Model
+
+# from convey.database.core import async_engine
+# from convey.database.models import Model
 
 
-async def lifespan(_: FastAPI):
-    async with async_engine.begin() as conn:
-        try:
-            await conn.run_sync(Model.metadata.create_all)  # gambiarrinha d levs
-            yield
-        except Exception:
-            await conn.rollback()
+# @asynccontextmanager
+# async def lifespan(_: FastAPI) -> AsyncIterator[None]:
+#     async with async_engine.begin() as conn:
+#         try:
+#             await conn.run_sync(Model.metadata.create_all)  # gambiarrinha d levs
+#             yield
+#         except Exception:
+#             await conn.rollback()
 
 
 app = FastAPI(
-    lifespan=lifespan,
+    # lifespan=lifespan,
     default_response_class=ORJSONResponse,
 )
 

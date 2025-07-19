@@ -1,8 +1,9 @@
 from typing import Sequence
 
-from convey.propostas.models import Proposta
 from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
+
+from convey.database.core import AsyncSession
+from convey.propostas.models import Proposta
 
 
 async def list_propostas(session: AsyncSession) -> Sequence[Proposta]:

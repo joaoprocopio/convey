@@ -1,7 +1,7 @@
 from typing import Annotated
 
-from convey.database.core import get_async_session
 from fastapi import Depends
-from sqlalchemy.ext.asyncio import AsyncSession
+
+from convey.database.core import AsyncSession, get_async_session
 
 AsyncSessionDep = Annotated[AsyncSession, Depends(get_async_session)]

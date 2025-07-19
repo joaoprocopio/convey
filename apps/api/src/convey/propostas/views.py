@@ -1,9 +1,11 @@
-from typing import List
+from typing import List, Sequence
+
+from fastapi import APIRouter, Response, status
 
 from convey.database.deps import AsyncSessionDep
+from convey.propostas.models import Proposta
 from convey.propostas.schemas import PropostaSchema
 from convey.propostas.services import get_proposta, list_propostas
-from fastapi import APIRouter, Response, status
 
 router_v1 = APIRouter()
 
@@ -13,7 +15,7 @@ router_v1 = APIRouter()
     response_model=List[PropostaSchema],
     status_code=status.HTTP_200_OK,
 )
-async def attractions_list(session: AsyncSessionDep):
+async def attractions_list(session: AsyncSessionDep) -> Sequence[Proposta]:
     attractions = await list_propostas(session)
 
     return attractions
@@ -26,7 +28,7 @@ async def attractions_list(session: AsyncSessionDep):
 )
 async def attractions_detail(
     proposta_id: int, response: Response, session: AsyncSessionDep
-):
+) -> Proposta | None:
     attraction = await get_proposta(session, proposta_id)
 
     if attraction is None:
