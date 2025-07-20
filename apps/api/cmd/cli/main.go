@@ -4,7 +4,6 @@ import (
 	"context"
 	"convey/internal/server"
 	"fmt"
-	"io"
 	"log"
 	"net/http"
 	"os"
@@ -13,44 +12,40 @@ import (
 	"time"
 )
 
-type runConfig struct {
-	ctx            context.Context
-	stdin          io.Reader
-	stdout, stderr io.Writer
+func listen(srv *http.Server) {
+	log.Printf("listening on %s\n", srv.Addr)
+
+	if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+		fmt.Fprintf(os.Stderr, "error listening and serving: %s\n", err)
+	}
 }
 
-func run(cfg *runConfig) error {
-	ctx, cancel := signal.NotifyContext(cfg.ctx, os.Interrupt)
+func teardown(wg *sync.WaitGroup, ctx context.Context, srv *http.Server) {
+	defer wg.Done()
+	<-ctx.Done()
+
+	shutdownCtx := context.Background()
+	shutdownCtx, cancel := context.WithTimeout(shutdownCtx, 10*time.Second)
+
+	defer cancel()
+
+	if err := srv.Shutdown(shutdownCtx); err != nil {
+		fmt.Fprintf(os.Stderr, "error shutting down http server: %s\n", err)
+	}
+}
+
+func run(ctx context.Context) error {
+	ctx, cancel := signal.NotifyContext(ctx, os.Interrupt)
 	defer cancel()
 
 	srv := server.NewServer(server.NewConfig())
 
-	go func() {
-		log.Printf("listening on %s\n", srv.Addr)
-
-		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			fmt.Fprint(cfg.stderr, "error listening and serving: %s\n", err)
-		}
-	}()
+	go listen(srv)
 
 	var wg sync.WaitGroup
 
 	wg.Add(1)
-
-	go func() {
-		defer wg.Done()
-		<-ctx.Done()
-
-		shutdownCtx := context.Background()
-		shutdownCtx, cancel := context.WithTimeout(shutdownCtx, 10*time.Second)
-
-		defer cancel()
-
-		if err := srv.Shutdown(shutdownCtx); err != nil {
-			fmt.Fprintf(cfg.stderr, "error shutting down http server: %s\n", err)
-		}
-	}()
-
+	go teardown(&wg, ctx, srv)
 	wg.Wait()
 
 	return nil
@@ -58,15 +53,9 @@ func run(cfg *runConfig) error {
 
 func main() {
 	ctx := context.Background()
-	cfg := &runConfig{
-		ctx:    ctx,
-		stdin:  os.Stdin,
-		stdout: os.Stdout,
-		stderr: os.Stderr,
-	}
 
-	if err := run(cfg); err != nil {
-		fmt.Fprintf(cfg.stderr, "%s\n", err)
+	if err := run(ctx); err != nil {
+		fmt.Fprintf(os.Stderr, "%s\n", err)
 		os.Exit(1)
 	}
 }

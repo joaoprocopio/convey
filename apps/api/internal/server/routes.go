@@ -5,12 +5,12 @@ import (
 	"net/http"
 )
 
-func handleHealth() http.Handler {
+func handleHealth() http.HandlerFunc {
 	type response struct {
 		Server string `json:"server"`
 	}
 
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
 		encoder := json.NewEncoder(w)
 		err := encoder.Encode(&response{
 			Server: "ok",
@@ -19,7 +19,7 @@ func handleHealth() http.Handler {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-	})
+	}
 }
 
 func addRoutes(mux *http.ServeMux) {
