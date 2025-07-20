@@ -13,7 +13,7 @@ func NewServer(cfg *Config, logger *slog.Logger) *http.Server {
 
 	var handler http.Handler = mux
 
-	// middlewares
+	handler = loggerMiddleware(handler, logger)
 
 	var server *http.Server = &http.Server{
 		ErrorLog: slog.NewLogLogger(logger.Handler(), slog.LevelError),

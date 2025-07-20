@@ -5,7 +5,7 @@ type Config struct {
 	Port string
 }
 
-func NewConfig() *Config {
+func NewDefaultConfig() *Config {
 	return &Config{
 		Host: "localhost",
 		Port: "8000",

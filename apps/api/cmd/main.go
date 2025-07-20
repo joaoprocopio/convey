@@ -18,7 +18,7 @@ func main() {
 	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
 
 	if err := run(ctx, logger); err != nil {
-		logger.Error("main: error running server", slog.String("error", err.Error()))
+		logger.Error("error running server", slog.String("error", err.Error()))
 		os.Exit(1)
 	}
 }
@@ -28,10 +28,10 @@ func run(ctx context.Context, logger *slog.Logger) error {
 	defer cancel()
 	grp, ctx := errgroup.WithContext(ctx)
 
-	srv := server.NewServer(server.NewConfig(), logger)
+	srv := server.NewServer(server.NewDefaultConfig(), logger)
 
 	grp.Go(func() error {
-		logger.Info("main: server is listening", slog.String("address", fmt.Sprintf("http://%s", srv.Addr)))
+		logger.Info("server is listening", slog.String("address", fmt.Sprintf("http://%s", srv.Addr)))
 
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			return err
@@ -46,7 +46,7 @@ func run(ctx context.Context, logger *slog.Logger) error {
 		ctx, cancel := context.WithTimeout(ctx, 10*time.Second)
 		defer cancel()
 
-		logger.Info("main: gracefully shutting down http server")
+		logger.Info("gracefully shutting down http server")
 
 		if err := srv.Shutdown(ctx); err != nil {
 			return err
