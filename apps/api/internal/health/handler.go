@@ -1,7 +1,7 @@
 package health
 
 import (
-	"convey/internal/json"
+	"convey/internal/server/codec"
 	"net/http"
 )
 
@@ -10,7 +10,7 @@ func healthcheck(w http.ResponseWriter, r *http.Request) {
 		Status string `json:"status"`
 	}
 
-	err := json.WriteEncodedJSON(w, r, http.StatusOK, Response{
+	err := codec.WriteEncodedJSON(w, r, http.StatusOK, Response{
 		Status: "ok",
 	})
 
@@ -21,6 +21,5 @@ func healthcheck(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandleHealth() http.Handler {
-
 	return http.HandlerFunc(healthcheck)
 }

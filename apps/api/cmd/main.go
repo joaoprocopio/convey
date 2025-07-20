@@ -28,7 +28,7 @@ func run(ctx context.Context, logger *slog.Logger) error {
 	defer cancel()
 	grp, ctx := errgroup.WithContext(ctx)
 
-	srv := server.NewServer(server.NewDefaultConfig(), logger)
+	srv := server.NewServer(server.DefaultConfig(), logger)
 
 	grp.Go(func() error {
 		logger.Info("server is listening", slog.String("address", fmt.Sprintf("http://%s", srv.Addr)))
