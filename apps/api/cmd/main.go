@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"convey/internal/server"
+	"fmt"
 	"log/slog"
 	"net/http"
 	"os"
@@ -29,7 +30,7 @@ func run(ctx context.Context, logger *slog.Logger) error {
 
 	srv := server.NewServer(server.NewConfig(), logger)
 
-	go listen(srv, logger)
+	go startup(srv, logger)
 
 	var wg sync.WaitGroup
 
@@ -40,12 +41,15 @@ func run(ctx context.Context, logger *slog.Logger) error {
 	return nil
 }
 
-func listen(srv *http.Server, logger *slog.Logger) {
+func startup(srv *http.Server, logger *slog.Logger) error {
+	logger.Info("main: server is listening", slog.String("address", fmt.Sprintf("http://%s", srv.Addr)))
+
 	if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 		logger.Error("main: error listening and serving", slog.String("error", err.Error()))
-	} else {
-		logger.Info("main: listening on", slog.String("address", srv.Addr))
+		return err
 	}
+
+	return nil
 }
 
 func shutdown(wg *sync.WaitGroup, ctx context.Context, srv *http.Server, logger *slog.Logger) {
