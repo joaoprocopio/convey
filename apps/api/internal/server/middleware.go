@@ -3,12 +3,22 @@ package server
 import (
 	"log/slog"
 	"net/http"
+	"time"
 )
 
 func loggerMiddleware(h http.Handler, logger *slog.Logger) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		logger.Info("Request received", "method", r.Method, "url", r.URL)
-
+		start := time.Now()
 		h.ServeHTTP(w, r)
+		duration := time.Since(start)
+
+		logger.Info(
+			"request received",
+			slog.String("method", r.Method),
+			slog.String("url", r.URL.Path),
+			slog.String("ip", r.RemoteAddr),
+			slog.String("user_agent", r.UserAgent()),
+			slog.Duration("duration", duration),
+		)
 	})
 }
