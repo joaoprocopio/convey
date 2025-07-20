@@ -41,10 +41,10 @@ func run(ctx context.Context, logger *slog.Logger) error {
 }
 
 func listen(srv *http.Server, logger *slog.Logger) {
-	logger.Info("main: listening on", slog.String("address", srv.Addr))
-
 	if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 		logger.Error("main: error listening and serving", slog.String("error", err.Error()))
+	} else {
+		logger.Info("main: listening on", slog.String("address", srv.Addr))
 	}
 }
 
