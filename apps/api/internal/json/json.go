@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func WriteJSONEncoded[T any](w http.ResponseWriter, r *http.Request, s int, v T) error {
+func WriteEncodedJSON[T any](w http.ResponseWriter, r *http.Request, s int, v T) error {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(s)
 
@@ -16,7 +16,7 @@ func WriteJSONEncoded[T any](w http.ResponseWriter, r *http.Request, s int, v T)
 	return nil
 }
 
-func ReadJSONDecoded[T any](r *http.Request) (T, error) {
+func ReadDecodedJSON[T any](r *http.Request) (T, error) {
 	var v T
 
 	if err := json.NewDecoder(r.Body).Decode(&v); err != nil {
