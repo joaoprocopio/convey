@@ -1,5 +1,6 @@
 from typing import AsyncGenerator
 
+import orjson
 from sqlalchemy.ext.asyncio import (
     AsyncEngine,
     AsyncSession,
@@ -7,11 +8,16 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine,
 )
 
-from convey.config import POSTGRES_URL
+from convey.config import IS_DEV, POSTGRES_URL
 
-__all__ = ["async_engine", "async_session", "get_async_session", "AsyncSession"]
-
-async_engine: AsyncEngine = create_async_engine(POSTGRES_URL)
+async_engine: AsyncEngine = create_async_engine(
+    POSTGRES_URL,
+    echo=IS_DEV,
+    echo_pool=IS_DEV,
+    pool_pre_ping=True,
+    json_deserializer=orjson.loads,
+    json_serializer=orjson.dumps,
+)
 async_session: async_sessionmaker[AsyncSession] = async_sessionmaker(bind=async_engine)
 
 
