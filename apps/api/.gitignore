@@ -29,3 +29,6 @@ go.work
 # air
 tmp/
 *.log
+
+# debug
+__debug_bin*
