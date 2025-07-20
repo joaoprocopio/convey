@@ -12,18 +12,7 @@ func HandleHealth() http.Handler {
 
 	var mux *http.ServeMux = http.NewServeMux()
 
-	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		err := json.EncodeJSON(w, r, http.StatusOK, response{
-			Server: "ok",
-		})
-
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-	})
-
-	mux.HandleFunc("/123/", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/123", func(w http.ResponseWriter, r *http.Request) {
 		err := json.EncodeJSON(w, r, http.StatusOK, response{
 			Server: "123",
 		})
@@ -34,9 +23,20 @@ func HandleHealth() http.Handler {
 		}
 	})
 
-	mux.HandleFunc("/abc/", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/abc", func(w http.ResponseWriter, r *http.Request) {
 		err := json.EncodeJSON(w, r, http.StatusOK, response{
 			Server: "abc",
+		})
+
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+	})
+
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		err := json.EncodeJSON(w, r, http.StatusOK, response{
+			Server: "ok",
 		})
 
 		if err != nil {
