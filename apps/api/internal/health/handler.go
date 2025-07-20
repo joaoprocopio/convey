@@ -7,12 +7,12 @@ import (
 
 func HandleHealth() http.HandlerFunc {
 	type Response struct {
-		Server string `json:"server"`
+		Status string `json:"status"`
 	}
 
 	return func(w http.ResponseWriter, r *http.Request) {
-		err := json.EncodeJSON(w, r, http.StatusOK, Response{
-			Server: "ok",
+		err := json.WriteJSONEncoded(w, r, http.StatusOK, Response{
+			Status: "ok",
 		})
 
 		if err != nil {

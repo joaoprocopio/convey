@@ -3,8 +3,7 @@ package main
 import (
 	"context"
 	"convey/internal/server"
-	"fmt"
-	"log"
+	"log/slog"
 	"net/http"
 	"os"
 	"os/signal"
@@ -12,15 +11,44 @@ import (
 	"time"
 )
 
-func listen(srv *http.Server) {
-	log.Printf("listening on %s\n", srv.Addr)
+func main() {
+	ctx := context.Background()
+	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
 
-	if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-		fmt.Fprintf(os.Stderr, "error listening and serving: %s\n", err)
+	slog.SetDefault(logger)
+
+	if err := run(ctx, logger); err != nil {
+		logger.Error("main: error running server", slog.String("error", err.Error()))
+		os.Exit(1)
 	}
 }
 
-func teardown(wg *sync.WaitGroup, ctx context.Context, srv *http.Server) {
+func run(ctx context.Context, logger *slog.Logger) error {
+	ctx, cancel := signal.NotifyContext(ctx, os.Interrupt)
+	defer cancel()
+
+	srv := server.NewServer(server.NewConfig(), logger)
+
+	go listen(srv, logger)
+
+	var wg sync.WaitGroup
+
+	wg.Add(1)
+	go shutdown(&wg, ctx, srv, logger)
+	wg.Wait()
+
+	return nil
+}
+
+func listen(srv *http.Server, logger *slog.Logger) {
+	logger.Info("main: listening on", slog.String("address", srv.Addr))
+
+	if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+		logger.Error("main: error listening and serving", slog.String("error", err.Error()))
+	}
+}
+
+func shutdown(wg *sync.WaitGroup, ctx context.Context, srv *http.Server, logger *slog.Logger) {
 	defer wg.Done()
 	<-ctx.Done()
 
@@ -30,32 +58,8 @@ func teardown(wg *sync.WaitGroup, ctx context.Context, srv *http.Server) {
 	defer cancel()
 
 	if err := srv.Shutdown(shutdownCtx); err != nil {
-		fmt.Fprintf(os.Stderr, "error shutting down http server: %s\n", err)
-	}
-}
-
-func run(ctx context.Context) error {
-	ctx, cancel := signal.NotifyContext(ctx, os.Interrupt)
-	defer cancel()
-
-	srv := server.NewServer(server.NewConfig())
-
-	go listen(srv)
-
-	var wg sync.WaitGroup
-
-	wg.Add(1)
-	go teardown(&wg, ctx, srv)
-	wg.Wait()
-
-	return nil
-}
-
-func main() {
-	ctx := context.Background()
-
-	if err := run(ctx); err != nil {
-		fmt.Fprintf(os.Stderr, "%s\n", err)
-		os.Exit(1)
+		logger.Error("main: error shutting down http server", slog.String("error", err.Error()))
+	} else {
+		logger.Info("main: gracefully shutting down http server")
 	}
 }

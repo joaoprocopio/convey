@@ -1,11 +1,12 @@
 package server
 
 import (
+	"log/slog"
 	"net"
 	"net/http"
 )
 
-func NewServer(cfg *Config) *http.Server {
+func NewServer(cfg *Config, logger *slog.Logger) *http.Server {
 	var mux *http.ServeMux = http.NewServeMux()
 
 	addRoutes(mux)
@@ -15,8 +16,9 @@ func NewServer(cfg *Config) *http.Server {
 	// middlewares
 
 	var server *http.Server = &http.Server{
-		Addr:    net.JoinHostPort(cfg.Host, cfg.Port),
-		Handler: handler,
+		ErrorLog: slog.NewLogLogger(logger.Handler(), slog.LevelError),
+		Addr:     net.JoinHostPort(cfg.Host, cfg.Port),
+		Handler:  handler,
 	}
 
 	return server
