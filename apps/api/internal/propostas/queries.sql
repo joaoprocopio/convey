@@ -1,7 +1,4 @@
 -- name: ListPropostas :many
-SELECT
-    id,
-    status,
-    name
+SELECT *
 FROM propostas
 ORDER BY status;

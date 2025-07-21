@@ -10,30 +10,26 @@ import (
 )
 
 const listPropostas = `-- name: ListPropostas :many
-SELECT
-    id,
-    status,
-    name
+SELECT id, status, name, assignee_id
 FROM propostas
 ORDER BY status
 `
 
-type ListPropostasRow struct {
-	ID     int32          `json:"id"`
-	Status PropostaStatus `json:"status"`
-	Name   string         `json:"name"`
-}
-
-func (q *Queries) ListPropostas(ctx context.Context) ([]ListPropostasRow, error) {
+func (q *Queries) ListPropostas(ctx context.Context) ([]Proposta, error) {
 	rows, err := q.db.Query(ctx, listPropostas)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []ListPropostasRow
+	var items []Proposta
 	for rows.Next() {
-		var i ListPropostasRow
-		if err := rows.Scan(&i.ID, &i.Status, &i.Name); err != nil {
+		var i Proposta
+		if err := rows.Scan(
+			&i.ID,
+			&i.Status,
+			&i.Name,
+			&i.AssigneeID,
+		); err != nil {
 			return nil, err
 		}
 		items = append(items, i)

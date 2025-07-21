@@ -16,7 +16,9 @@ go run ./cmd/main.go
 
 # banco de dados
 
-## pré requisitos
+## migrations
+
+### pré requisitos
 
 ```sh
 export GOOSE_MIGRATION_DIR='./internal/db/migrations'
@@ -36,7 +38,29 @@ go tool goose create -s NOME_DA_MIGRATION sql
 go tool goose up
 ```
 
-### regerar o schema
+## seeding
+
+### pré-requisitos
+
+```sh
+export GOOSE_MIGRATION_DIR='./internal/db/seeds'
+export GOOSE_DRIVER='postgres'
+export GOOSE_DBSTRING='user=postgres password=postgres dbname=postgres host=localhost port=5432'
+```
+
+### criar uma seed
+
+```sh
+go tool goose create -s NOME_DA_SEED sql
+```
+
+### subir as seeds
+
+```sh
+go tool goose -no-versioning up
+```
+
+## sqlc
 
 ```sh
 go tool sqlc generate
