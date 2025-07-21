@@ -2,32 +2,42 @@
 
 ## api
 
-antes de tudo
+### pré-requisitos
 
 ```sh
 cd apps/api
+go mod tidy
 ```
 
-rodar o backend
+### rodar o backend
 
 ```sh
-go mod tidy
 go run ./cmd/main.go
 ```
 
-criar uma migração
+## banco de dados
+
+### pré requisitos
 
 ```sh
-go tool goose -dir ./internal/db/migrations postgres create NOME_DA_MIGRATION sql
+export GOOSE_MIGRATION_DIR='./internal/db/migrations'
+export GOOSE_DRIVER='postgres'
+export GOOSE_DBSTRING='user=postgres password=postgres dbname=postgres host=localhost port=5432 sslmode=disable'
 ```
 
-subir as migrações
+### criar uma migração
 
 ```sh
-go tool goose -dir ./internal/db/migrations postgres up
+go tool goose create NOME_DA_MIGRATION sql
 ```
 
-regerar o schema
+### subir as migrações
+
+```sh
+go tool goose up
+```
+
+### regerar o schema
 
 ```sh
 go tool sqlc generate
