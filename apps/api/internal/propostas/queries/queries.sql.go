@@ -27,11 +27,11 @@ ORDER BY p.status
 `
 
 type ListPropostasRow struct {
-	ID            int32          `json:"id"`
-	Status        PropostaStatus `json:"status"`
-	Name          string         `json:"name"`
-	AssigneeID    pgtype.Int4    `json:"assignee_id"`
-	AssigneeEmail pgtype.Text    `json:"assignee_email"`
+	ID            int32
+	Status        PropostaStatus
+	Name          string
+	AssigneeID    pgtype.Int4
+	AssigneeEmail pgtype.Text
 }
 
 func (q *Queries) ListPropostas(ctx context.Context) ([]ListPropostasRow, error) {
