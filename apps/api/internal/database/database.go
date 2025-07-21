@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/url"
 
-	_ "github.com/mattn/go-sqlite3"
+	_ "modernc.org/sqlite"
 )
 
 func NewDatabase() (*sql.DB, error) {
@@ -19,7 +19,7 @@ func NewDatabase() (*sql.DB, error) {
 
 	addr := fmt.Sprintf("%s?%s", path, params.Encode())
 
-	db, err := sql.Open("sqlite3", addr)
+	db, err := sql.Open("sqlite", addr)
 
 	if err != nil {
 		return nil, err
