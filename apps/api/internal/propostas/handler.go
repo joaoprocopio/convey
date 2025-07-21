@@ -1,15 +1,24 @@
 package propostas
 
 import (
+	"context"
 	"convey/internal/server/codec"
+	"database/sql"
+	"log/slog"
 	"net/http"
 )
 
-func HandleListPropostas() http.HandlerFunc {
+func HandleListPropostas(_ context.Context, db *sql.DB, logger *slog.Logger) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var p []Proposta = make([]Proposta, 10)
+		propostas, err := ListPropostas(db)
 
-		codec.WriteEncodedJSON(w, r, http.StatusOK, p)
+		if err != nil {
+			logger.Error("failed to list propostas", slog.String("error", err.Error()))
+			http.Error(w, "failed to list propostas", http.StatusInternalServerError)
+			return
+		}
+
+		codec.WriteEncodedJSON(w, r, http.StatusOK, propostas)
 	}
 
 }

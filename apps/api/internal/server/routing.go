@@ -11,5 +11,5 @@ import (
 
 func addRoutes(mux *http.ServeMux, ctx context.Context, db *sql.DB, logger *slog.Logger) {
 	mux.Handle("GET /health", health.HandleHealth(ctx, db, logger))
-	mux.Handle("GET /propostas", propostas.HandleListPropostas())
+	mux.Handle("GET /propostas", propostas.HandleListPropostas(ctx, db, logger))
 }
