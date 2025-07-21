@@ -24,11 +24,11 @@ func NewServer(cfg *Config, ctx context.Context, db *sql.DB, logger *slog.Logger
 
 	handler = loggerMiddleware(handler, logger)
 
-	var server *http.Server = &http.Server{
+	var srv *http.Server = &http.Server{
 		ErrorLog: slog.NewLogLogger(logger.Handler(), slog.LevelError),
 		Addr:     net.JoinHostPort(cfg.Host, cfg.Port),
 		Handler:  handler,
 	}
 
-	return server
+	return srv
 }

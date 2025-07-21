@@ -8,8 +8,8 @@ import (
 
 type Middleware func(h http.Handler) http.Handler
 
-func loggerMiddleware(h http.Handler, logger *slog.Logger) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+func loggerMiddleware(h http.Handler, logger *slog.Logger) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
 		h.ServeHTTP(w, r)
 		duration := time.Since(start)
@@ -22,5 +22,5 @@ func loggerMiddleware(h http.Handler, logger *slog.Logger) http.Handler {
 			slog.String("user_agent", r.UserAgent()),
 			slog.Duration("duration", duration),
 		)
-	})
+	}
 }
