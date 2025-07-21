@@ -5,8 +5,8 @@ sql:
       database:
           uri: "./convey.sqlite3"
       schema: "./internal/db/migrations"
-      queries: "./internal/propostas/services/services.sql"
+      queries: "./internal/propostas/queries.sql"
       gen:
           go:
-              out: "./internal/propostas/services"
+              out: "./internal/propostas/queries"
               emit_json_tags: true

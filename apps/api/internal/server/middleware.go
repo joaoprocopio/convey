@@ -6,6 +6,8 @@ import (
 	"time"
 )
 
+type Middleware func(h http.Handler) http.Handler
+
 func loggerMiddleware(h http.Handler, logger *slog.Logger) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()

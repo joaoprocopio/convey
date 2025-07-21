@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"convey/internal/db"
+	propostasQueries "convey/internal/propostas/queries"
 	"convey/internal/server"
 	"fmt"
 	"log/slog"
@@ -35,7 +36,13 @@ func run(ctx context.Context, logger *slog.Logger) error {
 		return err
 	}
 
-	srv := server.NewServer(server.DefaultConfig(), ctx, db, logger)
+	srv := server.NewServer(
+		server.DefaultConfig(),
+		ctx,
+		db,
+		logger,
+		propostasQueries.New(db),
+	)
 
 	grp.Go(func() error {
 		logger.Info("server is listening", slog.String("address", fmt.Sprintf("http://%s", srv.Addr)))

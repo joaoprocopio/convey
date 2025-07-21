@@ -2,13 +2,13 @@ package propostas
 
 import (
 	"context"
-	"convey/internal/propostas/services"
+	"convey/internal/propostas/queries"
 	"convey/internal/server/codec"
 	"log/slog"
 	"net/http"
 )
 
-func HandleListPropostas(ctx context.Context, logger *slog.Logger, queries *services.Queries) http.HandlerFunc {
+func HandleListPropostas(ctx context.Context, logger *slog.Logger, queries *queries.Queries) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		propostas, err := queries.ListPropostas(ctx)
 

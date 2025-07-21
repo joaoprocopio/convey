@@ -2,7 +2,7 @@
 // versions:
 //   sqlc v1.29.0
 
-package services
+package queries
 
 type Proposta struct {
 	ID       int64  `json:"id"`
