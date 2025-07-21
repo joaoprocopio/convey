@@ -31,7 +31,7 @@ func run(ctx context.Context, logger *slog.Logger) error {
 	defer cancel()
 	grp, ctx := errgroup.WithContext(ctx)
 
-	cfg := config.DefaultConfig()
+	cfg := config.New()
 
 	db, err := db.New(ctx, cfg)
 

@@ -1,5 +1,9 @@
 package config
 
+import (
+	"os"
+)
+
 type Config struct {
 	SrvHost    string
 	SrvPort    string
@@ -10,14 +14,24 @@ type Config struct {
 	DbPassword string
 }
 
-func DefaultConfig() *Config {
+func env(key string, or string) string {
+	val := os.Getenv(key)
+
+	if val == "" {
+		return or
+	}
+
+	return val
+}
+
+func New() *Config {
 	return &Config{
-		SrvHost:    "localhost",
-		SrvPort:    "8000",
-		DbDatabase: "postgres",
-		DbHost:     "localhost",
-		DbPort:     "5432",
-		DbUser:     "postgres",
-		DbPassword: "postgres",
+		SrvHost:    env("SRV_HOST", "localhost"),
+		SrvPort:    env("SRV_PORT", "8000"),
+		DbDatabase: env("DB_DATABASE", "postgres"),
+		DbHost:     env("DB_HOST", "localhost"),
+		DbPort:     env("DB_PORT", "5432"),
+		DbUser:     env("DB_USER", "postgres"),
+		DbPassword: env("DB_PASSWORD", "postgres"),
 	}
 }
