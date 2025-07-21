@@ -21,13 +21,13 @@ go run ./cmd/main.go
 ```sh
 export GOOSE_MIGRATION_DIR='./internal/db/migrations'
 export GOOSE_DRIVER='postgres'
-export GOOSE_DBSTRING='user=postgres password=postgres dbname=postgres host=localhost port=5432 sslmode=disable'
+export GOOSE_DBSTRING='user=postgres password=postgres dbname=postgres host=localhost port=5432'
 ```
 
 ### criar uma migração
 
 ```sh
-go tool goose create NOME_DA_MIGRATION sql
+go tool goose create -s NOME_DA_MIGRATION sql
 ```
 
 ### subir as migrações

@@ -1,10 +1,5 @@
 -- +goose Up
 -- +goose StatementBegin
-CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    email VARCHAR(254) UNIQUE NOT NULL
-);
-
 CREATE TYPE proposta_status AS ENUM('backlog');
 
 CREATE TABLE propostas (
@@ -28,6 +23,5 @@ CREATE TABLE proposta_attachments (
 -- +goose StatementBegin
 DROP TABLE proposta_attachments;
 DROP TABLE propostas;
-DROP TABLE users;
 DROP TYPE proposta_status;
 -- +goose StatementEnd
