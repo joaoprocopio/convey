@@ -10,8 +10,8 @@ import (
 type Proposta struct {
 	ID          int                  `json:"id"`
 	Status      string               `json:"status"`
-	Assignee    string               `json:"assignee"`
-	Name        string               `json:"name"`
+	Name        string               `json:"name" fake:"{productname}"`
+	Assignee    string               `json:"assignee" fake:"{email}"`
 	Attachments []PropostaAttachment `json:"attachments"`
 }
 
@@ -24,12 +24,9 @@ type PropostaAttachment struct {
 var HandleListPropostas http.HandlerFunc = http.HandlerFunc(handleListPropostas)
 
 func handleListPropostas(w http.ResponseWriter, r *http.Request) {
-	var p Proposta
+	var p []Proposta
 
-	if err := gofakeit.Struct(&p); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
+	gofakeit.Slice(&p)
 
 	codec.WriteEncodedJSON(w, r, http.StatusOK, p)
 }
