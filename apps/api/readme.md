@@ -1,23 +1,22 @@
-# convey
+# api
 
-## api
-
-### pré-requisitos
+## pré-requisitos
 
 ```sh
 cd apps/api
+docker compose up -d
 go mod tidy
 ```
 
-### rodar o backend
+## rodar o backend
 
 ```sh
 go run ./cmd/main.go
 ```
 
-## banco de dados
+# banco de dados
 
-### pré requisitos
+## pré requisitos
 
 ```sh
 export GOOSE_MIGRATION_DIR='./internal/db/migrations'
