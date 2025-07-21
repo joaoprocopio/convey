@@ -1,13 +1,14 @@
 package health
 
 import (
+	"context"
 	"convey/internal/server/codec"
 	"database/sql"
 	"log/slog"
 	"net/http"
 )
 
-func HandleHealth(db *sql.DB, logger *slog.Logger) http.HandlerFunc {
+func HandleHealth(ctx context.Context, db *sql.DB, logger *slog.Logger) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		type health struct {
 			Server   string `json:"server"`
@@ -16,7 +17,7 @@ func HandleHealth(db *sql.DB, logger *slog.Logger) http.HandlerFunc {
 
 		var err error
 
-		err = db.Ping()
+		err = db.PingContext(ctx)
 
 		if err != nil {
 			logger.Error("database is not reachable", slog.String("error", err.Error()))

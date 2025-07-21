@@ -19,10 +19,11 @@ type PropostaAttachment struct {
 	URL         string `json:"url"`
 }
 
-var HandleListPropostas http.HandlerFunc = http.HandlerFunc(handleListPropostas)
+func HandleListPropostas() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		var p []Proposta = make([]Proposta, 10)
 
-func handleListPropostas(w http.ResponseWriter, r *http.Request) {
-	var p []Proposta
+		codec.WriteEncodedJSON(w, r, http.StatusOK, p)
+	}
 
-	codec.WriteEncodedJSON(w, r, http.StatusOK, p)
 }

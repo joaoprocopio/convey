@@ -35,7 +35,7 @@ func run(ctx context.Context, logger *slog.Logger) error {
 		return err
 	}
 
-	srv := server.NewServer(server.DefaultConfig(), db, logger)
+	srv := server.NewServer(server.DefaultConfig(), ctx, db, logger)
 
 	grp.Go(func() error {
 		logger.Info("server is listening", slog.String("address", fmt.Sprintf("http://%s", srv.Addr)))

@@ -1,16 +1,17 @@
 package server
 
 import (
+	"context"
 	"database/sql"
 	"log/slog"
 	"net"
 	"net/http"
 )
 
-func NewServer(cfg *Config, db *sql.DB, logger *slog.Logger) *http.Server {
+func NewServer(cfg *Config, ctx context.Context, db *sql.DB, logger *slog.Logger) *http.Server {
 	var mux *http.ServeMux = http.NewServeMux()
 
-	addRoutes(mux, db, logger)
+	addRoutes(mux, ctx, db, logger)
 
 	var handler http.Handler = mux
 
