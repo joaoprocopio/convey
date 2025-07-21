@@ -2,22 +2,38 @@ package health
 
 import (
 	"convey/internal/server/codec"
+	"database/sql"
+	"log/slog"
 	"net/http"
 )
 
-var HandleHealth http.HandlerFunc = http.HandlerFunc(handleHealth)
+func HandleHealth(db *sql.DB, logger *slog.Logger) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		type health struct {
+			Server   string `json:"server"`
+			Database string `json:"database"`
+		}
 
-func handleHealth(w http.ResponseWriter, r *http.Request) {
-	type health struct {
-		Status string `json:"status"`
+		var err error
+
+		err = db.Ping()
+
+		if err != nil {
+			logger.Error("database is not reachable", slog.String("error", err.Error()))
+			http.Error(w, "database is not reachable", http.StatusInternalServerError)
+			return
+		}
+
+		err = codec.WriteEncodedJSON(w, r, http.StatusOK, health{
+			Server:   "ok",
+			Database: "ok",
+		})
+
+		if err != nil {
+			logger.Error("failed to write response", slog.String("error", err.Error()))
+			http.Error(w, "failed to write response", http.StatusInternalServerError)
+			return
+		}
 	}
 
-	err := codec.WriteEncodedJSON(w, r, http.StatusOK, health{
-		Status: "ok",
-	})
-
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
 }

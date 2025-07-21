@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"convey/internal/database"
 	"convey/internal/server"
 	"fmt"
 	"log/slog"
@@ -28,7 +29,13 @@ func run(ctx context.Context, logger *slog.Logger) error {
 	defer cancel()
 	grp, ctx := errgroup.WithContext(ctx)
 
-	srv := server.NewServer(server.DefaultConfig(), logger)
+	db, err := database.NewDatabase()
+
+	if err != nil {
+		return err
+	}
+
+	srv := server.NewServer(server.DefaultConfig(), db, logger)
 
 	grp.Go(func() error {
 		logger.Info("server is listening", slog.String("address", fmt.Sprintf("http://%s", srv.Addr)))
@@ -49,6 +56,21 @@ func run(ctx context.Context, logger *slog.Logger) error {
 		logger.Info("gracefully shutting down http server")
 
 		if err := srv.Shutdown(ctx); err != nil {
+			return err
+		}
+
+		return nil
+	})
+
+	grp.Go(func() error {
+		<-ctx.Done()
+
+		_, cancel := context.WithTimeout(ctx, 10*time.Second)
+		defer cancel()
+
+		logger.Info("gracefully disconnecting from database")
+
+		if err := db.Close(); err != nil {
 			return err
 		}
 
