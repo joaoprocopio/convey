@@ -7,28 +7,48 @@ package queries
 
 import (
 	"context"
+
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 const listPropostas = `-- name: ListPropostas :many
-SELECT id, status, name, assignee_id
-FROM propostas
-ORDER BY status
+SELECT
+    p.id,
+    p.status,
+    p.name,
+    u.id AS assignee_id,
+    u.email AS assignee_email
+FROM propostas AS p
+
+LEFT JOIN users AS u
+    ON p.assignee_id = u.id
+
+ORDER BY p.status
 `
 
-func (q *Queries) ListPropostas(ctx context.Context) ([]Proposta, error) {
+type ListPropostasRow struct {
+	ID            int32          `json:"id"`
+	Status        PropostaStatus `json:"status"`
+	Name          string         `json:"name"`
+	AssigneeID    pgtype.Int4    `json:"assignee_id"`
+	AssigneeEmail pgtype.Text    `json:"assignee_email"`
+}
+
+func (q *Queries) ListPropostas(ctx context.Context) ([]ListPropostasRow, error) {
 	rows, err := q.db.Query(ctx, listPropostas)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []Proposta
+	var items []ListPropostasRow
 	for rows.Next() {
-		var i Proposta
+		var i ListPropostasRow
 		if err := rows.Scan(
 			&i.ID,
 			&i.Status,
 			&i.Name,
 			&i.AssigneeID,
+			&i.AssigneeEmail,
 		); err != nil {
 			return nil, err
 		}
