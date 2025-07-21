@@ -11,7 +11,7 @@ go mod tidy
 ## rodar o backend
 
 ```sh
-go run ./cmd/main.go
+go run ./cmd/server/main.go
 ```
 
 # banco de dados
