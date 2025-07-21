@@ -18,13 +18,13 @@ go run ./cmd/main.go
 criar uma migração
 
 ```sh
-go tool goose -dir ./internal/database/migrations sqlite ./convey.sqlite3 create NOME_DA_MIGRATION sql
+go tool goose -dir ./internal/db/migrations sqlite ./convey.sqlite3 create NOME_DA_MIGRATION sql
 ```
 
 subir as migrações
 
 ```sh
-go tool goose -dir ./internal/database/migrations sqlite ./convey.sqlite3 up
+go tool goose -dir ./internal/db/migrations sqlite ./convey.sqlite3 up
 ```
 
 regerar o schema

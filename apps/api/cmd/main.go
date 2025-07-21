@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"convey/internal/database"
+	"convey/internal/db"
 	"convey/internal/server"
 	"fmt"
 	"log/slog"
@@ -29,7 +29,7 @@ func run(ctx context.Context, logger *slog.Logger) error {
 	defer cancel()
 	grp, ctx := errgroup.WithContext(ctx)
 
-	db, err := database.NewDatabase()
+	db, err := db.New()
 
 	if err != nil {
 		return err

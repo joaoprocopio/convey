@@ -4,14 +4,12 @@ import (
 	"context"
 	"convey/internal/propostas/services"
 	"convey/internal/server/codec"
-	"database/sql"
 	"log/slog"
 	"net/http"
 )
 
-func HandleListPropostas(ctx context.Context, db *sql.DB, logger *slog.Logger) http.HandlerFunc {
+func HandleListPropostas(ctx context.Context, logger *slog.Logger, queries *services.Queries) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		queries := services.New(db)
 		propostas, err := queries.ListPropostas(ctx)
 
 		if err != nil {

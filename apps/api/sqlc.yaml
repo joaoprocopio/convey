@@ -4,7 +4,7 @@ sql:
     - engine: "sqlite"
       database:
           uri: "./convey.sqlite3"
-      schema: "./internal/database/migrations"
+      schema: "./internal/db/migrations"
       queries: "./internal/propostas/services/services.sql"
       gen:
           go:

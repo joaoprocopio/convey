@@ -1,4 +1,4 @@
-package database
+package db
 
 import (
 	"database/sql"
@@ -8,7 +8,7 @@ import (
 	_ "modernc.org/sqlite"
 )
 
-func NewDatabase() (*sql.DB, error) {
+func New() (*sql.DB, error) {
 	path := "file:convey.sqlite3"
 	params := url.Values{}
 

@@ -11,7 +11,7 @@ import (
 func NewServer(cfg *Config, ctx context.Context, db *sql.DB, logger *slog.Logger) *http.Server {
 	var mux *http.ServeMux = http.NewServeMux()
 
-	addRoutes(mux, ctx, db, logger)
+	addRoutes(mux, ctx, logger, db)
 
 	var handler http.Handler = mux
 
