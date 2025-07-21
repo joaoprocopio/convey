@@ -10,9 +10,9 @@ import (
 
 type DB = pgx.Conn
 
-func New(ctx context.Context, cfg *config.Config) (*pgx.Conn, error) {
+func New(ctx context.Context, cfg *config.Config) (*DB, error) {
 	dsn := fmt.Sprintf(
-		"postgres://%s:%s@%s:%s/%s",
+		"user=%s password=%s host=%s port=%s dbname=%s",
 		cfg.DbUser,
 		cfg.DbPassword,
 		cfg.DbHost,
