@@ -4,9 +4,67 @@
 
 package queries
 
+import (
+	"database/sql/driver"
+	"fmt"
+
+	"github.com/jackc/pgx/v5/pgtype"
+)
+
+type PropostaStatus string
+
+const (
+	PropostaStatusBacklog PropostaStatus = "backlog"
+)
+
+func (e *PropostaStatus) Scan(src interface{}) error {
+	switch s := src.(type) {
+	case []byte:
+		*e = PropostaStatus(s)
+	case string:
+		*e = PropostaStatus(s)
+	default:
+		return fmt.Errorf("unsupported scan type for PropostaStatus: %T", src)
+	}
+	return nil
+}
+
+type NullPropostaStatus struct {
+	PropostaStatus PropostaStatus `json:"proposta_status"`
+	Valid          bool           `json:"valid"` // Valid is true if PropostaStatus is not NULL
+}
+
+// Scan implements the Scanner interface.
+func (ns *NullPropostaStatus) Scan(value interface{}) error {
+	if value == nil {
+		ns.PropostaStatus, ns.Valid = "", false
+		return nil
+	}
+	ns.Valid = true
+	return ns.PropostaStatus.Scan(value)
+}
+
+// Value implements the driver Valuer interface.
+func (ns NullPropostaStatus) Value() (driver.Value, error) {
+	if !ns.Valid {
+		return nil, nil
+	}
+	return string(ns.PropostaStatus), nil
+}
+
 type Proposta struct {
-	ID       int32  `json:"id"`
-	Status   string `json:"status"`
-	Name     string `json:"name"`
-	Assignee string `json:"assignee"`
+	ID         int32          `json:"id"`
+	Status     PropostaStatus `json:"status"`
+	Name       string         `json:"name"`
+	AssigneeID pgtype.Int4    `json:"assignee_id"`
+}
+
+type PropostaAttachment struct {
+	ID         int32 `json:"id"`
+	PropostaID int32 `json:"proposta_id"`
+}
+
+type User struct {
+	ID    int32  `json:"id"`
+	Email string `json:"email"`
 }

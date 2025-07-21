@@ -2,7 +2,6 @@
 SELECT
     id,
     status,
-    name,
-    assignee
+    name
 FROM propostas
 ORDER BY status;
