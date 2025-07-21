@@ -20,7 +20,7 @@ ORDER BY status
 `
 
 func (q *Queries) ListPropostas(ctx context.Context) ([]Proposta, error) {
-	rows, err := q.db.QueryContext(ctx, listPropostas)
+	rows, err := q.db.Query(ctx, listPropostas)
 	if err != nil {
 		return nil, err
 	}
@@ -37,9 +37,6 @@ func (q *Queries) ListPropostas(ctx context.Context) ([]Proposta, error) {
 			return nil, err
 		}
 		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
 	}
 	if err := rows.Err(); err != nil {
 		return nil, err

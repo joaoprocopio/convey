@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"convey/internal/config"
 	"convey/internal/db"
 	propostasQueries "convey/internal/propostas/queries"
 	"convey/internal/server"
@@ -30,14 +31,16 @@ func run(ctx context.Context, logger *slog.Logger) error {
 	defer cancel()
 	grp, ctx := errgroup.WithContext(ctx)
 
-	db, err := db.New()
+	cfg := config.DefaultConfig()
+
+	db, err := db.New(ctx, cfg)
 
 	if err != nil {
 		return err
 	}
 
 	srv := server.NewServer(
-		server.DefaultConfig(),
+		cfg,
 		ctx,
 		db,
 		logger,
@@ -77,7 +80,7 @@ func run(ctx context.Context, logger *slog.Logger) error {
 
 		logger.Info("gracefully disconnecting from database")
 
-		if err := db.Close(); err != nil {
+		if err := db.Close(ctx); err != nil {
 			return err
 		}
 

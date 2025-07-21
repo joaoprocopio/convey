@@ -3,13 +3,8 @@ module convey
 go 1.24.5
 
 require (
+	github.com/jackc/pgx/v5 v5.7.5
 	golang.org/x/sync v0.16.0
-	modernc.org/sqlite v1.38.0
-)
-
-tool (
-	github.com/pressly/goose/v3/cmd/goose
-	github.com/sqlc-dev/sqlc/cmd/sqlc
 )
 
 require (
@@ -37,7 +32,6 @@ require (
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
-	github.com/jackc/pgx/v5 v5.7.4 // indirect
 	github.com/jackc/puddle/v2 v2.2.2 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/joho/godotenv v1.5.1 // indirect
@@ -91,7 +85,13 @@ require (
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	howett.net/plist v1.0.1 // indirect
-	modernc.org/libc v1.65.10 // indirect
+	modernc.org/libc v1.65.0 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
-	modernc.org/memory v1.11.0 // indirect
+	modernc.org/memory v1.10.0 // indirect
+	modernc.org/sqlite v1.37.0 // indirect
+)
+
+tool (
+	github.com/pressly/goose/v3/cmd/goose
+	github.com/sqlc-dev/sqlc/cmd/sqlc
 )

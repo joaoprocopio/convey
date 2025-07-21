@@ -1,25 +1,25 @@
 package db
 
 import (
-	"database/sql"
+	"context"
+	"convey/internal/config"
 	"fmt"
-	"net/url"
 
-	_ "modernc.org/sqlite"
+	"github.com/jackc/pgx/v5"
 )
 
-func New() (*sql.DB, error) {
-	path := "file:convey.sqlite3"
-	params := url.Values{}
+type DB = pgx.Conn
 
-	params.Add("cache", "shared")
-	params.Add("mode", "rwc")
-	params.Add("journal_mode", "WAL")
-	params.Add("foreign_keys", "on")
-
-	addr := fmt.Sprintf("%s?%s", path, params.Encode())
-
-	db, err := sql.Open("sqlite", addr)
+func New(ctx context.Context, cfg *config.Config) (*pgx.Conn, error) {
+	dsn := fmt.Sprintf(
+		"postgres://%s:%s@%s:%s/%s",
+		cfg.DbUser,
+		cfg.DbPassword,
+		cfg.DbHost,
+		cfg.DbPort,
+		cfg.DbDatabase,
+	)
+	db, err := pgx.Connect(ctx, dsn)
 
 	if err != nil {
 		return nil, err

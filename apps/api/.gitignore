@@ -32,9 +32,3 @@ tmp/
 
 # debug
 __debug_bin*
-
-# sqlite
-*.db
-*.db3
-*.sqlite
-*.sqlite3

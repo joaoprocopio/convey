@@ -5,7 +5,7 @@
 package queries
 
 type Proposta struct {
-	ID       int64  `json:"id"`
+	ID       int32  `json:"id"`
 	Status   string `json:"status"`
 	Name     string `json:"name"`
 	Assignee string `json:"assignee"`
