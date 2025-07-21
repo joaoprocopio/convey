@@ -3,6 +3,8 @@ package propostas
 import (
 	"convey/internal/server/codec"
 	"net/http"
+
+	"github.com/brianvoe/gofakeit/v7"
 )
 
 type Proposta struct {
@@ -22,24 +24,12 @@ type PropostaAttachment struct {
 var HandleListPropostas http.HandlerFunc = http.HandlerFunc(handleListPropostas)
 
 func handleListPropostas(w http.ResponseWriter, r *http.Request) {
-	codec.WriteEncodedJSON(w, r, http.StatusOK, []Proposta{
-		{
-			ID:       1,
-			Status:   "backlog",
-			Assignee: "pedro@embalae.com",
-			Name:     "Proposta de Embalagem",
-			Attachments: []PropostaAttachment{
-				{
-					ContentType: "application/pdf",
-					Filename:    "proposta.pdf",
-					URL:         "https://example.com/proposta.pdf",
-				},
-				{
-					ContentType: "image/png",
-					Filename:    "logo.png",
-					URL:         "https://example.com/logo.png",
-				},
-			},
-		},
-	})
+	var p Proposta
+
+	if err := gofakeit.Struct(&p); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	codec.WriteEncodedJSON(w, r, http.StatusOK, p)
 }
