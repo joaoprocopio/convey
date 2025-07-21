@@ -35,12 +35,6 @@ func run(ctx context.Context, logger *slog.Logger) error {
 		return err
 	}
 
-	err = database.Migrate(db)
-
-	if err != nil {
-		return err
-	}
-
 	srv := server.NewServer(server.DefaultConfig(), ctx, db, logger)
 
 	grp.Go(func() error {

@@ -2,15 +2,17 @@ package propostas
 
 import (
 	"context"
+	"convey/internal/propostas/services"
 	"convey/internal/server/codec"
 	"database/sql"
 	"log/slog"
 	"net/http"
 )
 
-func HandleListPropostas(_ context.Context, db *sql.DB, logger *slog.Logger) http.HandlerFunc {
+func HandleListPropostas(ctx context.Context, db *sql.DB, logger *slog.Logger) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		propostas, err := ListPropostas(db)
+		queries := services.New(db)
+		propostas, err := queries.ListPropostas(ctx)
 
 		if err != nil {
 			logger.Error("failed to list propostas", slog.String("error", err.Error()))

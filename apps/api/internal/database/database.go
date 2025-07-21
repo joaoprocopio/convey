@@ -27,20 +27,3 @@ func NewDatabase() (*sql.DB, error) {
 
 	return db, nil
 }
-
-func Migrate(db *sql.DB) error {
-	_, err := db.Exec(`
-		CREATE TABLE IF NOT EXISTS propostas (
-			id INTEGER PRIMARY KEY AUTOINCREMENT,
-			status TEXT NOT NULL,
-			name TEXT NOT NULL,
-			assignee TEXT NOT NULL
-		);
-	`)
-
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
