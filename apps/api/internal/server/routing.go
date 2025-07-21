@@ -17,6 +17,6 @@ func addRoutes(
 	db *sql.DB,
 	propostasQueries *propostasQueries.Queries,
 ) {
-	mux.Handle("GET /health", health.HandleHealth(ctx, db, logger))
+	mux.Handle("GET /health", health.HandleHealth(ctx, logger, db))
 	mux.Handle("GET /propostas", propostas.HandleListPropostas(ctx, logger, propostasQueries))
 }

@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-func HandleHealth(ctx context.Context, db *sql.DB, logger *slog.Logger) http.HandlerFunc {
+func HandleHealth(ctx context.Context, logger *slog.Logger, db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		type health struct {
 			Server   string `json:"server"`
