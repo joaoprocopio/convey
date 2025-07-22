@@ -12,7 +12,7 @@ CREATE TABLE propostas (
     id SERIAL PRIMARY KEY,
     status proposta_status NOT NULL,
     name VARCHAR(255) NOT NULL,
-    assignee_id INTEGER NULL
+    assignee_id INTEGER NULL,
 
     FOREIGN KEY (assignee_id) REFERENCES users (id) ON DELETE SET NULL
 );

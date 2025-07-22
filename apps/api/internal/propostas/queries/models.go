@@ -62,6 +62,8 @@ type Proposta struct {
 type PropostaAttachment struct {
 	ID         int32
 	PropostaID int32
+	Filename   string
+	Mimetype   string
 }
 
 type User struct {

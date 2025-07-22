@@ -18,7 +18,6 @@ func HandleListPropostas(ctx context.Context, logger *slog.Logger, qrs *queries.
 			return
 		}
 
-		// TODO: paginar
 		codec.WriteEncodedJSON(w, r, http.StatusOK, serializeListPropostas(propostas))
 	}
 

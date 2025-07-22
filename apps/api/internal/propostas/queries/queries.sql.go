@@ -17,21 +17,30 @@ SELECT
     p.status,
     p.name,
     u.id AS assignee_id,
-    u.email AS assignee_email
+    u.email AS assignee_email,
+    pa.id AS attachment_id,
+    pa.filename AS attachment_filename,
+    pa.mimetype AS attachment_mimetype
 FROM propostas AS p
 
 LEFT JOIN users AS u
     ON p.assignee_id = u.id
 
+LEFT JOIN proposta_attachments AS pa
+    ON pa.proposta_id = p.id
+
 ORDER BY p.status
 `
 
 type ListPropostasRow struct {
-	ID            int32
-	Status        PropostaStatus
-	Name          string
-	AssigneeID    pgtype.Int4
-	AssigneeEmail pgtype.Text
+	ID                 int32
+	Status             PropostaStatus
+	Name               string
+	AssigneeID         pgtype.Int4
+	AssigneeEmail      pgtype.Text
+	AttachmentID       pgtype.Int4
+	AttachmentFilename pgtype.Text
+	AttachmentMimetype pgtype.Text
 }
 
 func (q *Queries) ListPropostas(ctx context.Context) ([]ListPropostasRow, error) {
@@ -49,6 +58,9 @@ func (q *Queries) ListPropostas(ctx context.Context) ([]ListPropostasRow, error)
 			&i.Name,
 			&i.AssigneeID,
 			&i.AssigneeEmail,
+			&i.AttachmentID,
+			&i.AttachmentFilename,
+			&i.AttachmentMimetype,
 		); err != nil {
 			return nil, err
 		}
