@@ -30,8 +30,8 @@ func (e *PropostaStatus) Scan(src interface{}) error {
 }
 
 type NullPropostaStatus struct {
-	PropostaStatus PropostaStatus
-	Valid          bool // Valid is true if PropostaStatus is not NULL
+	PropostaStatus PropostaStatus `json:"proposta_status"`
+	Valid          bool           `json:"valid"` // Valid is true if PropostaStatus is not NULL
 }
 
 // Scan implements the Scanner interface.
@@ -53,21 +53,21 @@ func (ns NullPropostaStatus) Value() (driver.Value, error) {
 }
 
 type Proposta struct {
-	ID         int32
-	Status     PropostaStatus
-	Name       string
-	AssigneeID pgtype.Int4
+	ID         int32          `json:"id"`
+	Status     PropostaStatus `json:"status"`
+	Name       string         `json:"name"`
+	AssigneeID pgtype.Int4    `json:"assignee_id"`
 }
 
 type PropostaAttachment struct {
-	ID         int32
-	PropostaID int32
-	Filename   string
-	Mimetype   string
+	ID         int32  `json:"id"`
+	PropostaID int32  `json:"proposta_id"`
+	Filename   string `json:"filename"`
+	Mimetype   string `json:"mimetype"`
 }
 
 type User struct {
-	ID       int32
-	Email    string
-	Password string
+	ID       int32  `json:"id"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
 }

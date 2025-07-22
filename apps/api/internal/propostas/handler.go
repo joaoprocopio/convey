@@ -24,7 +24,6 @@ func HandleListPropostas(ctx context.Context, logger *slog.Logger, qrs *queries.
 		}
 
 		propostas, err := qrs.ListPropostas(ctx, queries.ListPropostasParams{
-
 			Cursor: cursor,
 			Limit:  limit,
 		})
@@ -35,7 +34,7 @@ func HandleListPropostas(ctx context.Context, logger *slog.Logger, qrs *queries.
 			return
 		}
 
-		codec.WriteEncodedJSON(w, r, http.StatusOK, serializeListPropostas(propostas))
+		codec.WriteEncodedJSON(w, r, http.StatusOK, propostas)
 	}
 
 }

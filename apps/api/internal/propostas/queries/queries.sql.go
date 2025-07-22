@@ -7,49 +7,57 @@ package queries
 
 import (
 	"context"
-
-	"github.com/jackc/pgx/v5/pgtype"
 )
 
 const listPropostas = `-- name: ListPropostas :many
+WITH paged_propostas AS (
+    SELECT id, status, name, assignee_id
+    FROM propostas AS p
+    WHERE
+        p.id > $1
+    ORDER BY p.id
+    LIMIT $2
+)
+
 SELECT
     p.id,
     p.status,
     p.name,
-    u.id AS assignee_id,
-    u.email AS assignee_email,
-    pa.id AS attachment_id,
-    pa.filename AS attachment_filename,
-    pa.mimetype AS attachment_mimetype
-FROM propostas AS p
+    COALESCE(
+        json_build_object(
+            'id', u.id,
+            'email', u.email
+        ),
+        NULL
+    ) AS assignee,
+    COALESCE(json_agg(
+        json_build_object(
+            'id', pa.id,
+            'mimetype', pa.mimetype,
+            'filename', pa.filename
+        )
+    ) FILTER (WHERE pa.id IS NOT NULL), '[]') AS attachments
+FROM paged_propostas AS p
 
 LEFT JOIN users AS u
-    ON p.assignee_id = u.id
-
+    ON u.id = p.assignee_id
 LEFT JOIN proposta_attachments AS pa
     ON pa.proposta_id = p.id
 
-WHERE
-    p.id > $1
-
-ORDER BY p.id
-LIMIT $2
+GROUP BY p.id, p.status, p.name, u.id, u.email
 `
 
 type ListPropostasParams struct {
-	Cursor int32
-	Limit  int32
+	Cursor int32 `json:"cursor"`
+	Limit  int32 `json:"limit"`
 }
 
 type ListPropostasRow struct {
-	ID                 int32
-	Status             PropostaStatus
-	Name               string
-	AssigneeID         pgtype.Int4
-	AssigneeEmail      pgtype.Text
-	AttachmentID       pgtype.Int4
-	AttachmentFilename pgtype.Text
-	AttachmentMimetype pgtype.Text
+	ID          int32          `json:"id"`
+	Status      PropostaStatus `json:"status"`
+	Name        string         `json:"name"`
+	Assignee    interface{}    `json:"assignee"`
+	Attachments interface{}    `json:"attachments"`
 }
 
 func (q *Queries) ListPropostas(ctx context.Context, arg ListPropostasParams) ([]ListPropostasRow, error) {
@@ -65,11 +73,8 @@ func (q *Queries) ListPropostas(ctx context.Context, arg ListPropostasParams) ([
 			&i.ID,
 			&i.Status,
 			&i.Name,
-			&i.AssigneeID,
-			&i.AssigneeEmail,
-			&i.AttachmentID,
-			&i.AttachmentFilename,
-			&i.AttachmentMimetype,
+			&i.Assignee,
+			&i.Attachments,
 		); err != nil {
 			return nil, err
 		}
