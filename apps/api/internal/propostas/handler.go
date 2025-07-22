@@ -12,23 +12,21 @@ import (
 func HandleListPropostas(ctx context.Context, logger *slog.Logger, qrs *queries.Queries) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		params := r.URL.Query()
-		cursor, err := strconv.ParseInt(params.Get("cursor"), 10, 32)
 
-		if err != nil {
-			logger.Error("cursor should be a valid integer", slog.String("error", err.Error()))
-			http.Error(w, "cursor should be a valid integer", http.StatusInternalServerError)
-			return
+		var cursor int32 = 0
+		var limit int32 = 10
+
+		if c, err := strconv.Atoi(params.Get("cursor")); err == nil {
+			cursor = int32(c)
 		}
-
-		limit, err := strconv.ParseInt(params.Get("limit"), 10, 32)
-
-		if err != nil {
-			limit = 10
+		if l, err := strconv.Atoi(params.Get("limit")); err == nil {
+			limit = int32(l)
 		}
 
 		propostas, err := qrs.ListPropostas(ctx, queries.ListPropostasParams{
-			Cursor: int32(cursor),
-			Limit:  int32(limit),
+
+			Cursor: cursor,
+			Limit:  limit,
 		})
 
 		if err != nil {
