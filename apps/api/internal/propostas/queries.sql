@@ -12,13 +12,13 @@ SELECT
     p.id,
     p.status,
     p.name,
-    COALESCE(
-        json_build_object(
+    CASE
+        WHEN u.id IS NULL THEN NULL
+        ELSE json_build_object(
             'id', u.id,
             'email', u.email
-        ),
-        NULL
-    ) AS assignee,
+        )
+    END AS assignee,
     COALESCE(json_agg(
         json_build_object(
             'id', pa.id,
