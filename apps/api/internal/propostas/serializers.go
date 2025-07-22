@@ -2,6 +2,8 @@ package propostas
 
 import (
 	"convey/internal/propostas/queries"
+	"maps"
+	"slices"
 )
 
 type PropostaAttachment struct {
@@ -16,15 +18,15 @@ type PropostaAssignee struct {
 }
 
 type Proposta struct {
-	ID          int32                        `json:"id"`
-	Status      queries.PropostaStatus       `json:"status"`
-	Name        string                       `json:"name"`
-	Assignee    *PropostaAssignee            `json:"assignee"`
-	Attachments map[int32]PropostaAttachment `json:"attachments"`
+	ID          int32                  `json:"id"`
+	Status      queries.PropostaStatus `json:"status"`
+	Name        string                 `json:"name"`
+	Assignee    *PropostaAssignee      `json:"assignee"`
+	Attachments []PropostaAttachment   `json:"attachments"`
 }
 
-func serializeListPropostas(rows []queries.ListPropostasRow) map[int32]Proposta {
-	propostas := make(map[int32]Proposta)
+func serializeListPropostas(rows []queries.ListPropostasRow) []*Proposta {
+	propostas := make(map[int32]*Proposta)
 
 	for _, row := range rows {
 		proposta, ok := propostas[row.ID]
@@ -39,27 +41,25 @@ func serializeListPropostas(rows []queries.ListPropostasRow) map[int32]Proposta 
 				}
 			}
 
-			proposta = Proposta{
+			proposta = &Proposta{
 				ID:          row.ID,
 				Status:      row.Status,
 				Name:        row.Name,
 				Assignee:    assignee,
-				Attachments: make(map[int32]PropostaAttachment),
+				Attachments: make([]PropostaAttachment, 0),
 			}
 
 			propostas[row.ID] = proposta
 		}
 
 		if row.AttachmentID.Valid {
-			proposta.Attachments[row.AttachmentID.Int32] = PropostaAttachment{
+			proposta.Attachments = append(proposta.Attachments, PropostaAttachment{
 				ID:       row.AttachmentID.Int32,
 				Filename: row.AttachmentFilename.String,
 				Mimetype: row.AttachmentMimetype.String,
-			}
+			})
 		}
-
 	}
 
-	return propostas
-	// return slices.Collect(maps.Values(propostas))
+	return slices.Collect(maps.Values(propostas))
 }
