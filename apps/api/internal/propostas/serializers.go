@@ -2,7 +2,6 @@ package propostas
 
 import (
 	"convey/internal/propostas/queries"
-	"fmt"
 )
 
 type assignee struct {
@@ -20,8 +19,6 @@ type proposta struct {
 func serializeListPropostas(rows []queries.ListPropostasRow) []proposta {
 	propostas := make([]proposta, len(rows))
 
-	fmt.Println(len(propostas))
-	fmt.Println(len(rows))
 	for i, row := range rows {
 		var a *assignee
 		var p proposta
