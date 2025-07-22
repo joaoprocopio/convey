@@ -16,4 +16,8 @@ LEFT JOIN users AS u
 LEFT JOIN proposta_attachments AS pa
     ON pa.proposta_id = p.id
 
-ORDER BY p.status;
+WHERE
+    p.id > sqlc.arg('cursor')
+
+ORDER BY p.id
+LIMIT sqlc.arg('limit');

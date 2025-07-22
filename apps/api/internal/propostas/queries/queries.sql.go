@@ -29,8 +29,17 @@ LEFT JOIN users AS u
 LEFT JOIN proposta_attachments AS pa
     ON pa.proposta_id = p.id
 
-ORDER BY p.status
+WHERE
+    p.id > $1
+
+ORDER BY p.id
+LIMIT $2
 `
+
+type ListPropostasParams struct {
+	Cursor int32
+	Limit  int32
+}
 
 type ListPropostasRow struct {
 	ID                 int32
@@ -43,8 +52,8 @@ type ListPropostasRow struct {
 	AttachmentMimetype pgtype.Text
 }
 
-func (q *Queries) ListPropostas(ctx context.Context) ([]ListPropostasRow, error) {
-	rows, err := q.db.Query(ctx, listPropostas)
+func (q *Queries) ListPropostas(ctx context.Context, arg ListPropostasParams) ([]ListPropostasRow, error) {
+	rows, err := q.db.Query(ctx, listPropostas, arg.Cursor, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
