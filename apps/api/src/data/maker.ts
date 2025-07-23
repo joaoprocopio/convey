@@ -7,14 +7,14 @@ import {
   PropostaStatus,
 } from '~/data/schemas'
 import { array } from '~/utils/array'
-import { randomInt } from '~/utils/random'
+import { randomBool, randomInt } from '~/utils/random'
 
 export function makeProposta(): IProposta {
   return {
     id: randomInt(1, 100),
     name: faker.commerce.productName(),
     status: faker.helpers.enumValue(PropostaStatus),
-    assignee: makeAssignee(),
+    assignee: randomBool() ? makeAssignee() : null,
     attachments: array(randomInt(0, 5)).map(() => makeAttachment()),
   }
 }

@@ -10,7 +10,7 @@ export interface IProposta {
   id: number
   name: string
   status: TPropostaStatus
-  assignee: IPropostaAssignee | undefined
+  assignee: IPropostaAssignee | null
   attachments: IPropostaAttachment[]
 }
 
