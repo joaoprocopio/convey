@@ -20,6 +20,6 @@ export interface IPropostaAssignee {
 }
 
 export interface IPropostaAttachment {
-  id: string
+  id: number
   url: string
 }
