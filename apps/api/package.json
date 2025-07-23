@@ -3,6 +3,7 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "clean": "git clean -xdf .nitro",
     "build": "nitro build",
     "dev": "nitro dev",
     "prepare": "nitro prepare",

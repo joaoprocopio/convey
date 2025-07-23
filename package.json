@@ -3,6 +3,12 @@
   "private": true,
   "packageManager": "pnpm@10.13.1",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "git clean -xdf .turbo node_modules",
+    "cleanall": "turbo clean",
+    "refresh": "pnpm cleanall && pnpm store prune --force && pnpm install",
+    "dev": "turbo dev"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.5"
   }
 }

@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "clean": "git clean -xdf node_modules dist",
-    "cleaninstall": "pnpm clean && pnpm store prune --force && pnpm install",
     "dev": "vite",
     "type-check": "vue-tsc --build",
     "build": "run-p type-check \"build-only {@}\" --",
