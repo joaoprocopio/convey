@@ -14,8 +14,11 @@ importers:
 
   apps/api:
     devDependencies:
+      h3:
+        specifier: ^1.15.3
+        version: 1.15.3
       nitropack:
-        specifier: latest
+        specifier: ^2.12.4
         version: 2.12.4(@netlify/blobs@9.1.2)
 
   apps/app:
