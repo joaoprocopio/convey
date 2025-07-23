@@ -1,9 +1,7 @@
-import { defineEventHandler, getRequestURL } from 'h3'
-import path from 'path'
+import { defineEventHandler, getQuery } from 'h3'
 
 export default defineEventHandler((event) => {
-  const url = getRequestURL(event)
-  const ext = path.extname(url.pathname).replace('.', '')
+  const { mimetype } = getQuery(event)
 
-  return ext
+  return mimetype
 })
