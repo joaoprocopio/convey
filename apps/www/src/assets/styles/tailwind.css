@@ -45,10 +45,9 @@
   --vis-tooltip-backdrop-filter: none !important;
   --vis-tooltip-padding: none !important;
 
-  --vis-primary-color: var(--primary);
-  /* change to any hsl value you want */
-  --vis-secondary-color: 160 81% 40%;
   --vis-text-color: var(--muted-foreground);
+  --vis-primary-color: var(--chart-1);
+  --vis-secondary-color: var(--chart-2);
 }
 
 .dark {
