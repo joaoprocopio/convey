@@ -2,9 +2,18 @@ import { TEnum } from '~/utils/enums'
 
 export type TPropostaStatus = 'backlog'
 
+export type TPropostaAttachmentMimeType =
+  | 'application/pdf'
+  | 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+
 export const PropostaStatus = {
   Backlog: 'backlog',
 } as const satisfies TEnum<TPropostaStatus>
+
+export const PropostaAttachmentMimeType = {
+  PDF: 'application/pdf',
+  XLSX: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+} as const satisfies TEnum<TPropostaAttachmentMimeType>
 
 export interface IProposta {
   id: number
@@ -22,4 +31,5 @@ export interface IPropostaAssignee {
 export interface IPropostaAttachment {
   id: number
   url: string
+  mimetype: TPropostaAttachmentMimeType
 }

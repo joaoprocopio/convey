@@ -4,25 +4,29 @@ import {
   IProposta,
   IPropostaAssignee,
   IPropostaAttachment,
+  PropostaAttachmentMimeType,
   PropostaStatus,
 } from '~/data/schemas'
 import { array } from '~/utils/array'
-import { randomBool, randomInt } from '~/utils/random'
+import { randomBool, randomEnumValue, randomInt } from '~/utils/random'
 
-export function makeProposta(): IProposta {
+export function makeProposta(url: URL): IProposta {
   return {
     id: randomInt(1, 100),
     name: faker.commerce.productName(),
-    status: faker.helpers.enumValue(PropostaStatus),
+    status: randomEnumValue(PropostaStatus),
     assignee: randomBool() ? makeAssignee() : null,
-    attachments: array(randomInt(0, 5)).map(() => makeAttachment()),
+    attachments: array(randomInt(0, 5)).map(() => makeAttachment(url)),
   }
 }
 
-export function makeAttachment(): IPropostaAttachment {
+export function makeAttachment(url: URL): IPropostaAttachment {
+  const mime = randomEnumValue(PropostaAttachmentMimeType)
+
   return {
     id: randomInt(1, 100),
-    url: faker.internet.url(), // trocar pra uma parada que sabe se é pdf ou imagem ou etc
+    url: `${url.origin}/static/${faker.system.commonFileName(faker.system.fileExt(mime))}`,
+    mimetype: mime,
   }
 }
 
