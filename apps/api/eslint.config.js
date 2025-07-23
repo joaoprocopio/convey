@@ -3,9 +3,8 @@ import { includeIgnoreFile } from '@eslint/compat'
 import eslint from '@eslint/js'
 import pluginPrettier from '@vue/eslint-config-prettier'
 import pluginImportSort from 'eslint-plugin-simple-import-sort'
-import tseslint from 'typescript-eslint'
-
 import { dirname, resolve } from 'path'
+import tseslint from 'typescript-eslint'
 import { fileURLToPath } from 'url'
 
 const exec = fileURLToPath(import.meta.url)
