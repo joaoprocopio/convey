@@ -1,0 +1,8 @@
+{
+  "name": "convey",
+  "private": true,
+  "packageManager": "pnpm@10.13.1",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

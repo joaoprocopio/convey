@@ -1,4 +1,8 @@
+packages:
+  - apps/*
+
 onlyBuiltDependencies:
+  - '@parcel/watcher'
   - '@tailwindcss/oxide'
   - esbuild
   - maplibre-gl

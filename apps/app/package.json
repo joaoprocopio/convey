@@ -1,8 +1,7 @@
 {
-  "name": "convey",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@convey/app",
   "type": "module",
+  "private": true,
   "scripts": {
     "clean": "git clean -xdf node_modules dist",
     "cleaninstall": "pnpm clean && pnpm store prune --force && pnpm install",
