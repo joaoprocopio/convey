@@ -1,4 +1,6 @@
 import { faker } from '@faker-js/faker/locale/pt_BR'
+import { EventHandlerRequest } from 'h3'
+import { getRequestURL, H3Event } from 'h3'
 
 import {
   IProposta,
@@ -10,22 +12,26 @@ import {
 import { array } from '~/utils/array'
 import { randomBool, randomEnumValue, randomInt } from '~/utils/random'
 
-export function makeProposta(url: URL): IProposta {
+export function makeProposta(event: H3Event<EventHandlerRequest>): IProposta {
   return {
     id: randomInt(1, 100),
     name: faker.commerce.productName(),
     status: randomEnumValue(PropostaStatus),
     assignee: randomBool() ? makeAssignee() : null,
-    attachments: array(randomInt(0, 5)).map(() => makeAttachment(url)),
+    attachments: array(randomInt(0, 5)).map(() => makeAttachment(event)),
   }
 }
 
-export function makeAttachment(url: URL): IPropostaAttachment {
+export function makeAttachment(
+  event: H3Event<EventHandlerRequest>,
+): IPropostaAttachment {
+  const requestURL = getRequestURL(event)
   const mime = randomEnumValue(PropostaAttachmentMimeType)
+  const url = `${requestURL.origin}/static/${faker.system.commonFileName(faker.system.fileExt(mime))}`
 
   return {
     id: randomInt(1, 100),
-    url: `${url.origin}/static/${faker.system.commonFileName(faker.system.fileExt(mime))}`,
+    url: url,
     mimetype: mime,
   }
 }
