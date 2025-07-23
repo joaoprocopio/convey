@@ -19,7 +19,7 @@ export const PropostaStatus = {
   Negociando: 'negociando',
   Proposta: 'proposta',
   Aprovado: 'aprovado',
-} as const satisfies TEnum<TPropostaStatus>
+} as const satisfies TEnum<string, TPropostaStatus>
 
 export const PropostaAttachmentMimeType = {
   PDF: 'application/pdf',
@@ -27,7 +27,7 @@ export const PropostaAttachmentMimeType = {
   JPEG: 'image/jpeg',
   PNG: 'image/png',
   WEBP: 'image/webp',
-} as const satisfies TEnum<TPropostaAttachmentMimeType>
+} as const satisfies TEnum<string, TPropostaAttachmentMimeType>
 
 export interface IProposta {
   id: number

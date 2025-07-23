@@ -16,7 +16,7 @@ export function randomArrayValue<T>(
   return a.at(i)
 }
 
-export function randomEnumValue<T extends TEnumKey>(e: TEnum<T>): T {
+export function randomEnumValue<T extends TEnumKey>(e: TEnum<TEnumKey, T>): T {
   const keys = Object.keys(e)
   const randomKey = randomArrayValue(keys)
   const randomValue = e[randomKey]

@@ -26,6 +26,7 @@ export function makeAttachment(
   event: H3Event<EventHandlerRequest>,
 ): IPropostaAttachment {
   const requestURL = getRequestURL(event)
+
   const mime = randomEnumValue(PropostaAttachmentMimeType)
   const ext = faker.system.fileExt(mime)
   const file = faker.system.commonFileName(ext)

@@ -1,3 +1,5 @@
 export type TEnumKey = PropertyKey
 
-export type TEnum<GKey extends TEnumKey> = Record<TEnumKey, GKey>
+export type TEnum<GKey extends TEnumKey, GValue> = {
+  [Key in GKey]: GValue
+}
