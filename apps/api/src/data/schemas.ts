@@ -1,6 +1,11 @@
 import { TEnum } from '~/utils/enums'
 
-export type TPropostaStatus = 'backlog'
+export type TPropostaStatus =
+  | 'backlog'
+  | 'prospectando'
+  | 'negociando'
+  | 'proposta'
+  | 'aprovado'
 
 export type TPropostaAttachmentMimeType =
   | 'application/pdf'
@@ -10,6 +15,10 @@ export type TPropostaAttachmentMimeType =
 
 export const PropostaStatus = {
   Backlog: 'backlog',
+  Prospectando: 'prospectando',
+  Negociando: 'negociando',
+  Proposta: 'proposta',
+  Aprovado: 'aprovado',
 } as const satisfies TEnum<TPropostaStatus>
 
 export const PropostaAttachmentMimeType = {
