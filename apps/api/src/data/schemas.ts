@@ -4,7 +4,9 @@ export type TPropostaStatus = 'backlog'
 
 export type TPropostaAttachmentMimeType =
   | 'application/pdf'
-  | 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+  | 'image/jpeg'
+  | 'image/png'
+  | 'image/webp'
 
 export const PropostaStatus = {
   Backlog: 'backlog',
@@ -12,7 +14,10 @@ export const PropostaStatus = {
 
 export const PropostaAttachmentMimeType = {
   PDF: 'application/pdf',
-  XLSX: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  JPG: 'image/jpeg',
+  JPEG: 'image/jpeg',
+  PNG: 'image/png',
+  WEBP: 'image/webp',
 } as const satisfies TEnum<TPropostaAttachmentMimeType>
 
 export interface IProposta {
@@ -30,6 +35,7 @@ export interface IPropostaAssignee {
 
 export interface IPropostaAttachment {
   id: number
+  file: string
   url: string
   mimetype: TPropostaAttachmentMimeType
 }

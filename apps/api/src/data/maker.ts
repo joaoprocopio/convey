@@ -27,11 +27,14 @@ export function makeAttachment(
 ): IPropostaAttachment {
   const requestURL = getRequestURL(event)
   const mime = randomEnumValue(PropostaAttachmentMimeType)
-  const url = `${requestURL.origin}/static/${faker.system.commonFileName(faker.system.fileExt(mime))}`
+  const ext = faker.system.fileExt(mime)
+  const file = faker.system.commonFileName(ext)
+  const url = `${requestURL.origin}/static/${file}`
 
   return {
     id: randomInt(1, 100),
     url: url,
+    file: file,
     mimetype: mime,
   }
 }
