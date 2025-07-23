@@ -15,11 +15,7 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: InicioPageName,
-    component: {
-      setup() {
-        return () => h('div', null, [h('h1', null, InicioPageName)])
-      },
-    },
+    component: () => import('~/pages/inicio-page'),
     meta: { layout: DefaultLayout },
   },
   {
