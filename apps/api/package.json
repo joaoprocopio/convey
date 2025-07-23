@@ -9,8 +9,19 @@
     "prepare": "nitro prepare",
     "preview": "node .output/server/index.mjs"
   },
-  "devDependencies": {
+  "dependencies": {
     "h3": "^1.15.3",
     "nitropack": "^2.12.4"
+  },
+  "devDependencies": {
+    "@eslint/compat": "^1.3.1",
+    "@eslint/js": "^9.31.0",
+    "eslint": "^9.31.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.3",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "prettier": "^3.6.2",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.38.0"
   }
 }

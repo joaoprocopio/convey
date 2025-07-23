@@ -2,5 +2,5 @@
 export default defineNitroConfig({
   compatibilityDate: 'latest',
   imports: false,
-  srcDir: "src",
-});
+  srcDir: 'src',
+})
