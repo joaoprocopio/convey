@@ -91,7 +91,8 @@ const groups: Group[] = [
               />
             </CollapsibleTrigger>
           </SidebarGroupLabel>
-          <CollapsibleContent>
+
+          <CollapsibleContent class="py-0.5">
             <SidebarGroupContent>
               <SidebarMenu>
                 <SidebarMenuItem

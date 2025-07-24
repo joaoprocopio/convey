@@ -32,15 +32,17 @@ const { toggleSidebar } = useSidebar()
             <SidebarMenuButton class="w-fit p-1">
               <Avatar class="size-6 rounded-sm">
                 <AvatarFallback
-                  class="rounded-none bg-sidebar-primary text-2xs text-sidebar-primary-foreground"
+                  class="rounded-none bg-sidebar-primary text-3xs font-semibold text-sidebar-primary-foreground"
                 >
                   RC
                 </AvatarFallback>
               </Avatar>
 
-              <span class="truncate text-sm font-medium"> Roger Camargo </span>
+              <span class="truncate text-xs font-medium"> Roger Camargo </span>
 
-              <ChevronDown class="ml-auto size-4 text-muted-foreground" />
+              <ChevronDown
+                class="ml-auto size-4 text-sidebar-muted-foreground"
+              />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
 
@@ -56,7 +58,7 @@ const { toggleSidebar } = useSidebar()
 
         <SidebarMenuButton
           @click="toggleSidebar"
-          class="size-8 shrink-0 justify-center p-0 text-muted-foreground [&>svg]:size-5"
+          class="size-8 shrink-0 justify-center p-0 text-sidebar-muted-foreground [&>svg]:size-5"
         >
           <PanelLeft />
         </SidebarMenuButton>
