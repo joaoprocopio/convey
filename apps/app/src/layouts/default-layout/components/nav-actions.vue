@@ -110,7 +110,7 @@ const groups: Group[] = [
                       :aria-disabled="!item.route"
                     >
                       <RouterLink :to="{ name: item.route }">
-                        <component :is="item.icon" v-if="item.icon" />
+                        <component v-if="item.icon" :is="item.icon" />
                         {{ item.label }}
                       </RouterLink>
                     </SidebarMenuButton>
@@ -142,7 +142,7 @@ const groups: Group[] = [
                   :aria-disabled="!item.route"
                 >
                   <RouterLink :to="{ name: item.route }">
-                    <component :is="item.icon" v-if="item.icon" />
+                    <component v-if="item.icon" :is="item.icon" />
                     {{ item.label }}
                   </RouterLink>
                 </SidebarMenuButton>
