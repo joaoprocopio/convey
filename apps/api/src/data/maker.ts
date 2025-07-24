@@ -30,7 +30,7 @@ export function makeAttachment(
   const mime = randomEnumValue(PropostaAttachmentMimeType)
   const ext = faker.system.fileExt(mime)
   const file = faker.system.commonFileName(ext)
-  const url = `${requestURL.origin}/static/${file}?mimetype=${mime}`
+  const url = `${requestURL.origin}/static/${file}`
 
   return {
     id: randomInt(1, 100),

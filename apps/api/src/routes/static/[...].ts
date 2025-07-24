@@ -1,11 +1,9 @@
-import { defineEventHandler, getQuery } from 'h3'
+import { defineEventHandler, getRequestURL, sendRedirect } from 'h3'
+import path from 'path'
 
-import { TMimeType } from '~/data/schemas'
+export default defineEventHandler(async (event) => {
+  const url = getRequestURL(event)
+  const ext = path.extname(url.pathname)
 
-export default defineEventHandler((event) => {
-  const { mimetype } = getQuery<{
-    mimetype: TMimeType
-  }>(event)
-
-  return mimetype
+  await sendRedirect(event, `${url.origin}/example${ext}`)
 })
