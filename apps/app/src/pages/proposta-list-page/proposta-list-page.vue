@@ -43,7 +43,7 @@ const viewConfig = useStorage<{
       <SidebarTrigger class="data-[open=true]:hidden" :data-open="open" />
 
       <div class="relative items-center">
-        <Input type="text" placeholder="Encontrar" class="pl-9" />
+        <Input type="text" placeholder="Encontrar" class="h-8 pl-9" />
 
         <span
           class="absolute inset-y-0 flex items-center justify-center px-2.5"
@@ -71,7 +71,7 @@ const viewConfig = useStorage<{
       </div>
 
       <Button class="ml-1.5" size="sm" variant="ghost">
-        <Ellipsis class="size-6" />
+        <Ellipsis class="size-5" />
       </Button>
     </header>
 
