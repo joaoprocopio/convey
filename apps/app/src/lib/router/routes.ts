@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/vue-query'
 import { h } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 
@@ -7,6 +8,7 @@ import {
   ProdutoListPageName,
   PropostaListPageName,
 } from '~/lib/router/constants'
+import { propostaQueries } from '~/queries/proposta'
 
 export const routes: RouteRecordRaw[] = [
   {
@@ -39,6 +41,14 @@ export const routes: RouteRecordRaw[] = [
     path: '/propostas',
     name: PropostaListPageName,
     meta: { layout: DefaultLayout },
-    component: () => import('~/pages/proposta-list-page'),
+    async beforeEnter(_to, _from, next) {
+      const queryClient = useQueryClient()
+      await queryClient.prefetchQuery(propostaQueries.all())
+
+      next()
+    },
+    async component() {
+      return await import('~/pages/proposta-list-page')
+    },
   },
 ]

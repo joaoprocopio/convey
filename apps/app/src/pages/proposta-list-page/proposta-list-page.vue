@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useQuery, useQueryClient } from '@tanstack/vue-query'
+import { useQuery } from '@tanstack/vue-query'
 import { useStorage } from '@vueuse/core'
 import {
   Ellipsis,
@@ -17,9 +17,6 @@ import ListView from '~/pages/proposta-list-page/components/list-view.vue'
 import { propostaQueries } from '~/queries/proposta'
 
 const { open } = useSidebar()
-const queryClient = useQueryClient()
-
-queryClient.prefetchQuery(propostaQueries.all())
 
 const propostas = useQuery({
   ...propostaQueries.all(),

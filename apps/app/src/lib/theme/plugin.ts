@@ -4,7 +4,7 @@ import { useTheme } from '~/lib/theme/composables'
 import { PrefersDarkColorScheme } from '~/lib/theme/constants'
 import { applyTheme } from '~/lib/theme/dom'
 
-export const theme: FunctionPlugin = async () => {
+export const theme: FunctionPlugin = () => {
   const theme = useTheme()
   const media = window.matchMedia(PrefersDarkColorScheme)
 
