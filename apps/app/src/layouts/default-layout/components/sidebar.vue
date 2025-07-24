@@ -32,13 +32,13 @@ const { toggleSidebar } = useSidebar()
             <SidebarMenuButton class="w-fit p-1">
               <Avatar class="size-6 rounded-sm">
                 <AvatarFallback
-                  class="rounded-none bg-sidebar-primary text-3xs font-semibold text-sidebar-primary-foreground"
+                  class="rounded-none bg-sidebar-primary text-3xs text-sidebar-primary-foreground"
                 >
                   RC
                 </AvatarFallback>
               </Avatar>
 
-              <span class="truncate text-xs font-medium"> Roger Camargo </span>
+              <span class="truncate text-xs"> Roger Camargo </span>
 
               <ChevronDown
                 class="ml-auto size-4 text-sidebar-muted-foreground"
