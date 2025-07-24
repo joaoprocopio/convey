@@ -4,15 +4,15 @@ import type { RouteRecordRaw } from 'vue-router'
 import DefaultLayout from '~/layouts/default-layout'
 import {
   InicioPageName,
-  ProdutosPageName,
-  PropostasPageName,
+  ProdutoListPageName,
+  PropostaListPageName,
 } from '~/lib/router/constants'
 
 export const routes: RouteRecordRaw[] = [
   {
     path: '/:pathMatch(.*)*',
     redirect: {
-      name: PropostasPageName,
+      name: PropostaListPageName,
     },
   },
   {
@@ -27,18 +27,18 @@ export const routes: RouteRecordRaw[] = [
   },
   {
     path: '/produtos',
-    name: ProdutosPageName,
+    name: ProdutoListPageName,
     meta: { layout: DefaultLayout },
     component: {
       render() {
-        return h('div', undefined, ProdutosPageName)
+        return h('div', undefined, ProdutoListPageName)
       },
     },
   },
   {
     path: '/propostas',
-    name: PropostasPageName,
+    name: PropostaListPageName,
     meta: { layout: DefaultLayout },
-    component: () => import('~/propostas/propostas-page'),
+    component: () => import('~/pages/proposta-list-page'),
   },
 ]

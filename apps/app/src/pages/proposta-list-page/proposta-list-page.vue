@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import { useQuery } from '@tanstack/vue-query'
 import { ListCheck } from 'lucide-vue-next'
 
 import { SidebarTrigger, useSidebar } from '~/lib/shadcn/ui/sidebar'
+import { propostaQueries } from '~/queries/proposta'
 
 const { open } = useSidebar()
+const propostas = useQuery(propostaQueries.all())
 </script>
 
 <template>
@@ -25,4 +28,9 @@ const { open } = useSidebar()
       </div>
     </header>
   </Teleport>
+
+  <pre>
+
+    {{ propostas }}
+  </pre>
 </template>

@@ -5,4 +5,7 @@ export const env = {
   get BASE_URL() {
     return import.meta.env.BASE_URL
   },
+  get API_URL() {
+    return import.meta.env.API_URL || 'http://localhost:3000'
+  },
 }

@@ -12,8 +12,8 @@ import { RouterLink } from 'vue-router'
 
 import {
   InicioPageName,
-  ProdutosPageName,
-  PropostasPageName,
+  ProdutoListPageName,
+  PropostaListPageName,
 } from '~/lib/router/constants'
 import {
   Collapsible,
@@ -62,12 +62,12 @@ const groups: Group[] = [
       {
         label: 'Produtos',
         icon: PackageOpen,
-        route: ProdutosPageName,
+        route: ProdutoListPageName,
       },
       {
         label: 'Propostas',
         icon: FileText,
-        route: PropostasPageName,
+        route: PropostaListPageName,
       },
       {
         label: 'Pedidos',
