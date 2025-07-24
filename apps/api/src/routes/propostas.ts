@@ -7,7 +7,7 @@ import { isArray } from '~/utils/is'
 import { randomInt } from '~/utils/random'
 
 export default defineEventHandler((event) => {
-  const propostas = array(randomInt(5, 30)).map(() => makeProposta(event))
+  const propostas = array(randomInt(5, 100)).map(() => makeProposta(event))
 
   const grouped = propostas.reduce(
     (group, proposta) => {

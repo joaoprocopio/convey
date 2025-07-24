@@ -91,7 +91,7 @@ export const PropostaArray = z.array(Proposta)
 export type TGroupedPropostaArrayInput = z.input<typeof GroupedPropostaArray>
 export type TGroupedPropostaArrayOutput = z.output<typeof GroupedPropostaArray>
 
-export const GroupedPropostaArray = z.record(
+export const GroupedPropostaArray = z.partialRecord(
   z.union(
     Object.values(PropostaStatus).map((status) => z.literal(status.value)),
   ),
