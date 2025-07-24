@@ -1,9 +1,26 @@
 import { defineEventHandler } from 'h3'
 
 import { makeProposta } from '~/data/maker'
+import { IProposta, TPropostaStatus } from '~/data/schemas'
 import { array } from '~/utils/array'
+import { isArray } from '~/utils/is'
 import { randomInt } from '~/utils/random'
 
 export default defineEventHandler((event) => {
-  return array(randomInt(5, 25)).map(() => makeProposta(event))
+  const propostas = array(randomInt(5, 30)).map(() => makeProposta(event))
+
+  const grouped = propostas.reduce(
+    (group, proposta) => {
+      if (!isArray(group[proposta.status])) {
+        group[proposta.status] = []
+      }
+
+      group[proposta.status].push(proposta)
+
+      return group
+    },
+    {} as Record<TPropostaStatus, IProposta[]>,
+  )
+
+  return grouped
 })
