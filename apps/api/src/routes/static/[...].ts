@@ -5,5 +5,5 @@ export default defineEventHandler(async (event) => {
   const url = getRequestURL(event)
   const ext = path.extname(url.pathname)
 
-  await sendRedirect(event, `${url.origin}/example${ext}`)
+  await sendRedirect(event, `/example${ext}`)
 })
