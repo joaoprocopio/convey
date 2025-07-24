@@ -1,37 +1,7 @@
 <script setup lang="ts">
-import {
-  CircleCheckBig,
-  CircleDashed,
-  GalleryVerticalEnd,
-  ListCheck,
-  RefreshCw,
-} from 'lucide-vue-next'
+import { ListCheck } from 'lucide-vue-next'
 
-import { Button } from '~/lib/shadcn/ui/button'
 import { SidebarTrigger, useSidebar } from '~/lib/shadcn/ui/sidebar'
-
-const f = {
-  tudo: {
-    icon: GalleryVerticalEnd,
-    title: 'Tudo',
-    value: 'tudo',
-  },
-  concluido: {
-    icon: CircleCheckBig,
-    title: 'Concluído',
-    value: 'concluido',
-  },
-  processando: {
-    icon: RefreshCw,
-    title: 'Processando',
-    value: 'processando',
-  },
-  pendente: {
-    icon: CircleDashed,
-    title: 'Pendente',
-    value: 'pendente',
-  },
-}
 
 const { open } = useSidebar()
 </script>
@@ -46,21 +16,6 @@ const { open } = useSidebar()
       >
         5
       </span>
-    </header>
-
-    <header class="flex h-header border-b px-6">
-      <div class="flex items-center gap-3">
-        <Button
-          v-for="filter in f"
-          :key="filter.value"
-          size="sm"
-          class="border"
-          :variant="filter.value === 'tudo' ? 'secondary' : 'outline'"
-        >
-          <component :is="filter.icon" />
-          <span>{{ filter.title }}</span>
-        </Button>
-      </div>
 
       <div
         class="ml-auto flex items-center gap-1.5 text-xs text-muted-foreground"
