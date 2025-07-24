@@ -7,7 +7,7 @@ export type TPropostaStatus =
   | 'proposta'
   | 'aprovado'
 
-export type TMimeType =
+export type TPropostaMimeType =
   | 'application/pdf'
   | 'image/jpeg'
   | 'image/png'
@@ -27,7 +27,7 @@ export const PropostaAttachmentMimeType = {
   JPEG: 'image/jpeg',
   PNG: 'image/png',
   WEBP: 'image/webp',
-} as const satisfies TEnum<string, TMimeType>
+} as const satisfies TEnum<string, TPropostaMimeType>
 
 export interface IProposta {
   id: number
@@ -46,5 +46,5 @@ export interface IPropostaAttachment {
   id: number
   file: string
   url: string
-  mimetype: TMimeType
+  mimetype: TPropostaMimeType
 }

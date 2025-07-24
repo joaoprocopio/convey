@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { useQuery } from '@tanstack/vue-query'
-import { ListCheck } from 'lucide-vue-next'
+import { ListCheck, ListRestart } from 'lucide-vue-next'
 
 import { SidebarTrigger, useSidebar } from '~/lib/shadcn/ui/sidebar'
 import { propostaQueries } from '~/queries/proposta'
 
 const { open } = useSidebar()
-const propostas = useQuery(propostaQueries.all())
+
+const propostas = useQuery({
+  ...propostaQueries.all(),
+  refetchInterval: 5 * 1000,
+})
 </script>
 
 <template>
@@ -21,16 +25,21 @@ const propostas = useQuery(propostaQueries.all())
       </span>
 
       <div
-        class="ml-auto flex items-center gap-1.5 text-xs text-muted-foreground"
+        class="ml-auto flex items-center gap-1.5 text-xs text-muted-foreground [&>svg]:size-5"
       >
-        <ListCheck class="size-5" />
-        <span>Tudo certo</span>
+        <template v-if="propostas.isFetching.value">
+          <ListRestart />
+          <span>Atualizando...</span>
+        </template>
+        <template v-else-if="propostas.isSuccess.value">
+          <ListCheck />
+          <span>Tudo certo</span>
+        </template>
       </div>
     </header>
   </Teleport>
 
   <pre>
-
     {{ propostas }}
   </pre>
 </template>
