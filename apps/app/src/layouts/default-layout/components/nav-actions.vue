@@ -3,7 +3,6 @@ import {
   ChevronDown,
   FileText,
   Home,
-  Inbox,
   type LucideIcon,
   PackageOpen,
   Search,
@@ -11,7 +10,11 @@ import {
 } from 'lucide-vue-next'
 import { RouterLink } from 'vue-router'
 
-import { PropostasPageName } from '~/lib/router/constants'
+import {
+  InicioPageName,
+  ProdutosPageName,
+  PropostasPageName,
+} from '~/lib/router/constants'
 import {
   Collapsible,
   CollapsibleContent,
@@ -46,12 +49,9 @@ const groups: Group[] = [
         icon: Search,
       },
       {
-        label: 'Página inicial',
+        label: 'Início',
         icon: Home,
-      },
-      {
-        label: 'Caixa de entrada',
-        icon: Inbox,
+        route: InicioPageName,
       },
     ],
   },
@@ -62,6 +62,7 @@ const groups: Group[] = [
       {
         label: 'Produtos',
         icon: PackageOpen,
+        route: ProdutosPageName,
       },
       {
         label: 'Propostas',

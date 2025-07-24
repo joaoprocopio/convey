@@ -1,7 +1,12 @@
+import { h } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 
 import DefaultLayout from '~/layouts/default-layout'
-import { PropostasPageName } from '~/lib/router/constants'
+import {
+  InicioPageName,
+  ProdutosPageName,
+  PropostasPageName,
+} from '~/lib/router/constants'
 
 export const routes: RouteRecordRaw[] = [
   {
@@ -11,9 +16,29 @@ export const routes: RouteRecordRaw[] = [
     },
   },
   {
+    path: '/',
+    name: InicioPageName,
+    meta: { layout: DefaultLayout },
+    component: {
+      render() {
+        return h('div', undefined, InicioPageName)
+      },
+    },
+  },
+  {
+    path: '/produtos',
+    name: ProdutosPageName,
+    meta: { layout: DefaultLayout },
+    component: {
+      render() {
+        return h('div', undefined, ProdutosPageName)
+      },
+    },
+  },
+  {
     path: '/propostas',
     name: PropostasPageName,
-    component: () => import('~/propostas/propostas-page'),
     meta: { layout: DefaultLayout },
+    component: () => import('~/propostas/propostas-page'),
   },
 ]
