@@ -10,7 +10,7 @@ import Sidebar from './components/sidebar.vue'
 
     <SidebarInset>
       <div
-        id="sidebar-header-container"
+        id="sidebar-header"
         class="sticky top-0 z-20 bg-background/70 backdrop-blur-xl"
       />
 
