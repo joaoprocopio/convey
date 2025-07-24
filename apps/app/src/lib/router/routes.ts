@@ -1,77 +1,19 @@
-import { h } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 
 import DefaultLayout from '~/layouts/default-layout'
-import {
-  FinanceiroPageName,
-  InicioPageName,
-  PedidosPageName,
-  ProdutosPageName,
-  PropostasPageName,
-  UnidadesPageName,
-} from '~/lib/router/constants'
+import { PropostasPageName } from '~/lib/router/constants'
 
 export const routes: RouteRecordRaw[] = [
   {
-    path: '/',
-    name: InicioPageName,
-    component: () => import('~/pages/inicio-page'),
-    meta: { layout: DefaultLayout },
-  },
-  {
-    path: '/financeiro',
-    name: FinanceiroPageName,
-    component: {
-      setup() {
-        return () => h('div', null, [h('h1', null, FinanceiroPageName)])
-      },
+    path: '/:pathMatch(.*)*',
+    redirect: {
+      name: PropostasPageName,
     },
-    meta: { layout: DefaultLayout },
-  },
-  {
-    path: '/pedidos',
-    name: PedidosPageName,
-    component: {
-      setup() {
-        return () => h('div', null, [h('h1', null, PedidosPageName)])
-      },
-    },
-    meta: { layout: DefaultLayout },
-  },
-  {
-    path: '/produtos',
-    name: ProdutosPageName,
-    component: {
-      setup() {
-        return () => h('div', null, [h('h1', null, ProdutosPageName)])
-      },
-    },
-    meta: { layout: DefaultLayout },
   },
   {
     path: '/propostas',
     name: PropostasPageName,
-    component: {
-      setup() {
-        return () => h('div', null, [h('h1', null, PropostasPageName)])
-      },
-    },
+    component: () => import('~/propostas/propostas-page'),
     meta: { layout: DefaultLayout },
-  },
-  {
-    path: '/unidades',
-    name: UnidadesPageName,
-    component: {
-      setup() {
-        return () => h('div', null, [h('h1', null, UnidadesPageName)])
-      },
-    },
-    meta: { layout: DefaultLayout },
-  },
-  {
-    path: '/:pathMatch(.*)*',
-    redirect: {
-      name: InicioPageName,
-    },
   },
 ]

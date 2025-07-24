@@ -1,38 +1,26 @@
 <script setup lang="ts">
 import {
-  ChartNoAxesCombined,
   ChevronDown,
-  Computer,
   FileText,
   Home,
   Inbox,
   LogOut,
   type LucideIcon,
-  Moon,
   PackageOpen,
-  Palette,
   Search,
-  Store,
-  Sun,
   Truck,
 } from 'lucide-vue-next'
 import { RouterLink } from 'vue-router'
 
+import { PropostasPageName } from '~/lib/router/constants'
 import { Avatar, AvatarFallback } from '~/lib/shadcn/ui/avatar'
-import { Collapsible } from '~/lib/shadcn/ui/collapsible'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
   DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '~/lib/shadcn/ui/dropdown-menu'
 import {
@@ -40,6 +28,7 @@ import {
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarHeader,
   SidebarInset,
   SidebarMenu,
@@ -48,119 +37,65 @@ import {
   SidebarProvider,
   SidebarRail,
 } from '~/lib/shadcn/ui/sidebar'
-import { useTheme } from '~/lib/theme/composables'
-import { Theme } from '~/lib/theme/constants'
+import { isNil } from '~/utils/is'
 
-const selectedTheme = useTheme()
-
-const availableThemes = [
-  {
-    icon: Computer,
-    title: 'Sistema',
-    value: Theme.System,
-  },
-  {
-    icon: Sun,
-    title: 'Claro',
-    value: Theme.Light,
-  },
-  {
-    icon: Moon,
-    title: 'Escuro',
-    value: Theme.Dark,
-  },
-] as const satisfies { icon: LucideIcon; value: string; title: string }[]
-
-interface Marca {
-  id: number
-  nome: string
-}
-
-const marcas: Marca[] = [
-  {
-    id: 14,
-    nome: 'Pizza Prime',
-  },
-  {
-    id: 36,
-    nome: 'Si Señor',
-  },
-  {
-    id: 83,
-    nome: 'Divino Fogão',
-  },
-]
-
-interface Item {
-  title: string
-  icon?: LucideIcon
+interface Group {
+  group?: string
   items?: Item[]
 }
 
-const items: Item[] = [
-  {
-    title: 'Buscar',
-    icon: Search,
-  },
-  {
-    title: 'Página inicial',
-    icon: Home,
-  },
-  {
-    title: 'Caixa de entrada',
-    icon: Inbox,
-  },
+interface Item {
+  label: string
+  icon?: LucideIcon
+  route?: string
+}
 
+const groups: Group[] = [
   {
-    title: 'Logística',
     items: [
       {
-        title: 'Produtos',
-        icon: PackageOpen,
+        label: 'Buscar',
+        icon: Search,
       },
       {
-        title: 'Propostas',
-        icon: FileText,
+        label: 'Página inicial',
+        icon: Home,
       },
       {
-        title: 'Pedidos',
-        icon: Truck,
+        label: 'Caixa de entrada',
+        icon: Inbox,
       },
     ],
   },
 
   {
-    title: 'Marcas',
-    items: marcas.map((marca) => ({
-      title: marca.nome,
-      items: [
-        {
-          title: 'Unidades',
-          icon: Store,
-        },
-        {
-          title: 'Colaboradores',
-          icon: ChartNoAxesCombined,
-        },
-        {
-          title: 'Financeiro',
-          icon: ChartNoAxesCombined,
-        },
-      ],
-    })),
+    group: 'Logística',
+    items: [
+      {
+        label: 'Produtos',
+        icon: PackageOpen,
+      },
+      {
+        label: 'Propostas',
+        icon: FileText,
+        route: PropostasPageName,
+      },
+      {
+        label: 'Pedidos',
+        icon: Truck,
+      },
+    ],
   },
 ]
 </script>
 
 <template>
   <SidebarProvider>
-    <Sidebar collapsible="icon" variant="sidebar">
+    <Sidebar collapsible="offcanvas" variant="sidebar">
       <SidebarHeader>
         <DropdownMenu>
           <DropdownMenuTrigger as-child>
-            <SidebarMenuButton
-              class="w-fit truncate group-data-[collapsible=icon]:p-1!"
-            >
+            <SidebarMenuButton class="w-fit">
               <Avatar class="size-6 rounded">
                 <AvatarFallback
                   class="rounded bg-sidebar-primary text-2xs text-sidebar-primary-foreground"
@@ -169,7 +104,7 @@ const items: Item[] = [
                 </AvatarFallback>
               </Avatar>
 
-              <span class="truncate text-sm font-medium"> Roger Camargo </span>
+              <span class="text-sm font-medium"> Roger Camargo </span>
 
               <ChevronDown class="size-4 text-muted-foreground" />
             </SidebarMenuButton>
@@ -197,34 +132,6 @@ const items: Item[] = [
 
             <DropdownMenuSeparator />
 
-            <DropdownMenuLabel>Preferências</DropdownMenuLabel>
-
-            <DropdownMenuSub>
-              <DropdownMenuSubTrigger class="gap-2">
-                <Palette class="size-4 text-muted-foreground" />
-                Tema
-              </DropdownMenuSubTrigger>
-              <DropdownMenuPortal>
-                <DropdownMenuSubContent>
-                  <DropdownMenuRadioGroup v-model="selectedTheme">
-                    <DropdownMenuRadioItem
-                      v-for="theme in availableThemes"
-                      :key="theme.value"
-                      :value="theme.value"
-                    >
-                      <component
-                        :is="theme.icon"
-                        class="text-muted-foreground"
-                      />
-                      {{ theme.title }}
-                    </DropdownMenuRadioItem>
-                  </DropdownMenuRadioGroup>
-                </DropdownMenuSubContent>
-              </DropdownMenuPortal>
-            </DropdownMenuSub>
-
-            <DropdownMenuSeparator />
-
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <LogOut />
@@ -236,10 +143,40 @@ const items: Item[] = [
       </SidebarHeader>
 
       <SidebarContent>
-        <SidebarGroup>
+        <SidebarGroup v-for="(group, groupIndex) in groups" :key="groupIndex">
+          <SidebarGroupLabel v-if="!isNil(group.group)">
+            {{ group.group }}
+          </SidebarGroupLabel>
+
           <SidebarGroupContent>
             <SidebarMenu>
-              <template v-for="(link, linkIndex) in items" :key="linkIndex">
+              <SidebarMenuItem
+                v-for="(item, itemIndex) in group.items"
+                :key="itemIndex"
+              >
+                <RouterLink
+                  v-slot="{ isActive }"
+                  :to="{ name: item.route }"
+                  custom
+                >
+                  <SidebarMenuButton
+                    as-child
+                    :is-active="isActive && 'route' in item"
+                    :aria-disabled="!item.route"
+                  >
+                    <RouterLink :to="{ name: item.route }">
+                      <component :is="item.icon" v-if="item.icon" />
+                      {{ item.label }}
+                    </RouterLink>
+                  </SidebarMenuButton>
+                </RouterLink>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+
+          <!-- <SidebarGroupContent>
+            <SidebarMenu>
+              <template>
                 <Collapsible as-child :default-open="true">
                   <SidebarMenuItem>
                     <RouterLink
@@ -263,7 +200,7 @@ const items: Item[] = [
                 </Collapsible>
               </template>
             </SidebarMenu>
-          </SidebarGroupContent>
+          </SidebarGroupContent> -->
         </SidebarGroup>
       </SidebarContent>
 

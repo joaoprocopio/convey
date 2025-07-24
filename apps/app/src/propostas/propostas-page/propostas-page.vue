@@ -1,3 +1,3 @@
 <template>
-  <h1>inicio</h1>
+  <h1>propostas</h1>
 </template>
