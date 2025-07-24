@@ -15,6 +15,11 @@ import { RouterLink } from 'vue-router'
 import { PropostasPageName } from '~/lib/router/constants'
 import { Avatar, AvatarFallback } from '~/lib/shadcn/ui/avatar'
 import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '~/lib/shadcn/ui/collapsible'
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
@@ -144,63 +149,73 @@ const groups: Group[] = [
 
       <SidebarContent>
         <SidebarGroup v-for="(group, groupIndex) in groups" :key="groupIndex">
-          <SidebarGroupLabel v-if="!isNil(group.group)">
-            {{ group.group }}
-          </SidebarGroupLabel>
-
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem
-                v-for="(item, itemIndex) in group.items"
-                :key="itemIndex"
-              >
-                <RouterLink
-                  v-slot="{ isActive }"
-                  :to="{ name: item.route }"
-                  custom
-                >
-                  <SidebarMenuButton
-                    as-child
-                    :is-active="isActive && 'route' in item"
-                    :aria-disabled="!item.route"
-                  >
-                    <RouterLink :to="{ name: item.route }">
-                      <component :is="item.icon" v-if="item.icon" />
-                      {{ item.label }}
-                    </RouterLink>
-                  </SidebarMenuButton>
-                </RouterLink>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-
-          <!-- <SidebarGroupContent>
-            <SidebarMenu>
-              <template>
-                <Collapsible as-child :default-open="true">
-                  <SidebarMenuItem>
-                    <RouterLink
-                      v-slot="{ isActive }"
-                      :to="{ name: link.route }"
-                      custom
+          <template v-if="!isNil(group.group)">
+            <Collapsible defaultOpen class="group/collapsible">
+              <SidebarGroupLabel asChild>
+                <CollapsibleTrigger>
+                  {{ group.group }}
+                  <ChevronDown
+                    class="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180"
+                  />
+                </CollapsibleTrigger>
+              </SidebarGroupLabel>
+              <CollapsibleContent>
+                <SidebarGroupContent>
+                  <SidebarMenu>
+                    <SidebarMenuItem
+                      v-for="(item, itemIndex) in group.items"
+                      :key="itemIndex"
                     >
-                      <SidebarMenuButton
-                        as-child
-                        :is-active="isActive && 'route' in link"
-                        :tooltip="link.tooltip"
-                        :aria-disabled="!link.route"
+                      <RouterLink
+                        v-slot="{ isActive }"
+                        :to="{ name: item.route }"
+                        custom
                       >
-                        <RouterLink :to="{ name: link.route }">
-                          <component :is="link.icon" v-if="link.icon" />
-                          {{ link.title }}
-                        </RouterLink>
-                      </SidebarMenuButton>
-                    </RouterLink>
-                  </SidebarMenuItem>
-                </Collapsible>
-              </template>
-            </SidebarMenu>
-          </SidebarGroupContent> -->
+                        <SidebarMenuButton
+                          as-child
+                          :is-active="isActive && 'route' in item"
+                          :aria-disabled="!item.route"
+                        >
+                          <RouterLink :to="{ name: item.route }">
+                            <component :is="item.icon" v-if="item.icon" />
+                            {{ item.label }}
+                          </RouterLink>
+                        </SidebarMenuButton>
+                      </RouterLink>
+                    </SidebarMenuItem>
+                  </SidebarMenu>
+                </SidebarGroupContent>
+              </CollapsibleContent>
+            </Collapsible>
+          </template>
+
+          <template v-else>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                <SidebarMenuItem
+                  v-for="(item, itemIndex) in group.items"
+                  :key="itemIndex"
+                >
+                  <RouterLink
+                    v-slot="{ isActive }"
+                    :to="{ name: item.route }"
+                    custom
+                  >
+                    <SidebarMenuButton
+                      as-child
+                      :is-active="isActive && 'route' in item"
+                      :aria-disabled="!item.route"
+                    >
+                      <RouterLink :to="{ name: item.route }">
+                        <component :is="item.icon" v-if="item.icon" />
+                        {{ item.label }}
+                      </RouterLink>
+                    </SidebarMenuButton>
+                  </RouterLink>
+                </SidebarMenuItem>
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </template>
         </SidebarGroup>
       </SidebarContent>
 
