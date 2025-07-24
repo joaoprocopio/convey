@@ -39,7 +39,7 @@ const viewConfig = useStorage<{
 
 <template>
   <Teleport to="#sidebar-header" defer>
-    <header class="flex items-center gap-x-3 border-b px-6 py-2">
+    <header class="flex h-header items-center gap-x-3 border-b px-6">
       <SidebarTrigger class="data-[open=true]:hidden" :data-open="open" />
 
       <div class="relative items-center">
@@ -75,7 +75,7 @@ const viewConfig = useStorage<{
       </Button>
     </header>
 
-    <header class="flex items-center gap-x-3 border-b px-6 py-2">
+    <header class="flex h-header items-center gap-x-3 border-b px-6">
       <Button variant="ghost" size="sm">
         <ListFilter />
         <span>Filtrar</span>

@@ -1,3 +1,11 @@
+import {
+  BadgeCheck,
+  CircleDashed,
+  type LucideIcon,
+  MessagesSquare,
+  Send,
+  Target,
+} from 'lucide-vue-next'
 import { z } from 'zod/v4'
 
 import type { TEnum } from '~/lib/enums/types'
@@ -18,20 +26,30 @@ export type TPropostaMimeType =
 export const PropostaStatus = {
   backlog: {
     value: 'backlog',
-  },
-  aprovado: {
-    value: 'aprovado',
-  },
-  negociando: {
-    value: 'negociando',
-  },
-  proposta: {
-    value: 'proposta',
+    title: 'Backlog',
+    icon: CircleDashed,
   },
   prospectando: {
     value: 'prospectando',
+    title: 'Prospectando',
+    icon: Target,
   },
-} as const satisfies TEnum<TPropostaStatus>
+  negociando: {
+    value: 'negociando',
+    title: 'Negociando',
+    icon: MessagesSquare,
+  },
+  proposta: {
+    value: 'proposta',
+    title: 'Proposta',
+    icon: Send,
+  },
+  aprovado: {
+    value: 'aprovado',
+    title: 'Aprovado',
+    icon: BadgeCheck,
+  },
+} as const satisfies TEnum<TPropostaStatus, { icon: LucideIcon; title: string }>
 
 export const PropostaAttachmentMimeType = {
   'application/pdf': {
