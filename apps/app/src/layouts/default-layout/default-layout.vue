@@ -1,24 +1,7 @@
 <script setup lang="ts">
-import {
-  ChevronDown,
-  FileText,
-  Home,
-  Inbox,
-  LogOut,
-  type LucideIcon,
-  PackageOpen,
-  Search,
-  Truck,
-} from 'lucide-vue-next'
-import { RouterLink } from 'vue-router'
+import { ChevronDown, LogOut } from 'lucide-vue-next'
 
-import { PropostasPageName } from '~/lib/router/constants'
 import { Avatar, AvatarFallback } from '~/lib/shadcn/ui/avatar'
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '~/lib/shadcn/ui/collapsible'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,67 +14,14 @@ import {
 import {
   Sidebar,
   SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarInset,
-  SidebarMenu,
   SidebarMenuButton,
-  SidebarMenuItem,
   SidebarProvider,
   SidebarRail,
 } from '~/lib/shadcn/ui/sidebar'
-import { isNil } from '~/utils/is'
 
-interface Group {
-  group?: string
-  items?: Item[]
-}
-
-interface Item {
-  label: string
-  icon?: LucideIcon
-  route?: string
-}
-
-const groups: Group[] = [
-  {
-    items: [
-      {
-        label: 'Buscar',
-        icon: Search,
-      },
-      {
-        label: 'Página inicial',
-        icon: Home,
-      },
-      {
-        label: 'Caixa de entrada',
-        icon: Inbox,
-      },
-    ],
-  },
-
-  {
-    group: 'Logística',
-    items: [
-      {
-        label: 'Produtos',
-        icon: PackageOpen,
-      },
-      {
-        label: 'Propostas',
-        icon: FileText,
-        route: PropostasPageName,
-      },
-      {
-        label: 'Pedidos',
-        icon: Truck,
-      },
-    ],
-  },
-]
+import NavActions from './nav-actions.vue'
 </script>
 
 <template>
@@ -100,7 +30,7 @@ const groups: Group[] = [
       <SidebarHeader>
         <DropdownMenu>
           <DropdownMenuTrigger as-child>
-            <SidebarMenuButton class="w-fit">
+            <SidebarMenuButton class="h-fit w-fit">
               <Avatar class="size-6 rounded">
                 <AvatarFallback
                   class="rounded bg-sidebar-primary text-2xs text-sidebar-primary-foreground"
@@ -148,75 +78,7 @@ const groups: Group[] = [
       </SidebarHeader>
 
       <SidebarContent>
-        <SidebarGroup v-for="(group, groupIndex) in groups" :key="groupIndex">
-          <template v-if="!isNil(group.group)">
-            <Collapsible defaultOpen class="group/collapsible">
-              <SidebarGroupLabel asChild>
-                <CollapsibleTrigger>
-                  {{ group.group }}
-                  <ChevronDown
-                    class="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180"
-                  />
-                </CollapsibleTrigger>
-              </SidebarGroupLabel>
-              <CollapsibleContent>
-                <SidebarGroupContent>
-                  <SidebarMenu>
-                    <SidebarMenuItem
-                      v-for="(item, itemIndex) in group.items"
-                      :key="itemIndex"
-                    >
-                      <RouterLink
-                        v-slot="{ isActive }"
-                        :to="{ name: item.route }"
-                        custom
-                      >
-                        <SidebarMenuButton
-                          as-child
-                          :is-active="isActive && 'route' in item"
-                          :aria-disabled="!item.route"
-                        >
-                          <RouterLink :to="{ name: item.route }">
-                            <component :is="item.icon" v-if="item.icon" />
-                            {{ item.label }}
-                          </RouterLink>
-                        </SidebarMenuButton>
-                      </RouterLink>
-                    </SidebarMenuItem>
-                  </SidebarMenu>
-                </SidebarGroupContent>
-              </CollapsibleContent>
-            </Collapsible>
-          </template>
-
-          <template v-else>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                <SidebarMenuItem
-                  v-for="(item, itemIndex) in group.items"
-                  :key="itemIndex"
-                >
-                  <RouterLink
-                    v-slot="{ isActive }"
-                    :to="{ name: item.route }"
-                    custom
-                  >
-                    <SidebarMenuButton
-                      as-child
-                      :is-active="isActive && 'route' in item"
-                      :aria-disabled="!item.route"
-                    >
-                      <RouterLink :to="{ name: item.route }">
-                        <component :is="item.icon" v-if="item.icon" />
-                        {{ item.label }}
-                      </RouterLink>
-                    </SidebarMenuButton>
-                  </RouterLink>
-                </SidebarMenuItem>
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </template>
-        </SidebarGroup>
+        <NavActions />
       </SidebarContent>
 
       <SidebarRail />
