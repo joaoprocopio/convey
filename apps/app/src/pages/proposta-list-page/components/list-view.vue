@@ -25,14 +25,13 @@ const propostas = useQuery(propostaQueries.all())
     >
       <template v-if="!isEmpty(propostas.data.value![status.value])">
         <CollapsibleTrigger
-          class="sticky top-24 z-10 flex h-subheader w-full items-center gap-4 border-b bg-accent/70 px-6 text-accent-foreground/70 backdrop-blur-xl group-data-[state=open]:text-foreground"
+          class="sticky top-24 z-10 flex h-subheader w-full items-center gap-4 border-b bg-accent/70 px-6 text-accent-foreground/70 backdrop-blur-xl"
         >
           <ChevronDown
-            class="size-3.5 transition duration-300 group-data-[state=closed]:rotate-180"
-            :stroke-width="2.5"
+            class="size-3.5 transition duration-300 group-data-[state=closed]:rotate-180 group-data-[state=open]:text-foreground"
           />
           <component :is="status.icon" class="size-5" />
-          <p class="text-sm font-medium">
+          <p class="text-sm font-medium text-foreground">
             {{ status.title }}
           </p>
           <p class="text-2xs font-semibold">
