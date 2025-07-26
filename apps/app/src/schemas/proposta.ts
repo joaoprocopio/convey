@@ -86,6 +86,9 @@ export type TPropostaAssigneeOutput = z.output<typeof PropostaAssignee>
 export const PropostaAssignee = z.object({
   id: z.int(),
   email: z.email(),
+  first_name: z.string(),
+  last_name: z.string(),
+  full_name: z.string(),
 })
 
 export type TPropostaInput = z.input<typeof Proposta>

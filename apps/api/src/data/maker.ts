@@ -12,9 +12,10 @@ import {
 import { array } from '~/utils/array'
 import { randomBool, randomEnumValue, randomInt } from '~/utils/random'
 
+let propostaId = 1
 export function makeProposta(event: H3Event<EventHandlerRequest>): IProposta {
   return {
-    id: randomInt(1, 100),
+    id: propostaId++,
     name: faker.commerce.productName(),
     status: randomEnumValue(PropostaStatus),
     assignee: randomBool() ? makeAssignee() : null,
@@ -22,6 +23,7 @@ export function makeProposta(event: H3Event<EventHandlerRequest>): IProposta {
   }
 }
 
+let attachmentId = 1
 export function makeAttachment(
   event: H3Event<EventHandlerRequest>,
 ): IPropostaAttachment {
@@ -33,16 +35,25 @@ export function makeAttachment(
   const url = `${requestURL.origin}/static/${file}`
 
   return {
-    id: randomInt(1, 100),
+    id: attachmentId++,
     url: url,
     file: file,
     mimetype: mime,
   }
 }
 
+let assigneeId = 1
 export function makeAssignee(): IPropostaAssignee {
+  const firstName = faker.person.firstName()
+  const lastName = faker.person.lastName()
+  const fullName = faker.person.fullName({ firstName, lastName })
+  const email = faker.internet.email({ firstName, lastName })
+
   return {
-    id: randomInt(1, 100),
-    email: faker.internet.email(),
+    id: assigneeId++,
+    email: email,
+    first_name: firstName,
+    last_name: lastName,
+    full_name: fullName,
   }
 }

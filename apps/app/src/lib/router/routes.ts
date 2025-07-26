@@ -6,6 +6,7 @@ import DefaultLayout from '~/layouts/default-layout'
 import {
   InicioPageName,
   ProdutoListPageName,
+  PropostaDetailPageName,
   PropostaListPageName,
 } from '~/lib/router/constants'
 import { propostaQueries } from '~/queries/proposta'
@@ -41,14 +42,25 @@ export const routes: RouteRecordRaw[] = [
     path: '/propostas',
     name: PropostaListPageName,
     meta: { layout: DefaultLayout },
-    async beforeEnter(_to, _from, next) {
+    beforeEnter(_to, _from, next) {
       const queryClient = useQueryClient()
-      await queryClient.prefetchQuery(propostaQueries.all())
-
+      queryClient.prefetchQuery(propostaQueries.all())
       next()
     },
     async component() {
       return await import('~/pages/proposta-list-page')
+    },
+  },
+  {
+    path: '/propostas/:id',
+    name: PropostaDetailPageName,
+    meta: { layout: DefaultLayout },
+    async component() {
+      return {
+        render() {
+          return h('div', undefined, PropostaDetailPageName)
+        },
+      }
     },
   },
 ]

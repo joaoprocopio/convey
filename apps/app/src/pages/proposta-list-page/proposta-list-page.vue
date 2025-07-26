@@ -35,7 +35,7 @@ const viewConfig = useStorage<{
 </script>
 
 <template>
-  <Teleport to="#sidebar-header" defer>
+  <div class="sticky top-0 z-20 bg-background/70 backdrop-blur-xl">
     <header class="flex h-header items-center gap-x-3 border-b px-6">
       <SidebarTrigger class="data-[open=true]:hidden" :data-open="open" />
 
@@ -83,7 +83,7 @@ const viewConfig = useStorage<{
         <span>Visualização</span>
       </Button>
     </header>
-  </Teleport>
+  </div>
 
   <ListView v-if="viewConfig.type === 'list'" />
 </template>

@@ -9,11 +9,6 @@ import Sidebar from './components/sidebar.vue'
     <Sidebar />
 
     <SidebarInset>
-      <div
-        id="sidebar-header"
-        class="sticky top-0 z-20 bg-background/70 backdrop-blur-xl"
-      />
-
       <div class="shrink-0 grow-1 basis-auto">
         <slot />
       </div>
